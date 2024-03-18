@@ -1,7 +1,9 @@
 <script setup></script>
 
 <template>
-  <h1>我是active组件</h1>
+  <page-container title="文章管理">
+    <div><h1>我是page-container组件</h1></div>
+  </page-container>
 </template>
 
 <style lang="scss" scoped></style>

@@ -140,6 +140,8 @@ const handleCommand = async (key) => {
     &__logo {
       height: 120px;
       background: url('@/assets/logo.png') no-repeat center / 120px auto;
+      //   background: url('@/assets/favicon.png') no-repeat center / 50px auto;
+      //   background: url('@/assets/brrath(9).png') no-repeat center / 100px auto;
     }
     .el-menu {
       border-right: none;
