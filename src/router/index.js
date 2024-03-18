@@ -16,7 +16,20 @@ const router = createRouter({
       path: '/',
       component: () => import('@/views/layout/LayoutContainer.vue'),
       redirect: '/article/manage',
-      children: []
+      children: [
+        {
+          path: '/article/manage',
+          component: () => import('@/views/article/ArticleManage.vue')
+        },
+        {
+          path: '/position/manage',
+          component: () => import('@/views/position/PositionManage.vue')
+        },
+        {
+          path: '/candidate/manage',
+          component: () => import('@/views/candidate/Candidatemanage.vue')
+        }
+      ]
     }
   ]
 })
@@ -31,7 +44,8 @@ const router = createRouter({
 router.beforeEach((to) => {
   // 如果没有token, 且访问的是非登录页，拦截到登录，其他情况正常放行
   const useStore = useUserStore()
-  if (!useStore.token && to.path !== '/login') return '/login'
+  // if (!useStore.token && to.path !== '/login') return '/login'
+  console.log(useStore.token && to.path)
 })
 
 export default router
