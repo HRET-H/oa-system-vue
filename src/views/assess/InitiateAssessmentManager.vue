@@ -175,6 +175,8 @@ export default {
     // 取消
     cancel() {
       this.initiateAssessmentForm = {}
+
+      this.$router.go(-1)
     }
   }
 }

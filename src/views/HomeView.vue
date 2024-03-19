@@ -26,34 +26,38 @@ onMounted(() => {
 
 <template>
   <div id="oa-home">
-    <el-header style="background-color: rgb(35, 43, 64); height: 30%">
-      <span>
-        <el-image
-          style="width: 30px; height: 40px; position: relative; top: 15px"
-          src="https://hret0721.oss-cn-beijing.aliyuncs.com/oa-system/oa-Logo.png"
-          fit="fill"
+    <!-- 外层容器。 当子元素中包含 <el-header> 或 <el-footer> 时，全部子元素会垂直上下排列， 否则会水平左右排列 -->
+    <el-container>
+      <!-- 顶栏容器 -->
+      <el-header style="background-color: rgb(35, 43, 64); height: 30%">
+        <span>
+          <el-image
+            style="width: 30px; height: 40px; position: relative; top: 15px"
+            src="https://hret0721.oss-cn-beijing.aliyuncs.com/oa-system/oa-Logo.png"
+            fit="fill"
+          />
+          &nbsp;
+          <h4 style="width: 15%; color: #fff; display: inline-block">
+            OA数字化办公系统
+          </h4>
+        </span>
+        <MenuTree
+          :data="MenuData"
+          mode="horizontal"
+          style="width: 60%; display: inline-block"
         />
-        &nbsp;
-        <h4 style="width: 15%; color: #fff; display: inline-block">
-          OA数字化办公系统
-        </h4>
-      </span>
-      <MenuTree
-        :data="MenuData"
-        mode="horizontal"
-        style="width: 60%; display: inline-block"
-      />
-      <el-icon
-        color="#fff"
-        @click="NavDrawer = true"
-        style="position: relative; right: 33%"
-        ><Fold
-      /></el-icon>
-      <el-drawer v-model="NavDrawer" :with-header="false">
-        <span>Hi there!</span>
-      </el-drawer>
-    </el-header>
-    <router-view></router-view>
+        <el-icon
+          color="#fff"
+          @click="NavDrawer = true"
+          style="position: relative; right: 33%"
+          ><Fold
+        /></el-icon>
+        <el-drawer v-model="NavDrawer" :with-header="false">
+          <span>Hi there!</span>
+        </el-drawer>
+      </el-header>
+      <router-view></router-view>
+    </el-container>
   </div>
 </template>
 
