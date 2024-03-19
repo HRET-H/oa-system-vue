@@ -15,6 +15,15 @@ const router = createRouter({
       path: '/home',
       name: 'home',
       component: () => import('@/views/HomeView.vue')
+    },
+    // 跳转到考核页面
+    {
+      path: '/assess',
+      component: () => import('@/views/assess/AssessManage.vue')
+    },
+    {
+      path: '/initiateAssessment',
+      component: () => import('@/views/assess/InitiateAssessmentManager.vue')
     }
   ]
 })
