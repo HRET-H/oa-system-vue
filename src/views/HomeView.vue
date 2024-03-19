@@ -11,7 +11,7 @@ import MenuTree from '@/components/menu/MenuTree.vue'
 axios.defaults.baseURL = 'http://localhost:9999'
 
 // 定义一个ref变量，用来存储数据
-let NavDrawer = ref('flase')
+let NavDrawer = ref(false)
 
 // 定义一个ref变量，用来存储数据
 let MenuData = ref([])

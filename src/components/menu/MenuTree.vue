@@ -31,7 +31,7 @@ export default {
           :index="item.menuPath"
           :key="index"
           v-if="
-            item.children &&
+            item.children != null &&
             item.children.length > 0 &&
             item.children[0].menuType === 'C'
           "

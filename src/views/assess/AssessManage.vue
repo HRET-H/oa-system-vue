@@ -1,7 +1,5 @@
 <template>
   <div>
-    <!-- 侧边栏 -->
-    <el-aside></el-aside>
     <!-- 主页面 -->
     <el-main>
       <page-container>
