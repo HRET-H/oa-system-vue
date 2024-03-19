@@ -14,16 +14,21 @@ const router = createRouter({
     {
       path: '/home',
       name: 'home',
-      component: () => import('@/views/HomeView.vue')
-    },
-    // 跳转到考核页面
-    {
-      path: '/assess',
-      component: () => import('@/views/assess/AssessManage.vue')
-    },
-    {
-      path: '/initiateAssessment',
-      component: () => import('@/views/assess/InitiateAssessmentManager.vue')
+      component: () => import('@/views/HomeView.vue'),
+      children: [
+        // 跳转到考核页面
+        {
+          path: '/assess',
+          name: 'assess',
+          component: () => import('@/views/assess/AssessManage.vue')
+        },
+        {
+          path: '/initiateAssessment',
+          name: '/initiateAssessment',
+          component: () =>
+            import('@/views/assess/InitiateAssessmentManager.vue')
+        }
+      ]
     }
   ]
 })
