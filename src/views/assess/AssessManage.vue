@@ -1,144 +1,155 @@
 <template>
   <div>
-    <page-container>
-      <!-- 发起考核按钮 -->
-      <div class="btn">
-        <el-button type="primary" @click="initiateAssessment"
-          >发起考核</el-button
+    <!-- 侧边栏 -->
+    <el-aside></el-aside>
+    <!-- 主页面 -->
+    <el-main>
+      <page-container>
+        <!-- 发起考核按钮 -->
+        <div class="btn">
+          <el-button type="primary" @click="initiateAssessment"
+            >发起考核</el-button
+          >
+        </div>
+        <!-- form表单条查 -->
+        <el-form
+          ref="form"
+          :model="assessForm"
+          label-width="80px"
+          inline="true"
         >
-      </div>
-      <!-- form表单条查 -->
-      <el-form ref="form" :model="assessForm" label-width="80px" inline="true">
-        <el-form-item label="计划名称">
-          <el-input
-            v-model="assessForm.assessName"
-            placeholder="计划名称"
-            style="width: 300px"
-          ></el-input>
-        </el-form-item>
-        <el-form-item label="状态">
-          <el-select
-            v-model="assessForm.status"
-            placeholder="状态"
-            style="width: 300px"
-          >
-            <el-option label="全部" value="0"></el-option>
-            <el-option label="未开始" value="1"></el-option>
-            <el-option label="进行中" value="2"></el-option>
-            <el-option label="已完成" value="3"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="计划类型">
-          <el-select
-            v-model="assessForm.assessType"
-            placeholder="计划类型"
-            style="width: 300px"
-          >
-            <el-option label="全部" value="0"></el-option>
-            <el-option label="周期性" value="1"></el-option>
-            <el-option label="非周期性" value="2"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="考核周期">
-          <el-col :span="11">
-            <el-date-picker
-              type="date"
-              placeholder="考核周期"
-              v-model="assessForm.assessTime"
+          <el-form-item label="计划名称">
+            <el-input
+              v-model="assessForm.assessName"
+              placeholder="计划名称"
               style="width: 300px"
-            ></el-date-picker>
-          </el-col>
-        </el-form-item>
-        <!-- 搜索重置按钮 -->
-        <el-form-item>
-          <el-button type="primary" @click="findAssessListAndPage"
-            >查询</el-button
-          >
-          <el-button @click="resetForm">重置</el-button>
-        </el-form-item>
-      </el-form>
-      <!-- 表格 -->
-      <el-table :data="assessList" style="width: 100%">
-        <el-table-column prop="assessName" label="计划日期" width="180">
-        </el-table-column>
-        <el-table-column prop="assessRange" width="180" label="考核范围">
-          <template v-slot:default="scope">
-            {{
-              scope.row.assessRange == 0
-                ? '技术部'
-                : scope.row.assessRange == 1
-                  ? '产品部'
-                  : scope.row.assessRange == 2
-                    ? '销售部'
-                    : scope.row.assessRange == 3
-                      ? '市场部'
-                      : scope.row.assessRange == 4
-                        ? '人事部'
-                        : '其他'
-            }}
-          </template>
-        </el-table-column>
-        <el-table-column prop="headId" label="计划负责人"> </el-table-column>
-        <el-table-column prop="assessTime" label="考核周期"> </el-table-column>
-        <el-table-column prop="assessType" label="计划类型">
-          <template v-slot="scope">
-            {{
-              scope.row.assessType == 0
-                ? '周期性'
-                : scope.row.assessType == 1
-                  ? '非周期性'
-                  : '其他'
-            }}
-          </template>
-        </el-table-column>
-        <el-table-column prop="status" label="状态">
-          <template v-slot:default="scope">
-            <el-tag v-if="scope.row.status == 0" type="danger">未开始</el-tag>
-            <el-tag v-else-if="scope.row.status == 1" type="warning"
-              >进行中</el-tag
+            ></el-input>
+          </el-form-item>
+          <el-form-item label="状态">
+            <el-select
+              v-model="assessForm.status"
+              placeholder="状态"
+              style="width: 300px"
             >
-            <el-tag v-else-if="scope.row.status == 2" type="success"
-              >已完成</el-tag
+              <el-option label="全部" value="0"></el-option>
+              <el-option label="未开始" value="1"></el-option>
+              <el-option label="进行中" value="2"></el-option>
+              <el-option label="已完成" value="3"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="计划类型">
+            <el-select
+              v-model="assessForm.assessType"
+              placeholder="计划类型"
+              style="width: 300px"
             >
-            <el-tag v-else-if="scope.row.status == 3" type="info"
-              >已取消</el-tag
+              <el-option label="全部" value="0"></el-option>
+              <el-option label="周期性" value="1"></el-option>
+              <el-option label="非周期性" value="2"></el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="考核周期">
+            <el-col :span="11">
+              <el-date-picker
+                type="date"
+                placeholder="考核周期"
+                v-model="assessForm.assessTime"
+                style="width: 300px"
+              ></el-date-picker>
+            </el-col>
+          </el-form-item>
+          <!-- 搜索重置按钮 -->
+          <el-form-item>
+            <el-button type="primary" @click="findAssessListAndPage"
+              >查询</el-button
             >
-          </template>
-        </el-table-column>
-        <el-table-column label="操作">
-          <template v-slot:default="scope">
-            <el-link
-              type="primary"
-              :underline="false"
-              @click="detailAssess(scope.row)"
-              >详情</el-link
-            >
-            <el-link
-              type="primary"
-              :underline="false"
-              @click="editAssess(scope.row)"
-              >修改</el-link
-            >
-            <el-link
-              type="primary"
-              :underline="false"
-              @click="deleteAssess(scope.row)"
-              >删除</el-link
-            >
-          </template>
-        </el-table-column>
-      </el-table>
-      <el-pagination
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page="pageNum"
-        :page-size="pageSize"
-        :total="total"
-        background
-        layout="prev, pager, next"
-      >
-      </el-pagination>
-    </page-container>
+            <el-button @click="resetForm">重置</el-button>
+          </el-form-item>
+        </el-form>
+        <!-- 表格 -->
+        <el-table :data="assessList" style="width: 100%">
+          <el-table-column prop="assessName" label="计划日期" width="180">
+          </el-table-column>
+          <el-table-column prop="assessRange" width="180" label="考核范围">
+            <template v-slot:default="scope">
+              {{
+                scope.row.assessRange == 0
+                  ? '技术部'
+                  : scope.row.assessRange == 1
+                    ? '产品部'
+                    : scope.row.assessRange == 2
+                      ? '销售部'
+                      : scope.row.assessRange == 3
+                        ? '市场部'
+                        : scope.row.assessRange == 4
+                          ? '人事部'
+                          : '其他'
+              }}
+            </template>
+          </el-table-column>
+          <el-table-column prop="headId" label="计划负责人"> </el-table-column>
+          <el-table-column prop="assessTime" label="考核周期">
+          </el-table-column>
+          <el-table-column prop="assessType" label="计划类型">
+            <template v-slot="scope">
+              {{
+                scope.row.assessType == 0
+                  ? '周期性'
+                  : scope.row.assessType == 1
+                    ? '非周期性'
+                    : '其他'
+              }}
+            </template>
+          </el-table-column>
+          <el-table-column prop="status" label="状态">
+            <template v-slot:default="scope">
+              <el-tag v-if="scope.row.status == 0" type="danger">未开始</el-tag>
+              <el-tag v-else-if="scope.row.status == 1" type="warning"
+                >进行中</el-tag
+              >
+              <el-tag v-else-if="scope.row.status == 2" type="success"
+                >已完成</el-tag
+              >
+              <el-tag v-else-if="scope.row.status == 3" type="info"
+                >已取消</el-tag
+              >
+            </template>
+          </el-table-column>
+          <el-table-column label="操作">
+            <template v-slot:default="scope">
+              <el-link
+                type="primary"
+                :underline="false"
+                @click="detailAssess(scope.row)"
+                >详情</el-link
+              >
+              <el-link
+                type="primary"
+                :underline="false"
+                @click="editAssess(scope.row)"
+                >修改</el-link
+              >
+              <el-link
+                type="primary"
+                :underline="false"
+                @click="deleteAssess(scope.row)"
+                >删除</el-link
+              >
+            </template>
+          </el-table-column>
+        </el-table>
+        <el-pagination
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page="pageNum"
+          :page-size="pageSize"
+          :total="total"
+          background
+          layout="prev, pager, next"
+        >
+        </el-pagination>
+      </page-container>
+    </el-main>
   </div>
 </template>
 
@@ -189,7 +200,7 @@ export default {
           this.assessForm
         )
         .then((res) => {
-          this.assessList = res.data.rows
+          this.assessList = res.data.data.list
           this.total = res.data.total
         })
     },
