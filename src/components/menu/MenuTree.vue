@@ -8,7 +8,7 @@
           :index="item.menuPath"
           v-if="item.children !== null && item.children.length > 0"
         >
-          <template>
+          <template #title>
             <span>{{ item.menuName }}</span>
           </template>
           <MenuTree :data="item.children"></MenuTree>
