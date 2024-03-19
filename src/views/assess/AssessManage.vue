@@ -189,7 +189,7 @@ export default {
           this.assessForm
         )
         .then((res) => {
-          this.assessList = res.data.rows
+          this.assessList = res.data.data.list
           this.total = res.data.total
         })
     },
