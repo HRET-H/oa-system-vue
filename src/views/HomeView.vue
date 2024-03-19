@@ -29,6 +29,7 @@ onMounted(() => {
         <MenuTree :data="MenuData" mode="horizontal" />
       </el-col>
     </el-header>
+    <router-view></router-view>
   </div>
 </template>
 
