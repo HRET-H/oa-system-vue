@@ -1,14 +1,3 @@
-<template>
-  <div id="oa-home">
-    <el-header>
-      <el-col> </el-col>
-      <el-col>
-        <MenuTree :data="MenuData" mode="horizontal" />
-      </el-col>
-    </el-header>
-  </div>
-</template>
-
 <!-- 使用vue的setup语法糖 -->
 <script setup>
 // 导入动态菜单数据
@@ -31,5 +20,16 @@ onMounted(() => {
   })
 })
 </script>
+
+<template>
+  <div id="oa-home">
+    <el-header>
+      <el-col> </el-col>
+      <el-col>
+        <MenuTree :data="MenuData" mode="horizontal" />
+      </el-col>
+    </el-header>
+  </div>
+</template>
 
 <style></style>
