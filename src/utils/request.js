@@ -2,7 +2,9 @@ import axios from 'axios'
 import { useUserStore } from '@/stores'
 import { ElMessage } from 'element-plus'
 import router from '@/router'
-const baseURL = 'http://localhost:8080'
+
+// 设置请求地址
+const baseURL = 'http://localhost:9999'
 
 const instance = axios.create({
   // TODO 1. 基础地址，超时时间

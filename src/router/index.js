@@ -11,25 +11,10 @@ import { useUserStore } from '@/stores'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    { path: '/login', component: () => import('@/views/login/loginPage.vue') }, // 登录页
     {
-      path: '/',
-      component: () => import('@/views/layout/LayoutContainer.vue'),
-      redirect: '/article/manage',
-      children: [
-        {
-          path: '/article/manage',
-          component: () => import('@/views/article/ArticleManage.vue')
-        },
-        {
-          path: '/position/manage',
-          component: () => import('@/views/position/PositionManage.vue')
-        },
-        {
-          path: '/candidate/manage',
-          component: () => import('@/views/candidate/Candidatemanage.vue')
-        }
-      ]
+      path: '/home',
+      name: 'home',
+      component: () => import('@/views/HomeView.vue')
     }
   ]
 })
