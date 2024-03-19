@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-menu :mode="mode">
+    <el-menu :mode="mode" router="true">
       <template v-for="(item, index) in data">
         <!-- 情况一：当 item 有子集时 -->
         <el-sub-menu
