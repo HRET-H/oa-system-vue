@@ -126,7 +126,6 @@
       @click="addPostDataMethod"
       >下一步</el-button
     >
-
   </div>
 </template>
 
