@@ -24,6 +24,14 @@ const router = createRouter({
     {
       path: '/initiateAssessment',
       component: () => import('@/views/assess/InitiateAssessmentManager.vue')
+    },
+    {
+      path: '/position',
+      component: () => import('@/views/recruit/positionManage.vue')
+    },
+    {
+      path: '/addposition',
+      component: () => import('@/views/recruit/addPositionManage.vue')
     }
   ]
 })
