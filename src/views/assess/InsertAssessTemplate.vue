@@ -14,27 +14,39 @@
       <el-form-item label="模板名称">
         <el-input v-model="insertAssessTemplateForm.templateName"></el-input>
       </el-form-item>
-      <el-form-item label="评分方式">
+      <el-form-item label="考核周期">
+        <el-col :span="11">
+          <el-date-picker
+            type="date"
+            placeholder="选择日期"
+            v-model="insertAssessTemplateForm.assessTime"
+            style="width: 100%"
+          ></el-date-picker>
+        </el-col>
+      </el-form-item>
+      <el-form-item label="考核范围">
         <el-select
-          v-model="insertAssessTemplateForm.scoreMethod"
+          v-model="insertAssessTemplateForm.assessRange"
           placeholder="请选择"
         >
-          <el-option label="百分制(0-100)" value="0"></el-option>
-          <el-option label="十分制(0-10)" value="1"></el-option>
-          <el-option label="五分制(0-5)" value="2"></el-option>
+          <el-option label="技术部" value="0"></el-option>
+          <el-option label="产品部" value="1"></el-option>
+          <el-option label="销售部" value="2"></el-option>
+          <el-option label="市场部" value="3"></el-option>
+          <el-option label="人事部" value="4"></el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="计分方式">
-        <el-select
-          v-model="insertAssessTemplateForm.scoring"
-          placeholder="请选择"
-        >
-          <el-option label="加权计算" value="0"></el-option>
-          <el-option label="加和计算" value="1"></el-option>
-        </el-select>
+      <el-form-item label="负责人">
+        <i class="el-icon-circle-plus-outline"></i>
+      </el-form-item>
+      <el-form-item label="考核说明">
+        <el-input
+          type="textarea"
+          v-model="insertAssessTemplateForm.assessDescription"
+        ></el-input>
       </el-form-item>
       <div class="title">
-        <h1>考核指标</h1>
+        <h1>考核范围与考核模板</h1>
       </div>
       <br />
       <el-form-item label="被考核人">
