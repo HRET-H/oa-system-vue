@@ -119,7 +119,6 @@
       只支持png，jpg格式文件
     </el-upload>
     <br />
-
     <el-button
       v-if="updateflag == 'true'"
       size="small"

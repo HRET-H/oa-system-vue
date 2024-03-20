@@ -32,6 +32,34 @@ const router = createRouter({
               name: 'InitiateAssessmentManager',
               component: () =>
                 import('@/views/assess/InitiateAssessmentManager.vue')
+            },
+            // 考核模板页面
+            {
+              path: '/appraisal_template',
+              name: 'appraisal_template',
+              component: () => import('@/views/assess/AssessTemplate.vue')
+            },
+            {
+              path: '/insertAssessTemplate',
+              name: 'insertAssessTemplate',
+              component: () => import('@/views/assess/InsertAssessTemplate.vue')
+            }
+          ]
+        },
+        {
+          path: '/recruit',
+          name: 'recruit',
+          component: () => import('@/views/recruit/recruitIndex.vue'),
+          children: [
+            {
+              path: '/positionManage',
+              name: 'positionManage',
+              component: () => import('@/views/recruit/positionManage.vue')
+            },
+            {
+              path: '/addPositionManage',
+              name: 'addPositionManage',
+              component: () => import('@/views/recruit/addPositionManage.vue')
             }
           ]
         }
