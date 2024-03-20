@@ -1,24 +1,25 @@
 <template>
   <div>
     <h1>职位信息</h1>
-    职位名称:<el-input
+    职位名称:&nbsp;
+    <el-input
       placeholder="请输入内容"
       v-model="addPostData.jobName"
       clearable
-      style="width: 250px"
-    ></el-input>
-    招聘人数:<el-input
+      style="width: 350px; height: 40px"
+    ></el-input
+    >招聘人数:&nbsp;<el-input
       placeholder="请输入内容"
       v-model="addPostData.jobNumber"
       clearable
-      style="width: 250px"
+      style="width: 350px"
     ></el-input
     ><br /><br />
     职位性质:
     <el-select
       v-model="addPostData.jobNature"
       placeholder="全部"
-      style="width: 250px"
+      style="width: 350px"
     >
       <el-option label="全职" value="1"></el-option>
       <el-option label="兼职" value="2"></el-option>
@@ -30,7 +31,7 @@
     <el-select
       v-model="addPostData.jobDept"
       placeholder="全部"
-      style="width: 250px"
+      style="width: 350px; height: 40px"
     >
       <el-option label="技术部" value="1"></el-option>
       <el-option label="产品部" value="2"></el-option>
@@ -38,44 +39,44 @@
       <el-option label="行政部" value="4"></el-option>
     </el-select>
     <br /><br />
-    工作地点:<el-input
+    工作地点:&nbsp;<el-input
       placeholder="请输入内容"
       v-model="addPostData.jobAddress"
       clearable
-      style="width: 250px"
+      style="width: 350px; height: 40px"
     ></el-input>
-    详细地址:<el-input
+    详细地址:&nbsp;<el-input
       placeholder="请输入内容"
       v-model="addPostData.jobDetailedAddress"
       clearable
-      style="width: 250px"
+      style="width: 350px; height: 40px"
     ></el-input>
     <h1>招聘要求</h1>
     薪资范围:<el-input
       placeholder=""
       v-model="addPostData.jobMinPay"
       clearable
-      style="width: 80px"
+      style="width: 100px; height: 40px"
     ></el-input
     >-
     <el-input
       placeholder=""
       v-model="addPostData.jobMaxPay"
       clearable
-      style="width: 80px"
+      style="width: 100px; height: 40px"
     ></el-input
     >&nbsp;
     <el-input
       placeholder=""
       v-model="addPostData.jobNumPay"
       clearable
-      style="width: 70px"
+      style="width: 100px; height: 40px"
     ></el-input
-    >薪 学历要求:
+    >薪&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;学历要求:
     <el-select
       v-model="addPostData.jobEducation"
       placeholder="全部"
-      style="width: 250px"
+      style="width: 350px; height: 40px"
     >
       <el-option label="不限" value="1"></el-option>
       <el-option label="高中及以下" value="2"></el-option>
@@ -88,20 +89,21 @@
       placeholder="请输入内容"
       v-model="addPostData.jobExperience"
       clearable
-      style="width: 250px"
+      style="width: 350px; height: 40px"
     ></el-input>
-    专业:<el-input
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 专业:<el-input
       placeholder="请输入内容"
       v-model="addPostData.jobMajor"
       clearable
-      style="width: 250px"
-    ></el-input
-    ><br /><br />
+      style="width: 350px; height: 40px"
+    ></el-input>
+    <br />
+    <br />
     职位描述:<el-input
-      type="textarea"
-      :rows="2"
+      :rows="1"
       placeholder="请输入内容"
       v-model="addPostData.jobDescribe"
+      style="width: 1000px; height: 90px"
     ></el-input>
 
     <!-- <img
@@ -109,14 +111,26 @@
       :src="addPostData.jobFile"
       style="width: 100px; height: 100px"
     /> -->
+    <br />
+    <br />
+
     <el-upload
+      v-model:file-list="fileList"
       class="avatar-uploader"
-      action="http://localhost:10010/manager/sysUser/userImg"
-      :show-file-list="false"
-      :on-success="handleAvatarSuccess"
+      action="http://localhost:9999/recruitJob/userImg"
+      multiple
+      :on-preview="handlePreview"
+      :on-remove="handleRemove"
+      :before-remove="beforeRemove"
+      :limit="3"
+      :on-exceed="handleExceed"
     >
-      <el-button size="small" type="primary">点击上传</el-button>
-      只支持png，jpg格式文件
+      上传文件：
+      <el-button type="primary">图片上传</el-button>
+      &nbsp;&nbsp;&nbsp;
+      <div class="el-upload__tip">
+        支持扩展名：.png .gif .pdf .jpg,单个文件不超过500kb。
+      </div>
     </el-upload>
 
     <div style="margin-left: 1200px; margin-top: 100px">
@@ -137,7 +151,6 @@
       >
     </div>
     <br />
-
     <!-- <el-button
       v-if="updateflag == 'true'"
       size="small"
@@ -157,6 +170,7 @@ export default {
     return {
       detailsDate: this.$route.query.detailsDate,
       updateflag: this.$route.query.updateflag,
+      fileList: [],
       JobId: '',
       addPostData: {
         jobId: '',

@@ -4,9 +4,15 @@
     <el-aside> </el-aside>
     <!--  主要内容-->
     <el-main>
-      <el-button size="small" @click="addPosition(undefined, true)">
+      <el-button
+        @click="addPosition(undefined, true)"
+        type="primary"
+        style="width: 120px; height: 40px"
+      >
         新建职位
       </el-button>
+      <br />
+      <br />
       负责人:
       <el-input
         placeholder="输入内容"
@@ -52,7 +58,7 @@
       </el-select>
       <br />
       <br />
-      发起时间：
+      发起时间:
       <el-date-picker
         v-model="findCondition.jobSumTime"
         type="datetimerange"
@@ -61,7 +67,7 @@
         format="YYYY-MM-DD HH:mm:ss"
         date-format="YYYY/MM/DD ddd"
         time-format="A hh:mm:ss"
-        style="width: 300px; margin-left: 200px"
+        style="width: 300px"
       >
       </el-date-picker>
       &nbsp;
@@ -81,14 +87,17 @@
         <el-table-column label="职位信息">
           <template v-slot="scope">
             <div @click="addPosition(scope.row)">
-              <span>{{ scope.row.jobName }}</span
-              >&nbsp;&nbsp;<span>职位ID:{{ scope.row.jobId }}</span
+              <span style="font-size: 16px">{{ scope.row.jobName }}</span
+              >&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 16px"
+                >职位ID:{{ scope.row.jobId }}</span
               ><br />
               <span>接受简历:12</span
-              >&nbsp;&nbsp;<span>初筛:5</span>&nbsp;&nbsp;
+              >&nbsp;&nbsp;&nbsp;&nbsp;<span>初筛:5</span>&nbsp;&nbsp;&nbsp;&nbsp;
               <span>待面试:1</span
-              >&nbsp;&nbsp;<span>通过面试:2</span>&nbsp;&nbsp;
-              <span>已发offer:14</span>&nbsp;&nbsp;<span>人才库:3</span>
+              >&nbsp;&nbsp;&nbsp;&nbsp;<span>通过面试:2</span>&nbsp;&nbsp;&nbsp;&nbsp;
+              <span>已发offer:14</span>&nbsp;&nbsp;&nbsp;&nbsp;<span
+                >人才库:3</span
+              >
             </div>
           </template>
         </el-table-column>
@@ -120,11 +129,7 @@
               :underline="false"
               type="primary"
               v-if="scope.row.jobStatus == 2"
-              @click="
-                (centerDialogVisible = true),
-                  (dlalogTitel = '删除'),
-                  (deleteById = scope.row.jobId)
-              "
+              @click="delete1(scope.row)"
               >删除&nbsp;&nbsp;</el-link
             >
 
@@ -138,13 +143,13 @@
               <template #footer>
                 <div class="dialog-footer">
                   <el-button @click="centerDialogVisible = false"
-                    >Cancel</el-button
+                    >取消</el-button
                   >
                   <el-button
                     type="primary"
                     @click="deletePostMethod(scope.row)"
                   >
-                    Confirm
+                    确定
                   </el-button>
                 </div>
               </template>
@@ -162,23 +167,6 @@
         :total="totalCount"
       >
       </el-pagination>
-
-      <el-dialog
-        :title="dlalogTitel"
-        v-model:visible="centerDialogVisible"
-        width="40%"
-        center
-      >
-        <h1 style="color: red">你确定要删除吗？</h1>
-        <template v-slot:footer>
-          <span class="dialog-footer">
-            <el-button @click="centerDialogVisible = false">取 消</el-button>
-            <el-button type="primary" @click="deletePostMethod()"
-              >确 定</el-button
-            >
-          </span>
-        </template>
-      </el-dialog>
     </el-main>
   </div>
 </template>
@@ -240,15 +228,27 @@ export default {
       console.log(row)
     },
     // 判断是否删除
+    delete1(row) {
+      this.centerDialogVisible = true
+      console.log(row)
+      console.log(row.jobId)
+      this.deleteById = row.jobId
+      console.log(this.centerDialogVisible)
+      this.dlalogTitel = '删除'
+      // ;(centerDialogVisible = true),
+      //   (dlalogTitel = '删除'),
+      //   (deleteById = scope.row.jobId)
+    },
     // 添加职位
     addPosition(row, updateflag) {
+      console.log(row)
       this.$router.push({
-        path: '/addposition',
-        query: {
-          detailsDate: row,
-          jobName: row.jobName,
-          jobStatus: row.jobStatus,
-          jobId: row.jobId,
+        path: '/home/recruit/addPositionManage',
+        params: {
+          detailsDate: 'row',
+          jobName: 'row.jobName',
+          jobStatus: 'row.jobStatus',
+          jobId: 'row.jobId',
           updateflag: updateflag
         }
       })
