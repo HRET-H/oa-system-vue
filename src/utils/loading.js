@@ -1,6 +1,6 @@
 import { ElLoading } from 'element-plus'
 
-// 打开全屏加载层方法
+// 打开ElLoading全屏加载层方法
 export function openFullScreen() {
   let loading = ElLoading.service({
     lock: true,
@@ -10,7 +10,7 @@ export function openFullScreen() {
   return loading
 }
 
-// 关闭全屏加载层方法
+// 关闭ElLoading全屏加载层方法
 export function closeFullScreen(option) {
   option.close()
 }

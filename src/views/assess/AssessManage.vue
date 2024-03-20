@@ -196,7 +196,7 @@ export default {
     },
     // 发起考核跳转页面
     initiateAssessment() {
-      this.$router.push('/InitiateAssessmentManager')
+      this.$router.push('/home/mova/InitiateAssessmentManager')
     },
     // 详情跳转页面（row）
     detailAssess() {

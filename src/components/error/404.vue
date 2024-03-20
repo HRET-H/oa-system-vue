@@ -3,7 +3,7 @@
     <p>
       页面将在<span>{{ time }}</span
       >秒后自动跳转首页，<br />
-      您也可以点击这里跳转<a href="/">首页</a>
+      您也可以点击这里跳转<a href="/home">首页</a>
     </p>
   </div>
 </template>
