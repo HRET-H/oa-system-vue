@@ -1,6 +1,68 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { useUserStore } from '@/stores'
 
+const routes = [
+  {
+    path: '/home',
+    name: 'home',
+    component: () => import('@/views/index/HomeView.vue'),
+    children: [
+      // 跳转到考核页面
+      {
+        path: 'mova',
+        name: 'mova',
+        component: () => import('@/views/index/AsideIndex.vue'),
+        children: [
+          {
+            path: 'appraisal_plan',
+            name: 'appraisal_plan',
+            component: () => import('@/views/assess/AssessManage.vue')
+          },
+          {
+            path: 'InitiateAssessmentManager',
+            name: 'InitiateAssessmentManager',
+            component: () =>
+              import('@/views/assess/InitiateAssessmentManager.vue')
+          },
+          // 考核模板页面
+          {
+            path: 'appraisal_template',
+            name: 'appraisal_template',
+            component: () => import('@/views/assess/AssessTemplate.vue')
+          },
+          {
+            path: 'insertAssessTemplate',
+            name: 'insertAssessTemplate',
+            component: () => import('@/views/assess/InsertAssessTemplate.vue')
+          }
+        ]
+      },
+      {
+        path: 'recruit',
+        name: 'recruit',
+        component: () => import('@/views/index/AsideIndex.vue'),
+        children: [
+          {
+            path: '/positionManage',
+            name: 'positionManage',
+            component: () => import('@/views/recruit/positionManage.vue')
+          },
+          {
+            path: 'addPositionManage',
+            name: 'addPositionManage',
+            component: () => import('@/views/recruit/addPositionManage.vue')
+          },
+          {
+            path: 'setPositionManage',
+            name: 'setPositionManage',
+            component: () => import('@/views/recruit/setPosition.vue')
+          }
+        ]
+      }
+    ]
+  }
+]
+
 // createRouter 创建路由实例
 // 配置 history 模式
 // 1. history模式：createWebHistory     地址栏不带 #
@@ -10,67 +72,7 @@ import { useUserStore } from '@/stores'
 // vite 中的环境变量 import.meta.env.BASE_URL  就是 vite.config.js 中的 base 配置项
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-    {
-      path: '/home',
-      name: 'home',
-      component: () => import('@/views/index/HomeView.vue'),
-      children: [
-        // 跳转到考核页面
-        {
-          path: 'mova',
-          name: 'mova',
-          component: () => import('@/views/index/AsideIndex.vue'),
-          children: [
-            {
-              path: 'appraisal_plan',
-              name: 'appraisal_plan',
-              component: () => import('@/views/assess/AssessManage.vue')
-            },
-            {
-              path: 'InitiateAssessmentManager',
-              name: 'InitiateAssessmentManager',
-              component: () =>
-                import('@/views/assess/InitiateAssessmentManager.vue')
-            },
-            // 考核模板页面
-            {
-              path: 'appraisal_template',
-              name: 'appraisal_template',
-              component: () => import('@/views/assess/AssessTemplate.vue')
-            },
-            {
-              path: 'insertAssessTemplate',
-              name: 'insertAssessTemplate',
-              component: () => import('@/views/assess/InsertAssessTemplate.vue')
-            }
-          ]
-        },
-        {
-          path: 'recruit',
-          name: 'recruit',
-          component: () => import('@/views/index/AsideIndex.vue'),
-          children: [
-            {
-              path: '/positionManage',
-              name: 'positionManage',
-              component: () => import('@/views/recruit/positionManage.vue')
-            },
-            {
-              path: 'addPositionManage',
-              name: 'addPositionManage',
-              component: () => import('@/views/recruit/addPositionManage.vue')
-            },
-            {
-              path: 'setPositionManage',
-              name: 'setPositionManage',
-              component: () => import('@/views/recruit/setPosition.vue')
-            }
-          ]
-        }
-      ]
-    }
-  ]
+  routes
 })
 
 // 登录访问拦截 => 默认是直接放行的
