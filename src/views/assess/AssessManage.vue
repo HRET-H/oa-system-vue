@@ -131,8 +131,8 @@
       <el-pagination
         @size-change="handleSizeChange"
         @current-change="handleCurrentChange"
-        :current-page="assessForm.pageNum"
-        :page-size="assessForm.pageSize"
+        :current-page="pageNum"
+        :page-size="pageSize"
         :total="total"
         background
         layout="prev, pager, next"
@@ -153,14 +153,14 @@ export default {
         assessName: '',
         status: '',
         assessType: '',
-        assessTime: '',
-        pageNum: 0,
-        pageSize: 10
+        assessTime: ''
       },
       assessId: '',
       //   考核列表
       assessList: [],
       // 分页
+      pageNum: 0,
+      pageSize: 10,
       total: 0
     }
   },
@@ -170,23 +170,26 @@ export default {
   methods: {
     // 分页
     handleSizeChange(val) {
-      this.assessForm.pageSize = val
+      this.pageSize = val
       this.findAssessListAndPage()
     },
     handleCurrentChange(val) {
-      this.assessForm.pageNum = val
-      // console.log(this.pageNum)
+      this.pageNum = val
+      console.log(this.pageNum)
       this.findAssessListAndPage()
     },
     // 查询考核方法列表和分页
     findAssessListAndPage() {
       axios
         .post(
-          'http://localhost:9999/assess/findAssessListAndPage',
+          'http://localhost:9999/assess/findAssessListAndPage?pageNum=' +
+            this.pageNum +
+            '&pageSize=' +
+            this.pageSize,
           this.assessForm
         )
         .then((res) => {
-          this.assessList = res.data.list
+          this.assessList = res.data.data.list
           this.total = res.data.total
         })
     },
