@@ -19,6 +19,7 @@
     "moment": "^2.30.1",
     "pinia": "^2.1.7",
     "vue": "^3.4.21",
+    "vue-mathjax": "^0.1.1",
     "vue-router": "^4.3.0"
   },
   "devDependencies": {

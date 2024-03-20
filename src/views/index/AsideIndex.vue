@@ -14,7 +14,6 @@ onMounted(() => {
   const route = useRoute()
   // 获取路由传递的参数
   const parentId = route.query.parentId
-
   axios.get('/menu/selectMenuTree?parentId=' + parentId).then((res) => {
     MenuData.value = res.data
   })

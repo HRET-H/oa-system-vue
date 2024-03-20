@@ -18,17 +18,17 @@ const router = createRouter({
       children: [
         // 跳转到考核页面
         {
-          path: '/mova',
+          path: 'mova',
           name: 'mova',
           component: () => import('@/views/index/AsideIndex.vue'),
           children: [
             {
-              path: '/appraisal_plan',
+              path: 'appraisal_plan',
               name: 'appraisal_plan',
               component: () => import('@/views/assess/AssessManage.vue')
             },
             {
-              path: '/InitiateAssessmentManager',
+              path: 'InitiateAssessmentManager',
               name: 'InitiateAssessmentManager',
               component: () =>
                 import('@/views/assess/InitiateAssessmentManager.vue')
@@ -36,19 +36,24 @@ const router = createRouter({
           ]
         },
         {
-          path: '/recruit',
+          path: 'recruit',
           name: 'recruit',
-          component: () => import('@/views/recruit/recruitIndex.vue'),
+          component: () => import('@/views/index/AsideIndex.vue'),
           children: [
             {
-              path: '/positionManage',
+              path: 'post',
               name: 'positionManage',
               component: () => import('@/views/recruit/positionManage.vue')
             },
             {
-              path: '/addPositionManage',
+              path: 'addPositionManage',
               name: 'addPositionManage',
               component: () => import('@/views/recruit/addPositionManage.vue')
+            },
+            {
+              path: 'setPositionManage',
+              name: 'setPositionManage',
+              component: () => import('@/views/recruit/setPosition.vue')
             }
           ]
         }
