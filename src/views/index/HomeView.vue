@@ -10,6 +10,9 @@ import { openFullScreen, closeFullScreen } from '@/utils/loading'
 // 导入动态菜单组件
 import MenuTree from '@/components/menu/MenuTree.vue'
 
+// 定义一个ref变量 用来存储全屏加载的boolean的值
+const fullscreenLoading = ref(true)
+
 // 设置axios的baseURL
 axios.defaults.baseURL = 'http://localhost:9999'
 

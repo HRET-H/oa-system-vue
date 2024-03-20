@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUpdated } from 'vue'
 // 导入动态菜单
 import MenuTree from '@/components/menu/MenuTree.vue'
 import axios from 'axios'
@@ -10,6 +10,17 @@ const MenuData = ref([])
 axios.defaults.baseURL = 'http://localhost:9999'
 
 onMounted(() => {
+  // 获取route
+  const route = useRoute()
+  // 获取路由传递的参数
+  const parentId = route.query.parentId
+
+  axios.get('/menu/selectMenuTree?parentId=' + parentId).then((res) => {
+    MenuData.value = res.data
+  })
+})
+
+onUpdated(() => {
   // 获取route
   const route = useRoute()
   // 获取路由传递的参数

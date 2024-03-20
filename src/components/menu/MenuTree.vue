@@ -21,7 +21,7 @@ export default {
     <el-menu
       v-if="mode === 'horizontal'"
       :mode="mode"
-      router="true"
+      :router="true"
       background-color="rgb(35,43,64)"
       text-color="#fff"
     >
@@ -59,7 +59,7 @@ export default {
       </template>
     </el-menu>
 
-    <el-menu v-else :mode="mode" router="true">
+    <el-menu v-else :mode="mode" :router="true">
       <template v-for="(item, index) in data">
         <!-- 情况一：当 item 有子集时 -->
         <el-sub-menu
