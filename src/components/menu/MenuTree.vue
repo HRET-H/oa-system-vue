@@ -12,23 +12,23 @@ export default {
       default: 'vertical'
     }
   }
-  // 注意： 在template标签上使用v-for，:key="index"不能写在template标签上，因为其标签不会被渲染，会引起循环错误
 }
 </script>
 
 <template>
+  <!-- // 注意： 在template标签上使用v-for，:key="index"不能写在template标签上，因为其标签不会被渲染，会引起循环错误 -->
   <div>
     <el-menu
       v-if="mode === 'horizontal'"
       :mode="mode"
-      router="true"
+      :router="true"
       background-color="rgb(35,43,64)"
       text-color="#fff"
     >
       <template v-for="(item, index) in data">
         <!-- 判断子级类型是否为菜单 -->
         <el-sub-menu
-          :index="item.menuPath"
+          :index="item.menuPath + '?parentId=' + item.menuId"
           :key="index"
           v-if="
             item.children != null &&
@@ -41,7 +41,7 @@ export default {
           </template>
           <el-menu-item
             :key="menu_index"
-            :index="menu_item.menuPath"
+            :index="menu_item.menuPath + '?parentId=' + menu_item.menuId"
             v-for="(menu_item, menu_index) in item.children"
           >
             <span>{{ menu_item.menuName }}</span>
@@ -49,19 +49,22 @@ export default {
         </el-sub-menu>
         <!-- 子级无菜单 -->
         <template v-else>
-          <el-menu-item :key="index" :index="item.menuPath">
+          <el-menu-item
+            :key="index"
+            :index="item.menuPath + '?parentId=' + item.menuId"
+          >
             <span>{{ item.menuName }}</span>
           </el-menu-item>
         </template>
       </template>
     </el-menu>
 
-    <el-menu v-else :mode="mode" router="true">
+    <el-menu v-else :mode="mode" :router="true">
       <template v-for="(item, index) in data">
         <!-- 情况一：当 item 有子集时 -->
         <el-sub-menu
           :key="index"
-          :index="item.menuPath"
+          :index="item.menuPath + '?parentId=' + item.menuId"
           v-if="item.children !== null && item.children.length > 0"
         >
           <template #title>
@@ -71,8 +74,14 @@ export default {
         </el-sub-menu>
 
         <!-- 情况二：当 item 没有子集时 -->
-        <el-menu-item :key="index + 1" :index="item.menuPath" v-else>
-          <span>{{ item.menuName }}</span>
+        <el-menu-item
+          :key="index + 1"
+          :index="item.menuPath + '?parentId=' + item.menuId"
+          v-else
+        >
+          <template #title>
+            <span>{{ item.menuName }}</span>
+          </template>
         </el-menu-item>
       </template>
     </el-menu>
