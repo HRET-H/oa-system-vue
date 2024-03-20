@@ -52,7 +52,7 @@ const router = createRouter({
           component: () => import('@/views/index/AsideIndex.vue'),
           children: [
             {
-              path: 'positionManage',
+              path: '/positionManage',
               name: 'positionManage',
               component: () => import('@/views/recruit/positionManage.vue')
             },
@@ -60,6 +60,11 @@ const router = createRouter({
               path: 'addPositionManage',
               name: 'addPositionManage',
               component: () => import('@/views/recruit/addPositionManage.vue')
+            },
+            {
+              path: 'setPositionManage',
+              name: 'setPositionManage',
+              component: () => import('@/views/recruit/setPosition.vue')
             }
           ]
         }
