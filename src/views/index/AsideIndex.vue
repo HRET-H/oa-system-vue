@@ -16,7 +16,10 @@ onMounted(() => {
   const parentId = route.query.parentId
 
   axios.get('/menu/selectMenuTree?parentId=' + parentId).then((res) => {
-    MenuData.value = res.data
+    // 判断是否有值
+    if (res.data !== null && res.data.length > 0) {
+      MenuData.value = res.data
+    }
   })
 })
 
@@ -27,7 +30,10 @@ onUpdated(() => {
   const parentId = route.query.parentId
 
   axios.get('/menu/selectMenuTree?parentId=' + parentId).then((res) => {
-    MenuData.value = res.data
+    // 判断是否有值
+    if (res.data !== null && res.data.length > 0) {
+      MenuData.value = res.data
+    }
   })
 })
 </script>
