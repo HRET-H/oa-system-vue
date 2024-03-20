@@ -196,7 +196,7 @@ export default {
     },
     // 发起考核跳转页面
     initiateAssessment() {
-      this.$router.push('/InitiateAssessmentManager')
+      this.$router.push('/home/mova/InitiateAssessmentManager')
     },
     // 详情跳转页面（row）
     detailAssess() {
@@ -208,7 +208,7 @@ export default {
     // 修改跳转页面（row）
     editAssess(row) {
       this.$router.push({
-        path: '/initiateAssessment',
+        path: 'InitiateAssessmentManager',
         query: { assessId: row.assessId }
       })
     },

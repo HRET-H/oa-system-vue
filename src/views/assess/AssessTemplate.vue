@@ -86,15 +86,11 @@
 
 <script>
 import axios from 'axios'
-import { ref } from 'vue'
 import { ElMessage } from 'element-plus'
 
 export default {
   data() {
     return {
-      // 菜单树
-      MenuData: ref([]),
-
       // 考核模板查询表单
       assessTemplateForm: {
         pageNum: 0,
