@@ -18,17 +18,17 @@ const router = createRouter({
       children: [
         // 跳转到考核页面
         {
-          path: '/mova',
+          path: 'mova',
           name: 'mova',
           component: () => import('@/views/index/AsideIndex.vue'),
           children: [
             {
-              path: '/appraisal_plan',
+              path: 'appraisal_plan',
               name: 'appraisal_plan',
               component: () => import('@/views/assess/AssessManage.vue')
             },
             {
-              path: '/InitiateAssessmentManager',
+              path: 'InitiateAssessmentManager',
               name: 'InitiateAssessmentManager',
               component: () =>
                 import('@/views/assess/InitiateAssessmentManager.vue')
