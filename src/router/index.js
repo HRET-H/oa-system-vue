@@ -43,8 +43,8 @@ const routes = [
         component: () => import('@/views/index/AsideIndex.vue'),
         children: [
           {
-            path: '/positionManage',
-            name: 'positionManage',
+            path: 'post',
+            name: 'post',
             component: () => import('@/views/recruit/positionManage.vue')
           },
           {

@@ -106,11 +106,11 @@
       style="width: 1000px; height: 90px"
     ></el-input>
 
-    <img
+    <!-- <img
       v-if="addPostData.jobFile != ''"
       :src="addPostData.jobFile"
       style="width: 100px; height: 100px"
-    />
+    /> -->
     <br />
     <br />
 
@@ -135,33 +135,43 @@
 
     <div style="margin-left: 1200px; margin-top: 100px">
       <el-button style="width: 125px" @click="returnq">取消</el-button>
-      <el-button style="width: 125px" type="primary" @click="addPostDataMethod"
+      <el-button
+        v-if="addPostData != null"
+        style="width: 125px"
+        type="primary"
+        @click="addPostDataMethod()"
         >下一步</el-button
+      >
+      <el-button
+        v-else
+        style="width: 125px"
+        type="primary"
+        @click="updatePost()"
+        >修改</el-button
       >
     </div>
     <br />
-    <el-button
+    <!-- <el-button
       v-if="updateflag == 'true'"
       size="small"
       type="primary"
-      @click="addPostDataMethod"
+      @click="findById"
       >下一步</el-button
-    >
-
+    > -->
   </div>
 </template>
 
 <script>
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
-import { VueMathjax } from 'vue-mathjax'
-VueMathjax
+
 export default {
   data() {
     return {
       detailsDate: this.$route.query.detailsDate,
       updateflag: this.$route.query.updateflag,
       fileList: [],
+      JobId: '',
       addPostData: {
         jobId: '',
         jobName: '',
@@ -184,56 +194,68 @@ export default {
     }
   },
   methods: {
+    // 取消
     returnq() {
       this.$router.push('/home/recruit/post')
     },
+    // 上传文件
     handleRemove(file, fileList) {
       console.log(file, fileList)
     },
+    // 文件上传
     handlePreview(file) {
       console.log(file)
     },
+    // 文件上传
     handleAvatarSuccess(res, file) {
       console.log(file)
       this.addPostData.jobFile = res.data
     },
-    initialize() {
-      console.log(this.updateflag)
-      if (this.detailsDate != undefined) {
-        this.addPostData = this.detailsDate
-      }
-    },
+    // 添加职位信息
     addPostDataMethod() {
-      if (this.updateflag == false) {
-        axios
-          .post('http://localhost:9999/recruitJob/updateJob', this.addPostData)
-          .then((result) => {
-            if (result.data.date.status == 200) {
-              ElMessage.success('恭喜你，修改成功')
-              this.$router.push('/home/recruit/setPositionManage')
-              this.$router.go(0)
-            } else {
-              ElMessage.error('修改职位信息失败')
-            }
-          })
-      } else {
-        axios
-          .post('http://localhost:9999/recruitJob/addJob', this.addPostData)
-          .then((result) => {
-            if (result.data.code == 200) {
-              console.log(result)
-              ElMessage.success('恭喜你，添加成功')
-              this.$router.push('/home/recruit/setPositionManage')
-              this.$router.go(0)
-            } else {
-              ElMessage.error('添加职位信息失败')
-            }
-          })
-      }
+      console.log('添加职位信息')
+      axios
+        .post('http://localhost:9999/recruitJob/addJob', this.addPostData)
+        .then((result) => {
+          if (result.data.code == 200) {
+            console.log(result)
+            ElMessage.success('恭喜你，添加成功')
+            this.$router.push('/home/recruit/setPositionManage')
+          } else {
+            ElMessage.error('添加职位信息失败')
+          }
+        })
+    },
+    findById() {
+      axios
+        .post(
+          'http://localhost:9999/recruitJob/findById?JobId=' +
+            this.$route.query.JobId
+        )
+        .then((res) => {
+          console.log(res)
+          this.addPostData = res.data
+          console.log(this.addPostData)
+        })
+    },
+    updatePost() {
+      console.log('修改职位信息')
+      axios
+        .post('http://localhost:9999/recruitJob/updateJob', this.addPostData)
+        .then((res) => {
+          if (res.data.code == 200) {
+            console.log('修改成功')
+            ElMessage.success('修改成功')
+            this.$router.push('/home/recruit/setPositionManage')
+          } else {
+            ElMessage.error('修改失败')
+          }
+        })
     }
   },
+  // 添加职位信息
   mounted() {
-    this.initialize()
+    this.findById()
   }
 }
 </script>
