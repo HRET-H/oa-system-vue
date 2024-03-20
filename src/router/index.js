@@ -34,6 +34,23 @@ const router = createRouter({
                 import('@/views/assess/InitiateAssessmentManager.vue')
             }
           ]
+        },
+        {
+          path: '/recruit',
+          name: 'recruit',
+          component: () => import('@/views/recruit/recruitIndex.vue'),
+          children: [
+            {
+              path: '/positionManage',
+              name: 'positionManage',
+              component: () => import('@/views/recruit/positionManage.vue')
+            },
+            {
+              path: '/addPositionManage',
+              name: 'addPositionManage',
+              component: () => import('@/views/recruit/addPositionManage.vue')
+            }
+          ]
         }
       ]
     }
