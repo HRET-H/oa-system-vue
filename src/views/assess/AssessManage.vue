@@ -189,7 +189,7 @@ export default {
           this.assessForm
         )
         .then((res) => {
-          this.assessList = res.data.rows
+          this.assessList = res.data.data.list
           this.total = res.data.total
         })
     },
@@ -199,7 +199,7 @@ export default {
     },
     // 发起考核跳转页面
     initiateAssessment() {
-      this.$router.push('/initiateAssessment')
+      this.$router.push('/appraisal_template')
     },
     // 详情跳转页面（row）
     detailAssess() {

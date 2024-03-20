@@ -14,24 +14,28 @@ const router = createRouter({
     {
       path: '/home',
       name: 'home',
-      component: () => import('@/views/HomeView.vue')
-    },
-    // 跳转到考核页面
-    {
-      path: '/assess',
-      component: () => import('@/views/assess/AssessManage.vue')
-    },
-    {
-      path: '/initiateAssessment',
-      component: () => import('@/views/assess/InitiateAssessmentManager.vue')
-    },
-    {
-      path: '/position',
-      component: () => import('@/views/recruit/positionManage.vue')
-    },
-    {
-      path: '/addposition',
-      component: () => import('@/views/recruit/addPositionManage.vue')
+      component: () => import('@/views/HomeView.vue'),
+      children: [
+        // 跳转到考核页面
+        {
+          path: '/mova',
+          name: 'mova',
+          component: () => import('@/views/assess/AssessIndex.vue'),
+          children: [
+            {
+              path: '/appraisal_plan',
+              name: 'appraisal_plan',
+              component: () => import('@/views/assess/AssessManage.vue')
+            },
+            {
+              path: '/appraisal_template',
+              name: 'appraisal_template',
+              component: () =>
+                import('@/views/assess/InitiateAssessmentManager.vue')
+            }
+          ]
+        }
+      ]
     }
   ]
 })

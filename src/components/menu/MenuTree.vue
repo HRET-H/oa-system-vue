@@ -1,6 +1,62 @@
+<script>
+import { ref } from 'vue'
+export default {
+  name: 'MenuTree',
+  props: {
+    data: {
+      type: Array,
+      default: ref([])
+    },
+    mode: {
+      type: String,
+      default: 'vertical'
+    }
+  }
+  // 注意： 在template标签上使用v-for，:key="index"不能写在template标签上，因为其标签不会被渲染，会引起循环错误
+}
+</script>
+
 <template>
   <div>
-    <el-menu :mode="mode" router="true">
+    <el-menu
+      v-if="mode === 'horizontal'"
+      :mode="mode"
+      router="true"
+      background-color="rgb(35,43,64)"
+      text-color="#fff"
+    >
+      <template v-for="(item, index) in data">
+        <!-- 判断子级类型是否为菜单 -->
+        <el-sub-menu
+          :index="item.menuPath"
+          :key="index"
+          v-if="
+            item.children != null &&
+            item.children.length > 0 &&
+            item.children[0].menuType === 'C'
+          "
+        >
+          <template #title>
+            <span>{{ item.menuName }}</span>
+          </template>
+          <el-menu-item
+            :key="menu_index"
+            :index="menu_item.menuPath"
+            v-for="(menu_item, menu_index) in item.children"
+          >
+            <span>{{ menu_item.menuName }}</span>
+          </el-menu-item>
+        </el-sub-menu>
+        <!-- 子级无菜单 -->
+        <template v-else>
+          <el-menu-item :key="index" :index="item.menuPath">
+            <span>{{ item.menuName }}</span>
+          </el-menu-item>
+        </template>
+      </template>
+    </el-menu>
+
+    <el-menu v-else :mode="mode" router="true">
       <template v-for="(item, index) in data">
         <!-- 情况一：当 item 有子集时 -->
         <el-sub-menu
@@ -23,28 +79,9 @@
   </div>
 </template>
 
-<script>
-import { ref } from 'vue'
-export default {
-  name: 'MenuTree',
-  props: {
-    data: {
-      type: Array,
-      default: ref([])
-    },
-    mode: {
-      type: String,
-      default: 'vertical'
-    }
-  }
-  // 注意： 在template标签上使用v-for，:key="index"不能写在template标签上，因为其标签不会被渲染，会引起循环错误
-}
-</script>
-
 <style scoped>
 /* 设置激活菜单的样式 */
 .el-menu-item.is-active {
-  background-color: rgba(84, 194, 195, 1) !important;
-  color: #fff !important;
+  font-weight: bold;
 }
 </style>
