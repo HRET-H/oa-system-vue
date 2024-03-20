@@ -35,29 +35,29 @@ const router = createRouter({
             },
             // 考核模板页面
             {
-              path: '/appraisal_template',
+              path: 'appraisal_template',
               name: 'appraisal_template',
               component: () => import('@/views/assess/AssessTemplate.vue')
             },
             {
-              path: '/insertAssessTemplate',
+              path: 'insertAssessTemplate',
               name: 'insertAssessTemplate',
               component: () => import('@/views/assess/InsertAssessTemplate.vue')
             }
           ]
         },
         {
-          path: '/recruit',
+          path: 'recruit',
           name: 'recruit',
-          component: () => import('@/views/recruit/recruitIndex.vue'),
+          component: () => import('@/views/index/AsideIndex.vue'),
           children: [
             {
-              path: '/positionManage',
+              path: 'positionManage',
               name: 'positionManage',
               component: () => import('@/views/recruit/positionManage.vue')
             },
             {
-              path: '/addPositionManage',
+              path: 'addPositionManage',
               name: 'addPositionManage',
               component: () => import('@/views/recruit/addPositionManage.vue')
             }

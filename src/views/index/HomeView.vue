@@ -39,7 +39,7 @@ onMounted(() => {
 
 <template>
   <!-- 外层容器。 当子元素中包含 <el-header> 或 <el-footer> 时，全部子元素会垂直上下排列， 否则会水平左右排列 -->
-  <el-container>
+  <el-container v-loading.fullscreen.lock="fullscreenLoading">
     <!-- 顶栏容器 -->
     <el-header style="background-color: rgb(35, 43, 64); height: 30%">
       <span>
