@@ -14,13 +14,13 @@ const router = createRouter({
     {
       path: '/home',
       name: 'home',
-      component: () => import('@/views/HomeView.vue'),
+      component: () => import('@/views/index/HomeView.vue'),
       children: [
         // 跳转到考核页面
         {
           path: '/mova',
           name: 'mova',
-          component: () => import('@/views/assess/AssessIndex.vue'),
+          component: () => import('@/views/index/AsideIndex.vue'),
           children: [
             {
               path: '/appraisal_plan',
@@ -28,8 +28,8 @@ const router = createRouter({
               component: () => import('@/views/assess/AssessManage.vue')
             },
             {
-              path: '/appraisal_template',
-              name: 'appraisal_template',
+              path: '/InitiateAssessmentManager',
+              name: 'InitiateAssessmentManager',
               component: () =>
                 import('@/views/assess/InitiateAssessmentManager.vue')
             }

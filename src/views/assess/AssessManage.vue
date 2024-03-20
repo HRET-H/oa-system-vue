@@ -199,7 +199,7 @@ export default {
     },
     // 发起考核跳转页面
     initiateAssessment() {
-      this.$router.push('/appraisal_template')
+      this.$router.push('/InitiateAssessmentManager')
     },
     // 详情跳转页面（row）
     detailAssess() {
