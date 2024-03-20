@@ -151,6 +151,9 @@ export default {
       labelPosition: 'right'
     }
   },
+  created() {
+    this.findAssessMentById()
+  },
   methods: {
     addAssessMent() {
       axios
@@ -166,10 +169,22 @@ export default {
             //   message: '新增成功',
             //   type: 'success'
             // })
-            this.$router.push('/assess')
+            this.$router.push('/home/mova/appraisal_plan')
           } else {
             ElMessage.error('新增失败')
           }
+        })
+    },
+    findAssessMentById() {
+      axios
+        .get(
+          'http://localhost:9999/assess/findAssessMentById?assessId=' +
+            this.$route.query.assessId
+        )
+        .then((res) => {
+          console.log(res)
+          this.initiateAssessmentForm = res.data
+          console.log(this.initiateAssessmentForm)
         })
     },
     // 取消
