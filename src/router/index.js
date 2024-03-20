@@ -32,6 +32,17 @@ const router = createRouter({
               name: 'InitiateAssessmentManager',
               component: () =>
                 import('@/views/assess/InitiateAssessmentManager.vue')
+            },
+            // 考核模板页面
+            {
+              path: 'appraisal_template',
+              name: 'appraisal_template',
+              component: () => import('@/views/assess/AssessTemplate.vue')
+            },
+            {
+              path: 'insertAssessTemplate',
+              name: 'insertAssessTemplate',
+              component: () => import('@/views/assess/InsertAssessTemplate.vue')
             }
           ]
         },
@@ -41,7 +52,7 @@ const router = createRouter({
           component: () => import('@/views/index/AsideIndex.vue'),
           children: [
             {
-              path: 'post',
+              path: '/positionManage',
               name: 'positionManage',
               component: () => import('@/views/recruit/positionManage.vue')
             },

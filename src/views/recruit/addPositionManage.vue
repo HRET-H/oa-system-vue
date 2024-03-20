@@ -140,6 +140,14 @@
       >
     </div>
     <br />
+    <el-button
+      v-if="updateflag == 'true'"
+      size="small"
+      type="primary"
+      @click="addPostDataMethod"
+      >下一步</el-button
+    >
+
   </div>
 </template>
 
