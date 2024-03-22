@@ -61,6 +61,11 @@ const routes = [
             path: 'setPositionManage',
             name: 'setPositionManage',
             component: () => import('@/views/recruit/setPosition.vue')
+          },
+          {
+            path: 'candidate',
+            name: 'candidate',
+            component: () => import('@/views/recruit/canDidate.vue')
           }
         ]
       }
