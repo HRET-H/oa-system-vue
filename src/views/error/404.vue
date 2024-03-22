@@ -12,6 +12,7 @@
 // 这里可以导入其他文件（比如：组件，工具js，第三方插件js，json文件，图片文件等等）
 
 export default {
+  name: '404',
   // 定义属性
   data() {
     return {

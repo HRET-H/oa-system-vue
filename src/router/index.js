@@ -4,6 +4,10 @@ import { createRouter, createWebHistory } from 'vue-router'
 // router路由
 const routes = [
   {
+    path: '/:pathMatch(.*)',
+    component: () => import('@/views/error/404.vue')
+  },
+  {
     path: '/home',
     name: 'home',
     component: () => import('@/views/index/HomeView.vue'),
