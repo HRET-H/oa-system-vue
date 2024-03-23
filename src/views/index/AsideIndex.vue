@@ -4,35 +4,59 @@ import { ref, onMounted, onUpdated } from 'vue'
 import MenuTree from '@/components/menu/MenuTree.vue'
 import axios from 'axios'
 import { useRoute } from 'vue-router'
+import { subMenuStore } from '@/stores/modules/menu'
+import { baseURL } from '@/utils/request'
+
+// 获取route
+const route = useRoute()
+
+// 获取pinia的store
+const store = subMenuStore()
 
 const MenuData = ref([])
 
-axios.defaults.baseURL = 'http://localhost:9999'
+axios.defaults.baseURL = baseURL
 
-onMounted(() => {
-  // 获取route
-  const route = useRoute()
-  // 获取路由传递的参数
-  const parentId = route.query.parentId
-  axios.get('/menu/selectMenuTree?parentId=' + parentId).then((res) => {
-    // 判断是否有值
+// 获取菜单数据
+function getMenuData(id) {
+  // 将菜单数据置为空数组
+  MenuData.value = []
+  // 获取菜单数据并返回axios请求的Promise
+  return axios.get('/menu/selectMenuTree?parentId=' + id).then((res) => {
+    // 判断数据是否为空
     if (res.data !== null && res.data.length > 0) {
       MenuData.value = res.data
+      return true
+    } else {
+      return false
+    }
+  })
+}
+
+onMounted(() => {
+  // 获取路由传递的参数
+  const parentId = route.query.parentId
+  // 获取菜单数据并判断是否获取到数据
+  getMenuData(parentId).then((res) => {
+    // 判断是否获取到数据
+    if (res) {
+      store.parentId = parentId
+    } else {
+      getMenuData(store.parentId)
     }
   })
 })
 
 onUpdated(() => {
-  // 获取route
-  const route = useRoute()
   // 获取路由传递的参数
   const parentId = route.query.parentId
-
-  axios.get('/menu/selectMenuTree?parentId=' + parentId).then((res) => {
-    console.log(res.data)
-    // 判断是否有值
-    if (res.data !== null && res.data.length > 0) {
-      MenuData.value = res.data
+  // 获取菜单数据并判断是否获取到数据
+  getMenuData(parentId).then((res) => {
+    // 判断是否获取到数据
+    if (res) {
+      store.parentId = parentId
+    } else {
+      getMenuData(store.parentId)
     }
   })
 })
