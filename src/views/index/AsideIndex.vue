@@ -42,7 +42,13 @@ onMounted(() => {
     if (res) {
       store.parentId = parentId
     } else {
-      getMenuData(store.parentId)
+      getMenuData(store.parentId).then((innerRes) => {
+        // 判断是否获取到数据
+        if (!innerRes) {
+          // 两次都未获取到数据初始化state中的parentId
+          store.$reset()
+        }
+      })
     }
   })
 })
@@ -56,7 +62,13 @@ onUpdated(() => {
     if (res) {
       store.parentId = parentId
     } else {
-      getMenuData(store.parentId)
+      getMenuData(store.parentId).then((innerRes) => {
+        // 判断是否获取到数据
+        if (!innerRes) {
+          // 两次都未获取到数据初始化state中的parentId
+          store.$reset()
+        }
+      })
     }
   })
 })
