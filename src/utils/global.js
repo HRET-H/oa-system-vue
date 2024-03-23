@@ -5,22 +5,14 @@ import getPagination from '@/components/pagination/getPagination.vue'
 
 const components = [getPagination]
 
+// 添加全局组件
 export default {
-  install: (app) => {
+  // 使用install方法，在app上进行扩展
+  install(app) {
+    // 遍历注册
     components.forEach((component) => {
-      // 在app上进行扩展，app提供 component directive 函数
-      // 如果要挂载原型 app.config.globalProperties 方式
-
-      // 利用组件的name属性，将组件注册为全局组件
-      app.component(
-        // 注册的名字
-        component.name,
-        // 组件的实现
-        {
-          /* ... */
-          getPagination
-        }
-      )
+      // 注册
+      app.component(component.name, component)
     })
   }
 }

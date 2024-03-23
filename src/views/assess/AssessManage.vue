@@ -128,16 +128,6 @@
           </template>
         </el-table-column>
       </el-table>
-      <!-- <el-pagination
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page="assessForm.pageNum"
-        :page-size="assessForm.pageSize"
-        :total="total"
-        background
-        layout="prev, pager, next"
-      >
-      </el-pagination> -->
       <GetPagination
         :page-num="assessForm.pageNum"
         :page-size="assessForm.pageSize"
@@ -150,11 +140,9 @@
 </template>
 
 <script>
-import GetPagination from '@/components/pagination/getPagination.vue'
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
 export default {
-  components: { GetPagination },
   data() {
     return {
       // 考核查询表单
