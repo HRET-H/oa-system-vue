@@ -47,6 +47,8 @@ onMounted(() => {
         if (!innerRes) {
           // 两次都未获取到数据初始化state中的parentId
           store.$reset()
+          // 获取菜单
+          getMenuData(store.parentId)
         }
       })
     }
@@ -67,6 +69,8 @@ onUpdated(() => {
         if (!innerRes) {
           // 两次都未获取到数据初始化state中的parentId
           store.$reset()
+          // 获取菜单
+          getMenuData(store.parentId)
         }
       })
     }
