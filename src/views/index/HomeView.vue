@@ -3,6 +3,7 @@
 // 导入动态菜单数据
 import { ref, onMounted } from 'vue'
 import { ElMessage } from 'element-plus'
+import { baseURL } from '@/utils/request'
 // 导入axios
 import axios from 'axios'
 // 导入弹窗js
@@ -11,7 +12,7 @@ import { openFullScreen, closeFullScreen } from '@/utils/loading'
 import MenuTree from '@/components/menu/MenuTree.vue'
 
 // 设置axios的baseURL
-axios.defaults.baseURL = 'http://localhost:9999'
+axios.defaults.baseURL = baseURL
 
 // 定义一个ref变量，用来存储数据
 let NavDrawer = ref(false)
@@ -32,7 +33,7 @@ onMounted(() => {
       closeFullScreen(loading)
     })
     .catch(() => {
-      ElMessage.error('网络不佳，请稍后刷新重试')
+      ElMessage.error('网络不佳请稍后重试!!!')
     })
 })
 </script>

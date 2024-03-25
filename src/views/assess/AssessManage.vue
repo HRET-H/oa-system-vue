@@ -128,16 +128,13 @@
           </template>
         </el-table-column>
       </el-table>
-      <el-pagination
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page="assessForm.pageNum"
+      <GetPagination
+        :page-num="assessForm.pageNum"
         :page-size="assessForm.pageSize"
         :total="total"
-        background
-        layout="prev, pager, next"
-      >
-      </el-pagination>
+        :handle-current-change="handleCurrentChange"
+        :handle-size-change="handleSizeChange"
+      />
     </page-container>
   </div>
 </template>
@@ -154,7 +151,7 @@ export default {
         status: '',
         assessType: '',
         assessTime: '',
-        pageNum: 0,
+        pageNum: 1,
         pageSize: 10
       },
       assessId: '',

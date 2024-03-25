@@ -1,23 +1,22 @@
-<script>
+<script setup>
 import { ref } from 'vue'
-export default {
-  name: 'MenuTree',
-  props: {
-    data: {
-      type: Array,
-      default: ref([])
-    },
-    mode: {
-      type: String,
-      default: 'vertical'
-    }
+
+// defineProps等价于 props
+defineProps({
+  data: {
+    type: Array,
+    default: () => ref([])
+  },
+  mode: {
+    type: String,
+    default: 'vertical'
   }
-}
+})
 </script>
 
 <template>
-  <!-- // 注意： 在template标签上使用v-for，:key="index"不能写在template标签上，因为其标签不会被渲染，会引起循环错误 -->
   <div>
+    <!-- // 注意： 在template标签上使用v-for，:key="index"不能写在template标签上，因为其标签不会被渲染，会引起循环错误 -->
     <el-menu
       v-if="mode === 'horizontal'"
       :mode="mode"
