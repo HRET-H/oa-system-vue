@@ -59,6 +59,19 @@ const routes = [
             component: () => import('@/views/recruit/setPosition.vue')
           }
         ]
+      },
+      {
+        path: 'clocking_in',
+        name: 'clocking_in',
+        component: () => import('@/views/index/AsideIndex.vue'),
+        children: [
+          {
+            path: 'attendance_section',
+            name: 'attendance_section',
+            component: () =>
+              import('@/views/clocking_in/attendance_section.vue')
+          }
+        ]
       }
     ]
   }
