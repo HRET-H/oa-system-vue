@@ -39,6 +39,16 @@ const routes = [
             path: 'insertAssessTemplate',
             name: 'insertAssessTemplate',
             component: () => import('@/views/assess/InsertAssessTemplate.vue')
+          },
+          {
+            path: 'appraisal_index',
+            name: 'appraisal_index',
+            component: () => import('@/views/assess/AssessIndex.vue')
+          },
+          {
+            path: 'InsertAssessIndex',
+            name: 'InsertAssessIndex',
+            component: () => import('@/views/assess/InsertAssessIndex.vue')
           }
         ]
       },
