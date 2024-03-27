@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 // 导入element-plus图标
-import { Search, ArrowRight } from '@element-plus/icons-vue'
+import { Search, ArrowRight, Plus } from '@element-plus/icons-vue'
 // 导入面包屑组件和message组件
 import { ElBreadcrumbItem, ElMessage } from 'element-plus'
 import axios from 'axios'
@@ -197,7 +197,12 @@ const handleClose = () => {
 <template>
   <div>
     <el-col @click="openDialog">
-      <v-btn icon="mdi-plus" v-if="selectUser.length === 0"></v-btn>
+      <el-button
+        size="large"
+        :icon="Plus"
+        circle
+        v-if="selectUser.length === 0"
+      />
       <span
         style="margin-left: 5px; margin-right: 5px"
         v-for="(item, index) in selectUser"
