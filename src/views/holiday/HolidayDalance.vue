@@ -24,28 +24,40 @@
               >查询</el-button
             >
             <el-button plain @click="exportData()" style="margin-right: 10px"
-        >导出</el-button
-      >
+              >导出</el-button
+            >
           </el-form-item>
         </el-form>
       </div>
 
       <!-- 表格 -->
       <el-table :data="holidayList" style="width: 100%">
-        <el-table-column prop="userNames" label="姓名" width="180"></el-table-column>
+        <el-table-column
+          prop="userNames"
+          label="姓名"
+          width="180"
+        ></el-table-column>
         <el-table-column prop="deptName" label="部门"> </el-table-column>
         <el-table-column prop="deptId" label="工号"> </el-table-column>
         <el-table-column prop="position" label="职位"></el-table-column>
-        <el-table-column prop="lnitiationTimess" label="职位时间"></el-table-column>
+        <el-table-column
+          prop="lnitiationTimess"
+          label="职位时间"
+        ></el-table-column>
         <el-table-column prop="leavess" label="事假（小时）"> </el-table-column>
-        <el-table-column prop="annualLeavess" label="年假（天）"> </el-table-column>
-        <el-table-column prop="sickLeavess" label="病假(小时)"> </el-table-column>
-        <el-table-column prop="maternityLeavess" label="产假（天）"> </el-table-column>
-        <el-table-column prop="paternityLeavess" label="陪产假（天）"> </el-table-column>
-        <el-table-column prop="marriageLeavess" label="婚假（天）"> </el-table-column>
+        <el-table-column prop="annualLeavess" label="年假（天）">
+        </el-table-column>
+        <el-table-column prop="sickLeavess" label="病假(小时)">
+        </el-table-column>
+        <el-table-column prop="maternityLeavess" label="产假（天）">
+        </el-table-column>
+        <el-table-column prop="paternityLeavess" label="陪产假（天）">
+        </el-table-column>
+        <el-table-column prop="marriageLeavess" label="婚假（天）">
+        </el-table-column>
         <el-table-column label="操作">
           <template v-slot:default="scope">
-            <el-link    
+            <el-link
               type="primary"
               :underline="false"
               @click="deleteHolidayDalance(scope.row)"
@@ -90,7 +102,7 @@ export default {
   created() {
     this.findHolidayPaginationList()
   },
-  
+
   methods: {
     // 分页
     handleSizeChange(val) {
@@ -116,7 +128,7 @@ export default {
         })
     },
     // 导出
-  exportData() {
+    exportData() {
       // 显示加载指示器（如果有的话）
       // showLoadingIndicator();
       axios({

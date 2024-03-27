@@ -172,33 +172,32 @@
         </el-select>
       </el-form-item> -->
 
-      <!-- <el-input-number label="发放日期"
+      <!-- <el-input-number
+        label="发放日期"
         v-model="initiateHolidayForm.releaseDate"
         :min="1"
         :max="31"
         controls-position="right"
         size="large"
-        >
+      >
       </el-input-number> -->
 
       <!-- <el-form-item label="发放规则">
-            <el-select
-            v-model="initiateHolidayForm.rules"
-            placeholder="请选择"
-            >
+        <el-select v-model="initiateHolidayForm.rules" placeholder="请选择">
           <el-option label="统一固定额度" value="0"></el-option>
           <el-option label="按社区工龄" value="1"></el-option>
           <el-option label="按司龄" value="2"></el-option>
         </el-select>
       </el-form-item> -->
 
-      <!-- <el-input-number label="发放额度"
+      <!-- <el-input-number
+        label="发放额度"
         v-model="initiateHolidayForm.lssuanceQuota"
         :min="1"
         :max="1000000"
         controls-position="right"
         size="large"
-        >
+      >
       </el-input-number> -->
       <!-- <el-form-item label="假期有效期">
         <el-checkbox-group v-model="initiateHolidayForm.holidayEffective">

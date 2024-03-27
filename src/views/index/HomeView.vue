@@ -44,8 +44,10 @@ onMounted(() => {
     element-loading-svg-view-box="-10, -10, 50, 50"
   >
     <!-- 顶栏容器 -->
-    <el-header style="background-color: rgb(35, 43, 64); height: 30%">
-      <span>
+    <el-header
+      style="background-color: rgb(35, 43, 64); height: 30%; padding: 0 0"
+    >
+      <span style="margin-left: 30px">
         <el-image
           style="width: 30px; height: 40px; position: relative; top: 15px"
           src="https://hret0721.oss-cn-beijing.aliyuncs.com/oa-system/oa-Logo.png"
@@ -59,7 +61,7 @@ onMounted(() => {
       <MenuTree
         :data="MenuData"
         mode="horizontal"
-        style="width: 60%; display: inline-block"
+        style="width: 60%; display: inline-block; position: relative; top: 1px"
       />
       <el-icon
         color="#fff"
@@ -76,4 +78,16 @@ onMounted(() => {
   </el-container>
 </template>
 
-<style></style>
+<style>
+* {
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  scrollbar-width: none;
+}
+</style>

@@ -1,7 +1,8 @@
 <script setup></script>
+
 <template>
-  <div class="container">
-    <h1>breath</h1>
-  </div>
+  <div></div>
 </template>
+
 <style></style>
+<samp></samp>

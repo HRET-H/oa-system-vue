@@ -140,11 +140,25 @@ const routes = [
           {
             path: 'attendance_section',
             name: 'attendance_section',
-            component: () =>
-              import('@/views/clocking_in/attendance_section.vue')
+            component: () => import('@/views/attendance/attendance_section.vue')
+          },
+          {
+            path: 'reissue_card_rule',
+            name: 'patch',
+            component: () => import('@/views/attendance/patch/patchManager.vue')
+          },
+          {
+            path: 'classes',
+            name: 'shifts',
+            component: () => import('@/views/attendance/shifts/ad_shifts.vue')
           }
         ]
       }
+      // {
+      //   path: 'employee_leave',
+      //   name: 'testOSS',
+      //   component: () => import('@/views/test/testOSS.vue')
+      // }
     ]
   }
 ]

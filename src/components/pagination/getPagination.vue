@@ -34,3 +34,5 @@ const locale = computed(() => zhCn)
     </el-config-provider>
   </span>
 </template>
+
+<style scoped></style>
