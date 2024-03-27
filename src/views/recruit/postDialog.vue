@@ -272,7 +272,7 @@ export default {
               <el-input type="textarea" v-model="form.postRemark"></el-input>
             </el-form-item>
             <br />
-            <el-form-item label="上传文件">
+            <el-form-item label="上传文件" style="color: aliceblue">
               <el-upload
                 class="upload-demo"
                 action="https://jsonplaceholder.typicode.com/posts/"
@@ -426,13 +426,16 @@ export default {
       </el-form>
       <div v-if="active == 0">
         <el-button @click="handleClose()">取 消</el-button>
-        <el-button type="primary" @click="active = 1">下一步</el-button>
+        <el-button type="primary" style="color: aliceblue" @click="active = 1"
+          >下一步</el-button
+        >
       </div>
       <div v-if="active == 1">
         <el-button @click="active = 0">上一步</el-button>
         <el-button
           type="primary"
           @click="post == 0 ? submitForm('form') : updateForm('form')"
+          style="color: aliceblue"
         >
           提交
         </el-button>

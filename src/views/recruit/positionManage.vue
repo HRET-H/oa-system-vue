@@ -156,10 +156,10 @@
         </el-table-column>
       </el-table>
       <span style="top: 20px; position: relative; float: right">
-        <el-pagination
-          @size-change="handleSizeChange"
-          @current-change="handleCurrentChange"
-          :current-page="pageNum"
+        <GetPagination
+          :handle-size-change="handleSizeChange"
+          :handle-current-change="handleCurrentChange"
+          :page-num="pageNum"
           :page-sizes="pageSizes"
           :page-size="pageSize"
           layout="total, sizes, prev, pager, next, jumper"

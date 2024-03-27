@@ -137,7 +137,7 @@
       <el-button style="width: 125px" @click="returnq">取消</el-button>
       <el-button
         v-if="addPostData != null"
-        style="width: 125px"
+        style="width: 125px; color: aliceblue"
         type="primary"
         @click="addPostDataMethod()"
         >下一步</el-button

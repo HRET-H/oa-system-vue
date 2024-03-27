@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div style="width: 1220px; margin: 0 auto">
     <h1>
       <div>
         <span style="color: #1890ff; font-size: 36px">|</span>
@@ -93,8 +93,8 @@
     </span>
     <br />
     <br />
-    <span style="margin-left: 70px; height: 100px">
-      <span style="position: absolute; top: 640px"> 个人优势&nbsp; </span>
+    <span style="margin-left: 70px">
+      <span> 个人优势 &nbsp;</span>
       <el-input
         type="textarea"
         placeholder="请输入内容"
@@ -102,7 +102,7 @@
         maxlength="100"
         show-word-limit
         :rows="4"
-        style="width: 1040px; margin-left: 70px"
+        style="width: 1050px"
       ></el-input>
     </span>
     <br />
@@ -154,7 +154,80 @@
         <span style="font-size: 26px">工作经历</span>
       </div>
     </h1>
-    
+    <br />
+    <div class="el-timeline">
+      <span class="el-timeline-item__tail">+ 添加工作经历</span>
+    </div>
+    <br />
+    <br />
+    <h1>
+      <div>
+        <span style="color: #1890ff; font-size: 36px"><b>|</b></span>
+        <span style="font-size: 26px">项目经验</span>
+      </div>
+    </h1>
+    <br />
+    <div class="el-timeline">
+      <span class="el-timeline-item__tail">+ 添加项目经验</span>
+    </div>
+    <br />
+    <br />
+    <h1>
+      <div>
+        <span style="color: #1890ff; font-size: 36px"><b>|</b></span>
+        <span style="font-size: 26px">培训经历</span>
+      </div>
+    </h1>
+    <br />
+    <div class="el-timeline">
+      <span class="el-timeline-item__tail">+ 添加培训经历</span>
+    </div>
+    <br />
+    <br />
+    <h1>
+      <div>
+        <span style="color: #1890ff; font-size: 36px"><b>|</b></span>
+        <span style="font-size: 26px">外语能力</span>
+      </div>
+    </h1>
+    <br />
+    <div class="el-timeline">
+      <span class="el-timeline-item__tail">+ 添加外语能力</span>
+    </div>
+    <br />
+    <br />
+    <h1>
+      <div>
+        <span style="color: #1890ff; font-size: 36px"><b>|</b></span>
+        <span style="font-size: 26px">获奖经历</span>
+      </div>
+    </h1>
+    <br />
+    <div class="el-timeline">
+      <span class="el-timeline-item__tail">+ 添加获奖经历</span>
+    </div>
+    <br />
+    <br />
+    <h1>
+      <div>
+        <span style="color: #1890ff; font-size: 36px"><b>|</b></span>
+        <span style="font-size: 26px">社交主页</span>
+      </div>
+    </h1>
+    <br />
+    <div class="el-timeline">
+      <span class="el-timeline-item__tail">+ 添加社交主页</span>
+    </div>
+    <br />
+    <br />
+    <div style="margin-left: 910px">
+      <el-button style="width: 128px; height: 40px">取消</el-button>
+      <el-button
+        type="primary"
+        style="color: aliceblue; width: 128px; height: 40px"
+        >确定</el-button
+      >
+    </div>
   </div>
 </template>
 
@@ -169,4 +242,19 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+.el-timeline {
+  width: 1100px;
+  height: 150px;
+  border: 1px solid rgb(210, 210, 210); /* 设置边框为实线且颜色为深灰色 */
+  background-color: transparent; /* 设置背景为透明以实现空心效果 */
+  position: relative;
+  right: -10px;
+  text-align: center;
+  margin-left: 70px;
+}
+.el-timeline-item__tail {
+  text-align: center;
+  line-height: 150px;
+}
+</style>
