@@ -2,8 +2,6 @@
 import { ref } from 'vue'
 // 导入element-plus图标
 import { Search, ArrowRight, Plus } from '@element-plus/icons-vue'
-// 导入面包屑组件和message组件
-import { ElBreadcrumbItem, ElMessage } from 'element-plus'
 import axios from 'axios'
 import { baseURL } from '@/utils/request'
 
@@ -19,7 +17,7 @@ const props = defineProps({
     default: true
   },
   // 弹窗数据回调函数
-  seccessData: Function
+  successData: Function
 })
 
 axios.defaults.baseURL = baseURL
@@ -45,11 +43,28 @@ const selectUser = ref([])
 let searchInput = ref('')
 
 // 打开部门信息弹框
-const openDialog = () => {
+const openDialog = (userId, dept_name) => {
   // 判断selectUser是否有值
   if (selectUser.value.length === 0) {
     // 初始化值
     getDeptValue()
+  } else {
+    // 回显点击的用户信息
+    data.value.forEach((item) => {
+      // 查找当前点击的用户位置
+      item.userList.forEach((user) => {
+        if (user.userId === userId) {
+          // 设置部门名称
+          deptName.value = dept_name
+          // 重置面包屑
+          items.value = [{ title: '部门信息' }]
+          // 添加部门名称面包屑
+          items.value.push({ title: dept_name })
+          // 设置用户列表
+          userData.value = item.userList
+        }
+      })
+    })
   }
 
   // 打开弹窗
@@ -84,6 +99,7 @@ const getByUserNameDeptValue = () => {
     })
 }
 
+// 更新数据
 const updateDataAndUserData = (title, userList) => {
   if (userList !== null && userList.length > 0) {
     // 将用户信息列表添加到userData中
@@ -196,15 +212,17 @@ const handleClose = () => {
 
 <template>
   <div>
-    <el-col @click="openDialog">
+    <el-col>
       <el-button
         size="large"
         :icon="Plus"
         circle
         v-if="selectUser.length === 0"
+        @click="openDialog()"
       />
       <span
-        style="margin-left: 5px; margin-right: 5px"
+        @click="openDialog(item.userId, item.deptName)"
+        style="margin-left: 5px; margin-right: 5px; display: inline-block"
         v-for="(item, index) in selectUser"
         :key="index"
       >
@@ -216,6 +234,9 @@ const handleClose = () => {
           src="https://hret0721.oss-cn-beijing.aliyuncs.com/oa-system/userAll.png"
           v-else
         />
+        <div>
+          {{ item.userName }}
+        </div>
       </span>
     </el-col>
 
