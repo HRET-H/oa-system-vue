@@ -121,9 +121,14 @@ const routes = [
             component: () => import('@/views/recruit/canDidate.vue')
           },
           {
-            path: '/interview',
+            path: 'interview',
             name: 'interview',
             component: () => import('@/views/recruit/InterView.vue')
+          },
+          {
+            path: 'addCanDidate',
+            name: 'addCanDidate',
+            component: () => import('@/views/recruit/addCanDidate.vue')
           }
         ]
       },
