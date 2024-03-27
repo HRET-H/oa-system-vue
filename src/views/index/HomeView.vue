@@ -45,7 +45,9 @@ onMounted(() => {
     element-loading-svg-view-box="-10, -10, 50, 50"
   >
     <!-- 顶栏容器 -->
-    <el-header style="background-color: rgb(35, 43, 64); height: 30%">
+    <el-header
+      style="background-color: rgb(35, 43, 64); height: 30%; padding: 0 0"
+    >
       <span>
         <el-image
           style="width: 30px; height: 40px; position: relative; top: 15px"

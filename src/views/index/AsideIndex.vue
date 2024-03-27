@@ -81,17 +81,52 @@ onUpdated(() => {
 <template>
   <div>
     <!-- 外层容器。 当子元素中包含 <el-header> 或 <el-footer> 时，全部子元素会垂直上下排列， 否则会水平左右排列 -->
-    <el-container>
+    <el-container class="layout-container">
       <!-- 侧边栏容器 -->
       <el-aside style="border-right: 2px solid #d4d7de">
-        <MenuTree :data="MenuData" style="height: 100vh; padding-top: 5%" />
+        <MenuTree :data="MenuData" style="height: 100vh; padding-top: 5%" ; />
       </el-aside>
       <!-- 主要区域容器 -->
-      <el-main>
+      <el-main style="height: 100vh">
         <router-view />
       </el-main>
     </el-container>
   </div>
 </template>
 
-<style></style>
+<style lang="scss" scoped>
+.layout-container {
+  height: 100vh;
+  .el-aside {
+    .el-menu {
+      border-right: none;
+    }
+  }
+  .el-header {
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .el-dropdown__box {
+      display: flex;
+      align-items: center;
+      .el-icon {
+        color: #999;
+        margin-left: 10px;
+      }
+
+      &:active,
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+  .el-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    color: #666;
+  }
+}
+</style>
