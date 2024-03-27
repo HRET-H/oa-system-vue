@@ -136,27 +136,27 @@ export default {
           candidateId: this.$route.query.queryObject
           // 根据实际需求添加addinterviewData中的其他字段到请求体
         }
-        console.log(this.$router.query.requestBody)
+        console.log(requestBody)
         const result = await axios.post(
           '/recruitCandidate/updateRecruitCandidateStatus',
           requestBody
         )
 
-        if (result.data.data !== null) {
-          this.$message.success(result.data.message)
+        if (result.data.data == null) {
+          console.log('更新成功')
         } else {
-          this.$message.error(result.data.message)
+          console.log('更新失败')
         }
 
         this.centerDialogVisible = false
-        this.$router.push({ path: '/candidate' })
+        this.$router.push({ path: 'candidate' })
       } catch (error) {
         console.error('提交数据时发生错误：', error)
         // 可以在这里增加更具体的错误提示或处理逻辑
       }
     },
     backinterviewDataMethod() {
-      this.$router.push({ path: 'candidate' })
+      this.$router.push({ path: '/home/recruit/candidate' })
     },
     changeCheckBox(val) {
       console.log(val)

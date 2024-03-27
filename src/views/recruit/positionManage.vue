@@ -1,11 +1,14 @@
 <template>
   <div>
-    <!-- 部门树 -->
-    <el-aside> </el-aside>
+    <post-dialog
+      ref="postDialog"
+      :postDialog="dialog"
+      :dialog-close="closeDialog"
+    ></post-dialog>
     <!--  主要内容-->
     <el-main>
       <el-button
-        @click="addPosition(undefined, true)"
+        @click="dialogPost()"
         type="primary"
         style="width: 120px; height: 40px"
       >
@@ -121,7 +124,7 @@
             <el-link
               :underline="false"
               type="primary"
-              @click="updatePosition(scope.row, true)"
+              @click="dialogPost(scope.row)"
               >编辑&nbsp;&nbsp;</el-link
             >
 
@@ -176,10 +179,20 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
 import moment from 'moment'
+import PostDialog from './postDialog.vue'
 
 export default {
+  components: {
+    PostDialog
+  },
   data() {
     return {
+      // 弹窗数据
+      dialog: {
+        visible: false,
+        data: {}
+      },
+
       tableData: [],
       // 默认显示第几页
       pageNum: 1,
@@ -218,6 +231,20 @@ export default {
     }
   },
   methods: {
+    // 新建/编辑职位
+    dialogPost(data) {
+      // 判断data是否有值
+      if (data) {
+        // 有值，编辑职位
+        this.$refs.postDialog.getData(data)
+      }
+
+      this.$refs.postDialog.init()
+      this.dialog.visible = true
+    },
+    closeDialog() {
+      this.dialog.visible = false
+    },
     updatePosition(row) {
       console.log(row)
       this.$router.push({

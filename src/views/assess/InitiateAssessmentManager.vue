@@ -37,7 +37,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="负责人">
-        <i class="el-icon-circle-plus-outline"></i>
+        <CustomTransfer :type="type" :seccessData="seccessData" />
       </el-form-item>
       <el-form-item label="考核说明">
         <el-input
@@ -148,7 +148,8 @@ export default {
         assessVisibe: [],
         PerformanceAnnouncement: ''
       },
-      labelPosition: 'right'
+      labelPosition: 'right',
+      type: 'true'
     }
   },
   created() {
@@ -192,6 +193,12 @@ export default {
       this.initiateAssessmentForm = {}
 
       this.$router.go(-1)
+    },
+    seccessData() {
+      this.$message({
+        message: '操作成功',
+        type: 'success'
+      })
     }
   }
 }
