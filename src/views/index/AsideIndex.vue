@@ -90,7 +90,7 @@ onBeforeUpdate(() => {
     <el-container class="layout-container">
       <!-- 侧边栏容器 -->
       <el-aside style="border-right: 2px solid #d4d7de">
-        <MenuTree :data="MenuData" style="height: 100vh; padding-top: 5%" ; />
+        <MenuTree :data="MenuData" style="height: 100vh; padding-top: 5%" />
       </el-aside>
       <!-- 主要区域容器 -->
       <el-main style="height: 100vh">

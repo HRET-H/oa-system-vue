@@ -47,7 +47,7 @@ onMounted(() => {
     <el-header
       style="background-color: rgb(35, 43, 64); height: 30%; padding: 0 0"
     >
-      <span>
+      <span style="margin-left: 30px">
         <el-image
           style="width: 30px; height: 40px; position: relative; top: 15px"
           src="https://hret0721.oss-cn-beijing.aliyuncs.com/oa-system/oa-Logo.png"
@@ -61,7 +61,7 @@ onMounted(() => {
       <MenuTree
         :data="MenuData"
         mode="horizontal"
-        style="width: 60%; display: inline-block"
+        style="width: 60%; display: inline-block; position: relative; top: 1px"
       />
       <el-icon
         color="#fff"
@@ -78,4 +78,16 @@ onMounted(() => {
   </el-container>
 </template>
 
-<style scoped></style>
+<style>
+* {
+  -ms-overflow-style: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  scrollbar-width: none;
+}
+</style>
