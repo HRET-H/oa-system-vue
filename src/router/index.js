@@ -66,6 +66,11 @@ const routes = [
             path: 'candidate',
             name: 'candidate',
             component: () => import('@/views/recruit/canDidate.vue')
+          },
+          {
+            path: '/interview',
+            name: 'interview',
+            component: () => import('@/views/recruit/InterView.vue')
           }
         ]
       },
