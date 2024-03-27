@@ -69,7 +69,6 @@ const routes = [
             name: 'leave_balance',
             component: () => import('@/views/holiday/HolidayDalance.vue')
           }
-          
         ]
       },
       // 用章模块
@@ -82,12 +81,10 @@ const routes = [
             path: '/seals',
             name: 'seals',
             component: () => import('@/views/seal/SealIndex.vue')
-          },
-         
-          
+          }
         ]
       },
-      
+
       {
         path: 'recruit',
         name: 'recruit',
@@ -114,9 +111,14 @@ const routes = [
             component: () => import('@/views/recruit/canDidate.vue')
           },
           {
-            path: '/interview',
+            path: 'interview',
             name: 'interview',
             component: () => import('@/views/recruit/InterView.vue')
+          },
+          {
+            path: 'addCanDidate',
+            name: 'addCanDidate',
+            component: () => import('@/views/recruit/addCanDidate.vue')
           }
         ]
       },
@@ -130,8 +132,7 @@ const routes = [
             name: 'attendance_section',
             component: () =>
               import('@/views/clocking_in/attendance_section.vue')
-          },
-          
+          }
         ]
       }
     ]

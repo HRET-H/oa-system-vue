@@ -1,6 +1,10 @@
 <template>
   <div style="height: 100%">
-    <el-button type="primary" style="width: 117px; height: 35px">
+    <el-button
+      @click="addcanDidate()"
+      type="primary"
+      style="width: 117px; height: 35px"
+    >
       新增候选人 </el-button
     ><br />
     <br />
@@ -204,7 +208,8 @@
               "
               type="primary"
               @click="sendinterview(scope.row)"
-              ><el-button type="primary">安排面试</el-button
+              ><el-button type="primary" style="color: aliceblue"
+                >安排面试</el-button
               >&nbsp;&nbsp;</el-link
             >
             <el-link
@@ -212,7 +217,8 @@
               v-if="scope.row.candidateStatus == 4"
               type="primary"
               @click="updateStatusCandidate(5, scope.row)"
-              ><el-button type="primary" style="width: 88px">发offer</el-button
+              ><el-button type="primary" style="width: 88px; color: aliceblue"
+                >发offer</el-button
               >&nbsp;&nbsp;</el-link
             >
             <el-link
@@ -220,7 +226,8 @@
               v-if="scope.row.candidateStatus == 5"
               type="primary"
               @click="updateStatusCandidate(7, scope.row)"
-              ><el-button type="primary">确认入职</el-button
+              ><el-button type="primary" style="color: aliceblue"
+                >确认入职</el-button
               >&nbsp;&nbsp;</el-link
             >
             <el-link
@@ -298,6 +305,7 @@
 <script>
 import moment from 'moment'
 import axios from 'axios'
+import { ElNotification } from 'element-plus'
 
 export default {
   data() {
@@ -366,18 +374,18 @@ export default {
       )
 
       console.log(queryObject.candidateId)
-
+      console.log(queryObject)
       this.$router.push({
-        path: '/interview',
+        path: 'interview',
         query: { queryObject: queryObject.candidateId }
       })
 
       console.log(row)
     },
     //添加职位
-    addCandidate(row, updateflag) {
+    addcanDidate(row, updateflag) {
       this.$router.push({
-        path: '/addCandidate',
+        path: 'addCanDidate',
         query: { detailsDate: row, updateflag: updateflag }
       })
     },
@@ -394,12 +402,19 @@ export default {
       axios
         .post('/recruitCandidate/updateRecruitCandidateStatus', updatedRow)
         .then((result) => {
-          if (result.data.data != null) {
-            console.log(result.data)
-            this.$message.error(result.data.msg)
+          if (result.data.code == 200) {
+            ElNotification({
+              title: '成功',
+              message: '修改成功',
+              type: 'success'
+            })
+            console.log(result.data.msg)
           } else {
-            console.log(result.data)
-            this.$message.success(result.data.msg)
+            ElNotification({
+              title: '失败',
+              message: '修改失败',
+              type: 'error'
+            })
           }
           this.centerDialogVisible = false
           this.search()
