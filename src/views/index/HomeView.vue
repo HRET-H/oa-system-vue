@@ -76,4 +76,4 @@ onMounted(() => {
   </el-container>
 </template>
 
-<style></style>
+<style scoped></style>
