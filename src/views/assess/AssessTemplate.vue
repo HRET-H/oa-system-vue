@@ -10,8 +10,8 @@
         >
         <el-input
           v-model="assessTemplateInput"
-          style="width: 240px"
-          placeholder="Type something"
+          style="width: 240px; float: right"
+          placeholder="搜索"
           :prefix-icon="Search"
           @click="findAssessTemplateListAndPage"
         />
@@ -143,9 +143,9 @@ export default {
     //     // })
     // },
     // 修改跳转页面（row）
-    editAssess(row) {
+    editAssessTemplate(row) {
       this.$router.push({
-        path: '/InsertAssessTemplate',
+        path: 'insertAssessTemplate',
         query: { templateId: row.templateId }
       })
     },
