@@ -42,6 +42,52 @@ const routes = [
           }
         ]
       },
+      // 员工假期模块
+      {
+        path: 'employee_leave',
+        name: 'employee_leave',
+        component: () => import('@/views/index/AsideIndex.vue'),
+        children: [
+          {
+            path: '/holiday_type',
+            name: 'holiday_type',
+            component: () => import('@/views/holiday/HolidayIndex.vue')
+          },
+          {
+            path: '/addHolidayIndex',
+            name: 'addHolidayIndex',
+            component: () => import('@/views/holiday/addHolidayIndex.vue')
+          },
+          {
+            path: 'leave_record',
+            name: 'leave_record',
+            component: () => import('@/views/holiday/RecordingIndex.vue')
+          },
+          // 假期余额
+          {
+            path: 'leave_balance',
+            name: 'leave_balance',
+            component: () => import('@/views/holiday/HolidayDalance.vue')
+          }
+          
+        ]
+      },
+      // 用章模块
+      {
+        path: 'seal',
+        name: 'seal',
+        component: () => import('@/views/index/AsideIndex.vue'),
+        children: [
+          {
+            path: '/seals',
+            name: 'seals',
+            component: () => import('@/views/seal/SealIndex.vue')
+          },
+         
+          
+        ]
+      },
+      
       {
         path: 'recruit',
         name: 'recruit',
@@ -66,6 +112,11 @@ const routes = [
             path: 'candidate',
             name: 'candidate',
             component: () => import('@/views/recruit/canDidate.vue')
+          },
+          {
+            path: '/interview',
+            name: 'interview',
+            component: () => import('@/views/recruit/InterView.vue')
           }
         ]
       },
@@ -79,7 +130,8 @@ const routes = [
             name: 'attendance_section',
             component: () =>
               import('@/views/clocking_in/attendance_section.vue')
-          }
+          },
+          
         ]
       }
     ]
