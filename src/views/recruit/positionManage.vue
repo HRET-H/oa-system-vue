@@ -121,7 +121,7 @@
             <el-link
               :underline="false"
               type="primary"
-              @click="addPosition(scope.row, true)"
+              @click="updatePosition(scope.row, true)"
               >编辑&nbsp;&nbsp;</el-link
             >
 
@@ -132,22 +132,26 @@
               @click="delete1(scope.row)"
               >删除&nbsp;&nbsp;</el-link
             >
+
             <el-dialog
-              :title="dlalogTitel"
-              v-model:visible="centerDialogVisible"
-              width="40%"
-              center
+              v-model="centerDialogVisible"
+              title="dlalogTitel"
+              width="500"
+              :before-close="handleClose"
             >
-              <h1 style="color: red">你确定要删除吗？</h1>
-              <template v-slot:footer>
-                <span class="dialog-footer">
+              <span>你确定要删除吗？</span>
+              <template #footer>
+                <div class="dialog-footer">
                   <el-button @click="centerDialogVisible = false"
-                    >取 消</el-button
+                    >取消</el-button
                   >
-                  <el-button type="primary" @click="deletePostMethod()"
-                    >确 定</el-button
+                  <el-button
+                    type="primary"
+                    @click="deletePostMethod(scope.row)"
                   >
-                </span>
+                    确定
+                  </el-button>
+                </div>
               </template>
             </el-dialog>
           </template>
@@ -184,7 +188,7 @@ export default {
       pageSizes: [1, 2, 5, 10],
       // 默认每页显示的条数（可修改）
       pageSize: 5,
-
+      JobId: '',
       //查询条件
       findCondition: {
         //查询也是
@@ -213,6 +217,17 @@ export default {
     }
   },
   methods: {
+    updatePosition(row) {
+      console.log(row)
+      this.$router.push({
+        path: '/home/recruit/addPositionManage',
+        query: {
+          JobId: row.jobId
+        }
+      })
+      console.log(row)
+    },
+    // 判断是否删除
     delete1(row) {
       this.centerDialogVisible = true
       console.log(row)
@@ -238,11 +253,15 @@ export default {
         }
       })
     },
-
+    // 修改职位状态
     updateStatusJob(jobStatus, row) {
-      row.jobStatus = status
+      console.log(row)
+      const updatedRow = {
+        jobId: row.jobId,
+        jobStatus: jobStatus
+      }
       axios
-        .post('http://localhost:9999/recruitJob/updateJob', row)
+        .post('http://localhost:9999/recruitJob/updateJob', updatedRow)
         .then((result) => {
           console.log(row)
           if (result.data.code == 200) {
@@ -293,11 +312,11 @@ export default {
         })
     },
     // 删除职位
-    deletePostMethod() {
+    deletePostMethod(row) {
+      console.log(row)
+      console.log(row.jobId)
       axios
-        .post('http://localhost:9999/recruitJob/deleteJob', {
-          jobId: this.deletePostData.jobId
-        })
+        .post('http://localhost:9999/recruitJob/deleteJob?JobId=' + row.jobId)
         .then((result) => {
           if (result.data.code == 200) {
             ElMessage.success('删除成功')
@@ -354,6 +373,7 @@ export default {
       return moment(date).format('YYYY-MM-DD HH:mm:ss')
     }
   },
+  // 打开就执行查询
   mounted() {
     this.search()
   }

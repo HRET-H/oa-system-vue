@@ -3,6 +3,7 @@
 // 导入动态菜单数据
 import { ref, onMounted } from 'vue'
 import { ElMessage } from 'element-plus'
+import { baseURL } from '@/utils/request'
 // 导入axios
 import axios from 'axios'
 // 导入弹窗js
@@ -10,11 +11,8 @@ import { openFullScreen, closeFullScreen } from '@/utils/loading'
 // 导入动态菜单组件
 import MenuTree from '@/components/menu/MenuTree.vue'
 
-// 定义一个ref变量 用来存储全屏加载的boolean的值
-const fullscreenLoading = ref(true)
-
 // 设置axios的baseURL
-axios.defaults.baseURL = 'http://localhost:9999'
+axios.defaults.baseURL = baseURL
 
 // 定义一个ref变量，用来存储数据
 let NavDrawer = ref(false)
@@ -35,14 +33,17 @@ onMounted(() => {
       closeFullScreen(loading)
     })
     .catch(() => {
-      ElMessage.error('网络不佳，请稍后刷新重试')
+      ElMessage.error('网络不佳请稍后重试!!!')
     })
 })
 </script>
 
 <template>
   <!-- 外层容器。 当子元素中包含 <el-header> 或 <el-footer> 时，全部子元素会垂直上下排列， 否则会水平左右排列 -->
-  <el-container v-loading.fullscreen.lock="fullscreenLoading">
+  <el-container
+    v-loading.fullscreen.lock="fullscreenLoading"
+    element-loading-svg-view-box="-10, -10, 50, 50"
+  >
     <!-- 顶栏容器 -->
     <el-header style="background-color: rgb(35, 43, 64); height: 30%">
       <span>
