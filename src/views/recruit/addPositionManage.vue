@@ -173,23 +173,23 @@ export default {
       fileList: [],
       JobId: '',
       addPostData: {
-        jobId: '',
-        jobName: '',
-        jobNumber: '',
-        jobStatus: '',
-        jobDept: '',
-        jobAddress: '',
-        jobDetailedAddress: '',
-        jobMinPay: '',
-        jobMaxPay: '',
-        jobNumPay: '',
-        jobEducation: '',
-        jobExperience: '',
-        jobMajor: '',
-        jobDescribe: '',
-        jobFile: '',
-        jobPrincipal: '',
-        jobNature: ''
+        jobId: '', // 职位id
+        jobName: '', //职位名称
+        jobNumber: '', //招聘人数
+        jobStatus: '', // 职位状态
+        jobDept: '', // 部门
+        jobAddress: '', // 工作地点
+        jobDetailedAddress: '', // 详细地址
+        jobMinPay: '', // 最低薪资
+        jobMaxPay: '', // 最高薪资
+        jobNumPay: '', // 薪资
+        jobEducation: '', // 学历要求
+        jobExperience: '', // 工作经验
+        jobMajor: '', // 专业
+        jobDescribe: '', // 职位描述
+        jobFile: '', // 文件
+        jobPrincipal: '', // 招聘负责人
+        jobNature: '' // 职位性质
       }
     }
   },
