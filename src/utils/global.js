@@ -1,9 +1,10 @@
 // 注册全局组件
 
 // 导入需要注册的全局组件
+import customTransfer from '@/components/transfer/customTransfer.vue'
 import getPagination from '@/components/pagination/getPagination.vue'
 
-const components = [getPagination]
+const components = [customTransfer, getPagination]
 
 // 添加全局组件
 export default {
