@@ -3,7 +3,7 @@
     <el-button
       @click="addcanDidate()"
       type="primary"
-      style="width: 117px; height: 35px"
+      style="width: 117px; height: 35px; color: aliceblue"
     >
       新增候选人 </el-button
     ><br />
@@ -17,22 +17,22 @@
         style="width: 250px; margin-left: 10px"
       >
       </el-input>
-      部门：
+      &nbsp;&nbsp;&nbsp;&nbsp; 部门：
       <el-select
         v-model="findCondition.candidateDepartment"
         placeholder="全部"
-        style="width: 200px; height: 40px"
+        style="width: 250px; height: 40px"
       >
         <el-option label="技术部" value="1"></el-option>
         <el-option label="产品部" value="2"></el-option>
         <el-option label="销售部" value="3"></el-option>
         <el-option label="行政部" value="4"></el-option>
       </el-select>
-      面试官：
+      &nbsp;&nbsp;&nbsp;&nbsp; 面试官：
       <el-select
         v-model="findCondition.candidateNature"
         placeholder="全部"
-        style="width: 200px; height: 40px"
+        style="width: 250px; height: 40px"
       >
         <el-option label="全职" value="1"></el-option>
         <el-option label="兼职" value="2"></el-option>
@@ -40,11 +40,11 @@
         <el-option label="外派" value="4"></el-option>
         <el-option label="退休返聘" value="5"></el-option>
       </el-select>
-      学历要求：
+      &nbsp;&nbsp;&nbsp;&nbsp; 学历要求：
       <el-select
         v-model="findCondition.candidateEducation"
         placeholder="全部"
-        style="width: 200px; height: 40px"
+        style="width: 250px; height: 40px"
       >
         <el-option label="不限" value="1"></el-option>
         <el-option label="高中及以下" value="2"></el-option>
@@ -55,7 +55,6 @@
       </el-select>
       <br />
       <br />
-
       申请时间：
       <el-date-picker
         v-model="findCondition.candidateSumTime"
@@ -67,10 +66,17 @@
         style="width: 300px"
       >
       </el-date-picker>
-
-      <el-button size="small" @click="search()">搜索</el-button>
-
-      <el-button size="small" @click="exportData()">导出</el-button>
+      &nbsp;
+      <el-button
+        type="primary"
+        style="width: 100px; height: 35px; color: aliceblue"
+        @click="search()"
+        >搜索</el-button
+      >
+      &nbsp;
+      <el-button @click="exportData()" style="width: 100px; height: 35px"
+        >导出</el-button
+      >
       <br /><br />
 
       <el-button
