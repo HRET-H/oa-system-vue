@@ -7,9 +7,8 @@
       <el-button
         @click="addPosition(undefined, true)"
         type="primary"
-        style="width: 120px; height: 40px"
-      >
-        新建职位
+        style="width: 120px; height: 40px; color: aliceblue"
+        >新建职位
       </el-button>
       <br />
       <br />
@@ -20,7 +19,7 @@
         clearable
         style="width: 250px; margin-left: 10px"
       ></el-input>
-      部门:
+      &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;部门:
       <el-select
         v-model="findCondition.jobDept"
         placeholder="全部"
@@ -31,19 +30,21 @@
         <el-option label="销售部" value="3"></el-option>
         <el-option label="行政部" value="4"></el-option>
       </el-select>
-      职位性质：
-      <el-select
-        v-model="findCondition.jobNature"
-        placeholder="全部"
-        style="width: 250px; margin-left: 10px"
-      >
-        <el-option label="全职" value="1"></el-option>
-        <el-option label="兼职" value="2"></el-option>
-        <el-option label="实习" value="3"></el-option>
-        <el-option label="外派" value="4"></el-option>
-        <el-option label="退休返聘" value="5"></el-option>
-      </el-select>
-      学历要求：
+      <span>
+        &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 职位性质：
+        <el-select
+          v-model="findCondition.jobNature"
+          placeholder="全部"
+          style="width: 250px; margin-left: 10px"
+        >
+          <el-option label="全职" value="1"></el-option>
+          <el-option label="兼职" value="2"></el-option>
+          <el-option label="实习" value="3"></el-option>
+          <el-option label="外派" value="4"></el-option>
+          <el-option label="退休返聘" value="5"></el-option>
+        </el-select>
+      </span>
+      &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 学历要求：
       <el-select
         v-model="findCondition.jobEducation"
         placeholder="全部"
@@ -71,17 +72,11 @@
       >
       </el-date-picker>
       &nbsp;
-      <el-button
-        plain
-        type="primary"
-        @click="search()"
-        style="margin-right: 10px"
+      <el-button type="primary" @click="search()" style="color: aliceblue"
         >搜索</el-button
       >
 
-      <el-button plain @click="exportData()" style="margin-right: 10px"
-        >导出</el-button
-      >
+      <el-button plain @click="exportData()">导出</el-button>
 
       <el-table :data="tableData" style="width: 100%">
         <el-table-column label="职位信息">
