@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onUpdated } from 'vue'
+import { ref, onMounted, onBeforeUpdate } from 'vue'
 // 导入动态菜单
 import MenuTree from '@/components/menu/MenuTree.vue'
 import axios from 'axios'
@@ -35,7 +35,10 @@ function getMenuData(id) {
 
 onMounted(() => {
   // 获取路由传递的参数
-  const parentId = route.query.parentId
+  let parentId = route.query.parentId
+  if (parentId === undefined || parentId === null) {
+    parentId = store.parentId
+  }
   // 获取菜单数据并判断是否获取到数据
   getMenuData(parentId).then((res) => {
     // 判断是否获取到数据
@@ -55,9 +58,12 @@ onMounted(() => {
   })
 })
 
-onUpdated(() => {
+onBeforeUpdate(() => {
   // 获取路由传递的参数
-  const parentId = route.query.parentId
+  let parentId = route.query.parentId
+  if (parentId === undefined || parentId === null) {
+    parentId = store.parentId
+  }
   // 获取菜单数据并判断是否获取到数据
   getMenuData(parentId).then((res) => {
     // 判断是否获取到数据
