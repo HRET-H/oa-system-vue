@@ -59,12 +59,12 @@ const routes = [
         component: () => import('@/views/index/AsideIndex.vue'),
         children: [
           {
-            path: '/holiday_type',
+            path: 'holiday_type',
             name: 'holiday_type',
             component: () => import('@/views/holiday/HolidayIndex.vue')
           },
           {
-            path: '/addHolidayIndex',
+            path: 'addHolidayIndex',
             name: 'addHolidayIndex',
             component: () => import('@/views/holiday/addHolidayIndex.vue')
           },
