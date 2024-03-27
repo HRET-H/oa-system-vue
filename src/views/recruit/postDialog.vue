@@ -205,7 +205,7 @@ export default {
       >
         <el-row v-show="active == 0">
           <h3>| 职位信息</h3>
-          <el-row style="position: relative; left: 5%">
+          <el-row>
             <el-form-item label="职位名称" prop="postName">
               <el-input v-model="form.postName"></el-input>
             </el-form-item>
@@ -233,7 +233,7 @@ export default {
             </el-form-item>
           </el-row>
           <h3>| 职位设置</h3>
-          <el-row style="position: relative; left: 5%">
+          <el-row>
             <el-form-item label="薪资范围">
               <el-input
                 v-model="form.postMinSalary"
@@ -272,17 +272,17 @@ export default {
               <el-input type="textarea" v-model="form.postRemark"></el-input>
             </el-form-item>
             <br />
-            <el-form-item label="上传文件">
+            <el-form-item label="上传文件" style="color: aliceblue">
               <el-upload
-                class="upload-demo"
-                action="https://jsonplaceholder.typicode.com/posts/"
+                v-model:file-list="fileList"
+                class="avatar-uploader"
+                action="http://localhost:9999/recruitJob/userImg"
+                multiple
                 :on-preview="handlePreview"
                 :on-remove="handleRemove"
                 :before-remove="beforeRemove"
-                multiple
                 :limit="3"
                 :on-exceed="handleExceed"
-                :file-list="fileList"
               >
                 <el-button size="small" type="primary">点击上传</el-button>
                 <template v-slot:tip>
@@ -358,11 +358,12 @@ export default {
             </el-form-item>
           </el-row>
           <h3>| 面试轮次</h3>
-          <el-row style="position: relative; left: 5%">
+          <el-row>
             <!-- 点击可以添加面试轮次 -->
             <el-button
               type="primary"
-              icon="el-icon-plus"
+              style="color: aliceblue"
+              icon="Plus"
               @click="addInterviewRound"
             ></el-button>
             <el-row
@@ -387,13 +388,14 @@ export default {
               </el-form-item>
               <el-button
                 type="danger"
-                icon="el-icon-delete"
+                icon="Minus"
                 @click="deleteInterviewRound(index)"
               ></el-button>
             </el-row>
           </el-row>
+          &nbsp;
           <h3>| 简历通过要求</h3>
-          <el-row style="position: relative; left: 5%">
+          <el-row>
             <el-form-item label="性别通过要求" prop="sexPassDemand">
               <el-select v-model="form.postSettings.sexPassDemand">
                 <el-option label="男" value="男"></el-option>
@@ -426,13 +428,16 @@ export default {
       </el-form>
       <div v-if="active == 0">
         <el-button @click="handleClose()">取 消</el-button>
-        <el-button type="primary" @click="active = 1">下一步</el-button>
+        <el-button type="primary" style="color: aliceblue" @click="active = 1"
+          >下一步</el-button
+        >
       </div>
       <div v-if="active == 1">
         <el-button @click="active = 0">上一步</el-button>
         <el-button
           type="primary"
           @click="post == 0 ? submitForm('form') : updateForm('form')"
+          style="color: aliceblue"
         >
           提交
         </el-button>
