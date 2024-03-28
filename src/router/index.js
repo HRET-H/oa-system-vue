@@ -49,6 +49,16 @@ const routes = [
             path: 'InsertAssessIndex',
             name: 'InsertAssessIndex',
             component: () => import('@/views/assess/InsertAssessIndex.vue')
+          },
+          {
+            path: 'performance_file',
+            name: 'performance_file',
+            component: () => import('@/views/assess/PerformanceFile.vue')
+          },
+          {
+            path: 'InsertPerformanceFile',
+            name: 'InsertPerformanceFile',
+            component: () => import('@/views/assess/InsertPerformanceFile.vue')
           }
         ]
       },
