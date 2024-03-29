@@ -49,6 +49,16 @@ const routes = [
             path: 'InsertAssessIndex',
             name: 'InsertAssessIndex',
             component: () => import('@/views/assess/InsertAssessIndex.vue')
+          },
+          {
+            path: 'performance_file',
+            name: 'performance_file',
+            component: () => import('@/views/assess/PerformanceFile.vue')
+          },
+          {
+            path: 'InsertPerformanceFile',
+            name: 'InsertPerformanceFile',
+            component: () => import('@/views/assess/InsertPerformanceFile.vue')
           }
         ]
       },
@@ -59,12 +69,12 @@ const routes = [
         component: () => import('@/views/index/AsideIndex.vue'),
         children: [
           {
-            path: '/holiday_type',
+            path: 'holiday_type',
             name: 'holiday_type',
             component: () => import('@/views/holiday/HolidayIndex.vue')
           },
           {
-            path: '/addHolidayIndex',
+            path: 'addHolidayIndex',
             name: 'addHolidayIndex',
             component: () => import('@/views/holiday/addHolidayIndex.vue')
           },
