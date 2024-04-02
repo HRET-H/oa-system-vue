@@ -81,71 +81,63 @@
 
       <el-button
         class="custom-button"
-        @click="(findCondition.candidateStatus = ''), search()"
+        @click="(findCondition.candidateTalentPoolStatus = ''), search()"
       >
-        <div style="font-size: 35px">{{ findConditionByNumberData.job }}人</div>
+        <div style="font-size: 35px">
+          {{ findcandidateTalentPoolStatusByNumber.sum }}人
+        </div>
         <br />
-        <span>全部</span>
+        <span>公共人才库</span>
       </el-button>
       <el-button
         class="custom-button"
-        @click="(findCondition.candidateStatus = 1), search()"
+        @click="(findCondition.candidateTalentPoolStatus = 1), search()"
       >
         <div style="font-size: 35px">
-          {{ findConditionByNumberData.job1 }}人
+          {{ findcandidateTalentPoolStatusByNumber.sum1 }}人
         </div>
         <br />
-        <span>初筛</span>
+        <span>黑名单</span>
       </el-button>
       <el-button
         class="custom-button"
-        @click="(findCondition.candidateStatus = 2), search()"
+        @click="(findCondition.candidateTalentPoolStatus = 2), search()"
       >
         <div style="font-size: 35px">
-          {{ findConditionByNumberData.job2 }}人
+          {{ findcandidateTalentPoolStatusByNumber.sum2 }}人
         </div>
         <br />
-        <span>待面试</span>
+        <span>淘汰人才库</span>
       </el-button>
       <el-button
         class="custom-button"
-        @click="(findCondition.candidateStatus = 3), search()"
+        @click="(findCondition.candidateTalentPoolStatus = 3), search()"
       >
         <div style="font-size: 35px">
-          {{ findConditionByNumberData.job3 }}人
+          {{ findcandidateTalentPoolStatusByNumber.sum3 }}人
         </div>
         <br />
-        <span>面试中</span>
+        <span>放弃入职人才库</span>
       </el-button>
       <el-button
         class="custom-button"
-        @click="(findCondition.candidateStatus = 4), search()"
+        @click="(findCondition.candidateTalentPoolStatus = 4), search()"
       >
         <div style="font-size: 35px">
-          {{ findConditionByNumberData.job4 }}人
+          {{ findcandidateTalentPoolStatusByNumber.sum4 }}人
         </div>
         <br />
-        <span>通过面试</span>
+        <span>主动离职人才库</span>
       </el-button>
       <el-button
         class="custom-button"
-        @click="(findCondition.candidateStatus = 5), search()"
+        @click="(findCondition.candidateTalentPoolStatus = 5), search()"
       >
         <div style="font-size: 35px">
-          {{ findConditionByNumberData.job5 }}人
+          {{ findcandidateTalentPoolStatusByNumber.sum5 }}人
         </div>
         <br />
-        <span>待入职</span>
-      </el-button>
-      <el-button
-        class="custom-button"
-        @click="(findCondition.candidateStatus = 6), search()"
-      >
-        <div style="font-size: 35px">
-          {{ findConditionByNumberData.job6 }}人
-        </div>
-        <br />
-        <p>人才库</p>
+        <span>被动离职人才库</span>
       </el-button>
 
       <el-table :data="tableData" style="width: 100%">
@@ -210,79 +202,30 @@
             </div>
           </template>
         </el-table-column>
-
-        <el-table-column label="操作" width="250%">
+        <el-table-column label="入库时间">
+          <template v-slot="scope"
+            ><div>{{ scope.row.candidateStorage }}</div></template
+          >
+        </el-table-column>
+        <el-table-column label="操作">
           <template v-slot="scope">
             <el-link
-              :underline="false"
-              v-if="
-                scope.row.candidateStatus == 1 || scope.row.candidateStatus == 6
-              "
+              v-if="scope.row.candidateState == 1"
               type="primary"
-              @click="sendinterview(scope.row)"
-              ><el-button type="primary" style="color: aliceblue"
-                >安排面试</el-button
-              >&nbsp;&nbsp;</el-link
+              @click="sendState(2, scope.row)"
+              >恢复以前状态</el-link
             >
             <el-link
-              :underline="false"
-              v-if="scope.row.candidateStatus == 4"
+              v-else
               type="primary"
-              @click="updateStatusCandidate(5, scope.row)"
-              ><el-button type="primary" style="width: 88px; color: aliceblue"
-                >发offer</el-button
-              >&nbsp;&nbsp;</el-link
+              size="mini"
+              @click="sendState(1, scope.row)"
+              >从候选人移到人才库</el-link
             >
-            <el-link
-              :underline="false"
-              v-if="scope.row.candidateStatus == 5"
-              type="primary"
-              @click="updateStatusCandidate(7, scope.row)"
-              ><el-button type="primary" style="color: aliceblue"
-                >确认入职</el-button
-              >&nbsp;&nbsp;</el-link
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <el-link @click="delCanDidate(scope.row.candidateId)" type="primary"
+              >删除</el-link
             >
-            <el-link
-              :underline="false"
-              v-if="
-                scope.row.candidateStatus != 5 &&
-                scope.row.candidateStatus != 6 &&
-                scope.row.candidateStatus != 7
-              "
-              type="primary"
-              @click="updateStatusCandidate(6, scope.row)"
-              >淘汰&nbsp;&nbsp;</el-link
-            >
-            <el-link
-              :underline="false"
-              v-if="
-                scope.row.candidateStatus != 5 &&
-                scope.row.candidateStatus != 6 &&
-                scope.row.candidateStatus != 7
-              "
-              type="primary"
-              @click="
-                updateStatusCandidate(
-                  stringtoNum(scope.row.candidateStatus),
-                  scope.row
-                )
-              "
-              >通过&nbsp;&nbsp;</el-link
-            >
-            <el-link
-              :underline="false"
-              v-if="scope.row.candidateStatus == 5"
-              type="primary"
-              @click="updateStatusCandidate(6, scope.row)"
-              >放弃&nbsp;&nbsp;</el-link
-            >
-            <el-link
-              :underline="false"
-              v-if="scope.row.candidateStatus == 7"
-              type="primary"
-            >
-              <div style="color: black; font-size: 15px">已入职</div>
-            </el-link>
           </template>
         </el-table-column>
       </el-table>
@@ -329,7 +272,7 @@ export default {
       total: 0,
       // 默认每页显示的条数（可修改）
       // pageSize: 5,
-      findConditionByNumberData: '',
+      findcandidateTalentPoolStatusByNumber: '',
 
       //查询条件
       findCondition: {
@@ -339,13 +282,15 @@ export default {
         pageSize: 10,
         //关键字
         candidateName: '',
+        // 人才库
+        candidateTalentPoolStatus: '',
         //用人部门
         recruitJob: {
           jobName: '',
           jobDept: '',
           jobPrincipal: ''
         },
-
+        candidateId: '',
         //学历要求
         candidateEducation: '',
         candidateStatus: '',
@@ -355,7 +300,8 @@ export default {
         candidateEndTime: '',
         // 时间
         candidateTime: '',
-        candidateSumTime: ''
+        candidateSumTime: '',
+        candidateState: ''
       },
       centerDialogVisible: false,
       dlalogTitel: '',
@@ -365,6 +311,28 @@ export default {
     }
   },
   methods: {
+    sendState(State, row) {
+      row.candidateState = State
+      console.log(State)
+      const updateState = {
+        candidateId: row.candidateId,
+        candidateState: row.candidateState
+      }
+      console.log(updateState)
+      axios
+        .post(
+          '/recruitCandidate/updateRecruitcandidateTalentPoolStatus',
+          updateState
+        )
+        .then((res) => {
+          if (res.data.code === 200) {
+            ElMessage.success('修改成功')
+          } else {
+            ElMessage.error('修改失败')
+          }
+          this.search()
+        })
+    },
     // 状态的转换
     stringtoNum(val) {
       var num = Number(val) + 1
@@ -391,8 +359,22 @@ export default {
         path: 'interview',
         query: { queryObject: queryObject.candidateId }
       })
-
       console.log(row)
+    },
+    //删除数据
+    delCanDidate(candidateId) {
+      axios
+        .post(
+          '/recruitCandidate/deleteRecruitCandidate?candidateId=' + candidateId
+        )
+        .then((res) => {
+          if (res.data.code == 200) {
+            ElMessage.success('恭喜你，删除成功')
+            this.search()
+          } else {
+            ElMessage.error('删除失败')
+          }
+        })
     },
     //添加职位
     addcanDidate(row, updateflag) {
@@ -412,7 +394,10 @@ export default {
       }
       console.log(updatedRow)
       axios
-        .post('/recruitCandidate/updateRecruitCandidateStatus', updatedRow)
+        .post(
+          '/recruitCandidate/updateRecruitcandidateTalentPoolStatus',
+          updatedRow
+        )
         .then((result) => {
           if (result.data.code == 200) {
             ElNotification({
@@ -573,10 +558,12 @@ export default {
     },
     // 查询职位
     findConditionByNumber() {
-      axios.post('/recruitCandidate/findConditionByNumber').then((result) => {
-        console.log(result.data.data)
-        this.findConditionByNumberData = result.data.data
-      })
+      axios
+        .post('/recruitCandidate/findcandidateTalentPoolStatusByNumber')
+        .then((result) => {
+          console.log(result.data.data)
+          this.findcandidateTalentPoolStatusByNumber = result.data.data
+        })
     }
   },
   mounted() {
@@ -595,7 +582,7 @@ export default {
 <style scoped>
 ::v-deep .custom-button {
   white-space: pre-line;
-  width: 150px;
+  width: 200px;
   height: 80px;
 }
 </style>

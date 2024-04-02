@@ -139,6 +139,16 @@ const routes = [
             path: 'addCanDidate',
             name: 'addCanDidate',
             component: () => import('@/views/recruit/addCanDidate.vue')
+          },
+          {
+            path: 'talent_pool',
+            name: 'talent_pool',
+            component: () => import('@/views/recruit/talentPool.vue')
+          },
+          {
+            path: 'recruit_setting',
+            name: 'recruit_setting',
+            component: () => import('@/views/recruit/recruitSetting.vue')
           }
         ]
       },
