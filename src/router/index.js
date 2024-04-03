@@ -149,6 +149,28 @@ const routes = [
             path: 'recruit_setting',
             name: 'recruit_setting',
             component: () => import('@/views/recruit/recruitSetting.vue')
+          },
+          {
+            path: 'statistical',
+            name: 'statistical',
+            children: [
+              {
+                path: 'recruit_overview',
+                name: 'recruit_overview',
+                component: () =>
+                  import('@/views/recruit/recruitmentOverview.vue')
+              },
+              {
+                path: 'recruit_funnel',
+                name: 'recruit_funnel',
+                component: () => import('@/views/recruit/recruitFunnel.vue')
+              },
+              {
+                path: 'resume_data',
+                name: 'resume_data',
+                component: () => import('@/views/recruit/resumeData.vue')
+              }
+            ]
           }
         ]
       },
