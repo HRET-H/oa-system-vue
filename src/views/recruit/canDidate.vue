@@ -160,7 +160,13 @@
                             : '已入职'
               }}</span></el-button
             ><br />
-            <span>{{ scope.row.candidateSex }}</span
+            <span>{{
+              scope.row.candidateSex == 1
+                ? '男'
+                : scope.row.candidateSex == 2
+                  ? '女'
+                  : '不方便透露'
+            }}</span
             >&nbsp;|&nbsp;<span
               v-if="scope.row && scope.row.candidateDateBirth"
             >

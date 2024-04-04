@@ -5,6 +5,9 @@
       :postDialog="dialog"
       :dialog-close="closeDialog"
     ></post-dialog>
+
+    <!--  主要内容-->
+
     <el-button
       @click="dialogPost()"
       type="primary"
@@ -13,6 +16,7 @@
     </el-button>
     <br />
     <br />
+
     负责人:
     <el-input
       placeholder="输入内容"
@@ -179,7 +183,6 @@ export default {
         visible: false,
         data: {}
       },
-
       tableData: [],
       // 默认显示第几页
       pageNum: 1,
@@ -225,7 +228,6 @@ export default {
         // 有值，编辑职位
         this.$refs.postDialog.getData(data)
       }
-
       this.$refs.postDialog.init()
       this.dialog.visible = true
     },

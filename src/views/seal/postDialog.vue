@@ -23,24 +23,6 @@ export default {
 
       active: 0,
 
-      addPost: {
-        jobName: '',
-        jobNumber: '',
-        jobStatus: '',
-        jobDept: '',
-        jobAddress: '',
-        jobDetailedAddress: '',
-        jobMinPay: '',
-        jobMaxPay: '',
-        jobNumPay: '',
-        jobEducation: '',
-        jobExperience: '',
-        jobMajor: '',
-        jobDescribe: '',
-        jobFile: '',
-        jobPrincipal: '',
-        jobNature: ''
-      },
       form: {
         // 职位信息
         postName: '', // 职位名称
@@ -85,35 +67,52 @@ export default {
   },
   methods: {
     init() {
-      axios.post('http://localhost:9999/recruitJob/findAll').then((res) => {
-        this.userList = res.data
-      })
+      this.getUserList()
     },
     getData(data) {
-      this.addPost = data
+      this.form = data
       this.post = 1
     },
     handleClose() {
       // 重置表单
-      this.$refs.addPost.resetFields()
+      this.$refs.form.resetFields()
       this.active = 0
       // 关闭弹窗
       this.dialogClose()
     },
+    // 获取用户列表
+    getUserList() {
+      axios
+        .get('api/manager/sysUser/selectAllUser')
+        .then((res) => {
+          this.userList = res.data
+          // 将当前用户从用户列表中移除
+          const user = JSON.parse(document.cookie.split('=')[1]).userId
+          this.userList = this.userList.filter((item) => {
+            return item.userId !== user
+          })
+        })
+        .catch(() => {
+          this.$message({
+            message: '获取用户列表失败',
+            type: 'error'
+          })
+        })
+    },
     addInterviewRound() {
-      this.addPost.postSettings.interviewRound.push({
+      this.form.postSettings.interviewRound.push({
         interviewId: '' // 面试官id
       })
     },
     deleteInterviewRound(index) {
-      this.addPost.postSettings.interviewRound.splice(index, 1)
+      this.form.postSettings.interviewRound.splice(index, 1)
     },
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           // 发送请求
           axios
-            .post('http://localhost:9999/recruitJob/addJob', this.addPost)
+            .post('api/manager/post/addPost', this.form)
             .then((res) => {
               // 判断是否成功
               if (res.data.code == 200) {
@@ -150,7 +149,7 @@ export default {
         if (valid) {
           // 发送请求
           axios
-            .post('http://localhost:9999/recruitJob/updateJob', this.addPost)
+            .post('api/manager/post/updatePost', this.form)
             .then((res) => {
               // 判断是否成功
               if (res.data.code == 200) {
@@ -198,8 +197,8 @@ export default {
         <el-step title="职位设置"></el-step>
       </el-steps>
       <el-form
-        ref="addPost"
-        :model="addPost"
+        ref="form"
+        :model="form"
         label-width="80px"
         :inline="true"
         :rules="rules"
@@ -207,15 +206,15 @@ export default {
         <el-row v-show="active == 0">
           <h3>| 职位信息</h3>
           <el-row>
-            <el-form-item label="职位名称" prop="jobName">
-              <el-input v-model="addPost.jobName"></el-input>
+            <el-form-item label="职位名称" prop="postName">
+              <el-input v-model="form.postName"></el-input>
             </el-form-item>
-            <el-form-item label="招聘人数" prop="jobNumber">
-              <el-input v-model="addPost.jobNumber"></el-input>
+            <el-form-item label="招聘人数" prop="postRecruitNum">
+              <el-input v-model="form.postRecruitNum"></el-input>
             </el-form-item>
-            <el-form-item label="职位性质" prop="jobNature">
+            <el-form-item label="职位性质" prop="postQuality">
               <el-select
-                v-model="addPost.jobNature"
+                v-model="form.postQuality"
                 placeholder="请选择职位性质"
               >
                 <el-option label="全职" value="全职"></el-option>
@@ -223,65 +222,54 @@ export default {
                 <el-option label="实习" value="实习"></el-option>
               </el-select>
             </el-form-item>
-            <el-form-item label="用人部门" prop="jobdept">
-              <el-option label="技术部" value="1"></el-option>
-              <el-option label="产品部" value="2"></el-option>
-              <el-option label="销售部" value="3"></el-option>
-              <el-option label="行政部" value="4"></el-option>
+            <el-form-item label="用人部门" prop="postDept">
+              <el-input v-model="form.postDept"></el-input>
             </el-form-item>
-            <el-form-item label="工作地点" prop="jobAddress">
-              <el-input v-model="addPost.jobAddress"></el-input>
+            <el-form-item label="工作地点" prop="workArea">
+              <el-input v-model="form.workArea"></el-input>
             </el-form-item>
-            <el-form-item label="详细地址" prop="jobDetailedAddress">
-              <el-input v-model="addPost.jobDetailedAddress"></el-input>
+            <el-form-item label="详细地址" prop="workAddress">
+              <el-input v-model="form.workAddress"></el-input>
             </el-form-item>
           </el-row>
           <h3>| 职位设置</h3>
           <el-row>
             <el-form-item label="薪资范围">
               <el-input
-                v-model="addPost.jobMinPay"
+                v-model="form.postMinSalary"
                 style="width: 80px"
               ></el-input>
               <span style="margin: 0 10px">-</span>
               <el-input
-                v-model="addPost.jobMaxPay"
+                v-model="form.postMaxSalary"
                 style="width: 80px"
               ></el-input>
               &nbsp;&nbsp;&nbsp;
               <el-input
-                v-model="addPost.jobNumPay"
+                v-model="form.postSalary"
                 style="width: 80px"
               ></el-input>
               薪
             </el-form-item>
             <el-form-item label="学历要求" prop="postEducationalRequirements">
               <el-select
-                v-model="addPost.jobEducation"
+                v-model="form.postEducationalRequirements"
                 placeholder="请选择学历要求"
               >
-                <el-option label="不限" value="1"></el-option>
-                <el-option label="高中及以下" value="2"></el-option>
-                <el-option label="大专" value="3"></el-option>
-                <el-option label="本科" value="4"></el-option>
-                <el-option label="硕士" value="5"></el-option>
-                <el-option label="博士及以上" value="6"></el-option>
+                <el-option label="大专" value="大专"></el-option>
+                <el-option label="本科" value="本科"></el-option>
+                <el-option label="硕士" value="硕士"></el-option>
+                <el-option label="博士" value="博士"></el-option>
               </el-select>
             </el-form-item>
-            <el-form-item label="工作经验" prop="jobExperience">
-              <el-input
-                type="number"
-                v-model="addPost.jobExperience"
-              ></el-input>
+            <el-form-item label="工作经验" prop="workUndergo">
+              <el-input type="number" v-model="form.workUndergo"></el-input>
             </el-form-item>
-            <el-form-item label="专业" prop="jobMajor">
-              <el-input v-model="addPost.jobMajor"></el-input>
+            <el-form-item label="专业" prop="major">
+              <el-input v-model="form.major"></el-input>
             </el-form-item>
-            <el-form-item label="职位描述" prop="jobDescribe">
-              <el-input
-                type="textarea"
-                v-model="addPost.jobDescribe"
-              ></el-input>
+            <el-form-item label="职位描述" prop="postRemark">
+              <el-input type="textarea" v-model="form.postRemark"></el-input>
             </el-form-item>
             <br />
             <el-form-item label="上传文件" style="color: aliceblue">
@@ -309,9 +297,9 @@ export default {
         <el-row v-show="active == 1">
           <h3>| 招聘信息</h3>
           <el-row>
-            <el-form-item label="计划启动时间" prop="jobPostStartTime">
+            <el-form-item label="计划启动时间" prop="postStartTime">
               <el-date-picker
-                v-model="addPost.postStartTime"
+                v-model="form.postSettings.postStartTime"
                 type="datetime"
                 value-format="yyyy-MM-dd HH:mm:ss"
                 placeholder="选择日期"
@@ -319,9 +307,9 @@ export default {
                 clearable
               ></el-date-picker>
             </el-form-item>
-            <el-form-item label="最晚到岗时间" prop="jobPostEndTime">
+            <el-form-item label="最晚到岗时间" prop="postEndTime">
               <el-date-picker
-                v-model="addPost.postEndTime"
+                v-model="form.postSettings.postEndTime"
                 type="datetime"
                 value-format="yyyy-MM-dd HH:mm:ss"
                 placeholder="选择日期"
@@ -408,31 +396,32 @@ export default {
           &nbsp;
           <h3>| 简历通过要求</h3>
           <el-row>
-            <el-form-item label="性别通过要求" prop="jobSex">
-              <el-select v-model="addPost.jobSex">
-                <el-option label="男" value="1"></el-option>
-                <el-option label="女" value="2"></el-option>
-                <el-option label="不限" value="0"></el-option>
+            <el-form-item label="性别通过要求" prop="sexPassDemand">
+              <el-select v-model="form.postSettings.sexPassDemand">
+                <el-option label="男" value="男"></el-option>
+                <el-option label="女" value="女"></el-option>
+                <el-option label="不限" value="不限"></el-option>
               </el-select>
             </el-form-item>
-            <el-form-item label="学历通过要求" prop="jobEducation">
-              <el-select v-model="addPost.jobEducation">
-                <el-option label="不限" value="1"></el-option>
-                <el-option label="高中及以下" value="2"></el-option>
-                <el-option label="大专" value="3"></el-option>
-                <el-option label="本科" value="4"></el-option>
-                <el-option label="硕士" value="5"></el-option>
-                <el-option label="博士及以上" value="6"></el-option>
+            <el-form-item label="学历通过要求" prop="eduPassDemand">
+              <el-select v-model="form.postSettings.eduPassDemand">
+                <el-option label="大专" value="大专"></el-option>
+                <el-option label="本科" value="本科"></el-option>
+                <el-option label="硕士" value="硕士"></el-option>
+                <el-option label="博士" value="博士"></el-option>
               </el-select>
             </el-form-item>
-            <el-form-item label="工作经验通过要求" prop="jobExperience">
+            <el-form-item label="工作经验通过要求" prop="workPassExp">
               <el-input
-                placeholder="请输入内容"
-                v-model="addPost.jobExperience"
+                type="number"
+                v-model="form.postSettings.workPassExp"
               ></el-input>
             </el-form-item>
-            <el-form-item label="年龄通过要求" prop="jobAge">
-              <el-input type="number" v-model="addPost.jobAge"></el-input>
+            <el-form-item label="年龄通过要求" prop="agePassDemand">
+              <el-input
+                type="number"
+                v-model="form.postSettings.agePassDemand"
+              ></el-input>
             </el-form-item>
           </el-row>
         </el-row>
@@ -447,7 +436,7 @@ export default {
         <el-button @click="active = 0">上一步</el-button>
         <el-button
           type="primary"
-          @click="post == 0 ? submitForm('addPost') : updateForm('addPost')"
+          @click="post == 0 ? submitForm('form') : updateForm('form')"
           style="color: aliceblue"
         >
           提交
