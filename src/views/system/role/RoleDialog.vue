@@ -170,7 +170,7 @@ const closeDialog = () => {
   // 重置表单
   roleData.value = {
     roleName: '',
-    roleCode: '',
+    roleRemark: '',
     menus: []
   }
   // 关闭弹窗
