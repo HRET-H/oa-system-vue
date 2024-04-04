@@ -12,6 +12,20 @@ const routes = [
     name: 'home',
     component: () => import('@/views/index/HomeView.vue'),
     children: [
+      // 系统管理
+      {
+        path: 'system',
+        name: '系统管理',
+        component: () => import('@/views/index/AsideIndex.vue'),
+        children: [
+          // 角色管理
+          {
+            path: 'role',
+            name: '角色管理',
+            component: () => import('@/views/system/role/RoleManager.vue')
+          }
+        ]
+      },
       // 跳转到考核页面
       {
         path: 'mova',

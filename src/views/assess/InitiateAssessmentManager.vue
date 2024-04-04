@@ -37,7 +37,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="负责人">
-        <CustomTransfer :type="type" :seccessData="seccessData" />
+        <CustomTransfer :type="type" :successData="successData" />
       </el-form-item>
       <el-form-item label="考核说明">
         <el-input
@@ -134,7 +134,6 @@
 </template>
 <script>
 import axios from 'axios'
-import { ElMessage } from 'element-plus'
 export default {
   data() {
     return {
@@ -149,7 +148,7 @@ export default {
         PerformanceAnnouncement: ''
       },
       labelPosition: 'right',
-      type: 'true'
+      type: true
     }
   },
   created() {
@@ -194,7 +193,7 @@ export default {
 
       this.$router.go(-1)
     },
-    seccessData() {
+    successData() {
       this.$message({
         message: '操作成功',
         type: 'success'
@@ -209,6 +208,7 @@ export default {
   margin-bottom: 20px;
   border-left: 2px solid #409eff;
 }
+
 .title h1 {
   text-indent: 0.3em;
 }

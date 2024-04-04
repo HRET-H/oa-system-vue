@@ -8,303 +8,289 @@
       新增候选人 </el-button
     ><br />
     <br />
-    <page-container>
-      关键字：
-      <el-input
-        placeholder="输入内容"
-        v-model="findCondition.candidateName"
-        clearable
-        style="width: 250px; margin-left: 10px"
-      >
-      </el-input>
-      &nbsp;&nbsp;&nbsp;&nbsp; 部门：
-      <el-select
-        v-model="findCondition.candidateDepartment"
-        placeholder="全部"
-        style="width: 250px; height: 40px"
-      >
-        <el-option label="技术部" value="1"></el-option>
-        <el-option label="产品部" value="2"></el-option>
-        <el-option label="销售部" value="3"></el-option>
-        <el-option label="行政部" value="4"></el-option>
-      </el-select>
-      &nbsp;&nbsp;&nbsp;&nbsp; 面试官：
-      <el-select
-        v-model="findCondition.candidateNature"
-        placeholder="全部"
-        style="width: 250px; height: 40px"
-      >
-        <el-option label="全职" value="1"></el-option>
-        <el-option label="兼职" value="2"></el-option>
-        <el-option label="实习" value="3"></el-option>
-        <el-option label="外派" value="4"></el-option>
-        <el-option label="退休返聘" value="5"></el-option>
-      </el-select>
-      &nbsp;&nbsp;&nbsp;&nbsp; 学历要求：
-      <el-select
-        v-model="findCondition.candidateEducation"
-        placeholder="全部"
-        style="width: 250px; height: 40px"
-      >
-        <el-option label="不限" value="1"></el-option>
-        <el-option label="高中及以下" value="2"></el-option>
-        <el-option label="大专" value="3"></el-option>
-        <el-option label="本科" value="4"></el-option>
-        <el-option label="硕士" value="5"></el-option>
-        <el-option label="博士及以上" value="6"></el-option>
-      </el-select>
+    关键字：
+    <el-input
+      placeholder="输入内容"
+      v-model="findCondition.candidateName"
+      clearable
+      style="width: 250px; margin-left: 10px"
+    >
+    </el-input>
+    &nbsp;&nbsp;&nbsp;&nbsp; 部门：
+    <el-select
+      v-model="findCondition.candidateDepartment"
+      placeholder="全部"
+      style="width: 250px; height: 40px"
+    >
+      <el-option label="技术部" value="1"></el-option>
+      <el-option label="产品部" value="2"></el-option>
+      <el-option label="销售部" value="3"></el-option>
+      <el-option label="行政部" value="4"></el-option>
+    </el-select>
+    &nbsp;&nbsp;&nbsp;&nbsp; 面试官：
+    <el-select
+      v-model="findCondition.candidateNature"
+      placeholder="全部"
+      style="width: 250px; height: 40px"
+    >
+      <el-option label="全职" value="1"></el-option>
+      <el-option label="兼职" value="2"></el-option>
+      <el-option label="实习" value="3"></el-option>
+      <el-option label="外派" value="4"></el-option>
+      <el-option label="退休返聘" value="5"></el-option>
+    </el-select>
+    &nbsp;&nbsp;&nbsp;&nbsp; 学历要求：
+    <el-select
+      v-model="findCondition.candidateEducation"
+      placeholder="全部"
+      style="width: 250px; height: 40px"
+    >
+      <el-option label="不限" value="1"></el-option>
+      <el-option label="高中及以下" value="2"></el-option>
+      <el-option label="大专" value="3"></el-option>
+      <el-option label="本科" value="4"></el-option>
+      <el-option label="硕士" value="5"></el-option>
+      <el-option label="博士及以上" value="6"></el-option>
+    </el-select>
+    <br />
+    <br />
+    申请时间：
+    <el-date-picker
+      v-model="findCondition.candidateSumTime"
+      type="datetimerange"
+      start-placeholder="开始时间"
+      end-placeholder="结束时间"
+      range-separator="至"
+      value-format="YYYY-MM-DD HH:mm:ss"
+      style="width: 300px"
+    >
+    </el-date-picker>
+    &nbsp;
+    <el-button
+      type="primary"
+      style="width: 100px; height: 35px; color: aliceblue"
+      @click="search()"
+      >搜索</el-button
+    >
+    &nbsp;
+    <el-button @click="exportData()" style="width: 100px; height: 35px"
+      >导出</el-button
+    >
+    <br /><br />
+
+    <el-button
+      class="custom-button"
+      @click="(findCondition.candidateStatus = ''), search()"
+    >
+      <div style="font-size: 35px">{{ findConditionByNumberData.job }}人</div>
       <br />
+      <span>全部</span>
+    </el-button>
+    <el-button
+      class="custom-button"
+      @click="(findCondition.candidateStatus = 1), search()"
+    >
+      <div style="font-size: 35px">{{ findConditionByNumberData.job1 }}人</div>
       <br />
-      申请时间：
-      <el-date-picker
-        v-model="findCondition.candidateSumTime"
-        type="datetimerange"
-        start-placeholder="开始时间"
-        end-placeholder="结束时间"
-        range-separator="至"
-        value-format="YYYY-MM-DD HH:mm:ss"
-        style="width: 300px"
-      >
-      </el-date-picker>
-      &nbsp;
-      <el-button
-        type="primary"
-        style="width: 100px; height: 35px; color: aliceblue"
-        @click="search()"
-        >搜索</el-button
-      >
-      &nbsp;
-      <el-button @click="exportData()" style="width: 100px; height: 35px"
-        >导出</el-button
-      >
-      <br /><br />
+      <span>初筛</span>
+    </el-button>
+    <el-button
+      class="custom-button"
+      @click="(findCondition.candidateStatus = 2), search()"
+    >
+      <div style="font-size: 35px">{{ findConditionByNumberData.job2 }}人</div>
+      <br />
+      <span>待面试</span>
+    </el-button>
+    <el-button
+      class="custom-button"
+      @click="(findCondition.candidateStatus = 3), search()"
+    >
+      <div style="font-size: 35px">{{ findConditionByNumberData.job3 }}人</div>
+      <br />
+      <span>面试中</span>
+    </el-button>
+    <el-button
+      class="custom-button"
+      @click="(findCondition.candidateStatus = 4), search()"
+    >
+      <div style="font-size: 35px">{{ findConditionByNumberData.job4 }}人</div>
+      <br />
+      <span>通过面试</span>
+    </el-button>
+    <el-button
+      class="custom-button"
+      @click="(findCondition.candidateStatus = 5), search()"
+    >
+      <div style="font-size: 35px">{{ findConditionByNumberData.job5 }}人</div>
+      <br />
+      <span>待入职</span>
+    </el-button>
+    <el-button
+      class="custom-button"
+      @click="(findCondition.candidateStatus = 6), search()"
+    >
+      <div style="font-size: 35px">{{ findConditionByNumberData.job6 }}人</div>
+      <br />
+      <p>人才库</p>
+    </el-button>
 
-      <el-button
-        class="custom-button"
-        @click="(findCondition.candidateStatus = ''), search()"
-      >
-        <div style="font-size: 35px">{{ findConditionByNumberData.job }}人</div>
-        <br />
-        <span>全部</span>
-      </el-button>
-      <el-button
-        class="custom-button"
-        @click="(findCondition.candidateStatus = 1), search()"
-      >
-        <div style="font-size: 35px">
-          {{ findConditionByNumberData.job1 }}人
-        </div>
-        <br />
-        <span>初筛</span>
-      </el-button>
-      <el-button
-        class="custom-button"
-        @click="(findCondition.candidateStatus = 2), search()"
-      >
-        <div style="font-size: 35px">
-          {{ findConditionByNumberData.job2 }}人
-        </div>
-        <br />
-        <span>待面试</span>
-      </el-button>
-      <el-button
-        class="custom-button"
-        @click="(findCondition.candidateStatus = 3), search()"
-      >
-        <div style="font-size: 35px">
-          {{ findConditionByNumberData.job3 }}人
-        </div>
-        <br />
-        <span>面试中</span>
-      </el-button>
-      <el-button
-        class="custom-button"
-        @click="(findCondition.candidateStatus = 4), search()"
-      >
-        <div style="font-size: 35px">
-          {{ findConditionByNumberData.job4 }}人
-        </div>
-        <br />
-        <span>通过面试</span>
-      </el-button>
-      <el-button
-        class="custom-button"
-        @click="(findCondition.candidateStatus = 5), search()"
-      >
-        <div style="font-size: 35px">
-          {{ findConditionByNumberData.job5 }}人
-        </div>
-        <br />
-        <span>待入职</span>
-      </el-button>
-      <el-button
-        class="custom-button"
-        @click="(findCondition.candidateStatus = 6), search()"
-      >
-        <div style="font-size: 35px">
-          {{ findConditionByNumberData.job6 }}人
-        </div>
-        <br />
-        <p>人才库</p>
-      </el-button>
-
-      <el-table :data="tableData" style="width: 100%">
-        <el-table-column label="基本信息">
-          <template v-slot="scope">
-            <div @click="addPosition(scope.row)">
-              <span>{{ scope.row.candidateId }}</span>
-              <span>{{ scope.row.candidateName }}</span
-              >&nbsp;&nbsp;<span>{{ scope.row.candidateExpect }}</span
-              >&nbsp;&nbsp; <span>{{ scope.row.candidateTime }}</span
-              >&nbsp;&nbsp;<el-button type="info" plain size="small"
-                ><span>{{
-                  scope.row.candidateStatus == 1
-                    ? '初筛'
-                    : scope.row.candidateStatus == 2
-                      ? '待面试'
-                      : scope.row.candidateStatus == 3
-                        ? '面试中'
-                        : scope.row.candidateStatus == 4
-                          ? '通过面试'
-                          : scope.row.candidateStatus == 5
-                            ? '待入职'
-                            : scope.row.candidateStatus == 6
-                              ? '人才库'
-                              : '已入职'
-                }}</span></el-button
-              ><br />
-              <span>{{ scope.row.candidateSex }}</span
-              >&nbsp;|&nbsp;<span
-                v-if="scope.row && scope.row.candidateDateBirth"
-              >
-                {{
-                  // 假设 today 和 candidateDateBirth 字符串是标准的日期格式（如 "YYYY-MM-DD"）
-                  calculateAge(today, scope.row.candidateDateBirth)
-                }}岁</span
-              >&nbsp;|&nbsp;<span>{{ scope.row.candidateExpect }}</span
-              >&nbsp;&nbsp;<br />
-              <span>{{ scope.row.candidateWorkAddres }}</span
-              >&nbsp;|&nbsp;<span>{{ scope.row.candidateWorkDate }}</span
-              >&nbsp;|&nbsp; <span>{{ scope.row.candidateBirthplace }}</span
-              >&nbsp;|&nbsp;
-              <span>{{
-                scope.row.candidateEducation == 1
-                  ? '初中'
-                  : scope.row.candidateEducation == 2
-                    ? '高中'
-                    : scope.row.candidateEducation == 3
-                      ? '大专'
-                      : scope.row.candidateEducation == 4
-                        ? '本科'
-                        : scope.row.candidateEducation == 5
-                          ? '硕士'
-                          : '博士'
-              }}</span
-              >&nbsp;|&nbsp; <span>{{ scope.row.candidateTime }}</span>
-            </div>
-          </template>
-        </el-table-column>
-
-        <el-table-column label="操作" width="250%">
-          <template v-slot="scope">
-            <el-link
-              :underline="false"
-              v-if="
-                scope.row.candidateStatus == 1 || scope.row.candidateStatus == 6
-              "
-              type="primary"
-              @click="sendinterview(scope.row)"
-              ><el-button type="primary" style="color: aliceblue"
-                >安排面试</el-button
-              >&nbsp;&nbsp;</el-link
+    <el-table :data="tableData" style="width: 100%">
+      <el-table-column label="基本信息">
+        <template v-slot="scope">
+          <div @click="addPosition(scope.row)">
+            <span>{{ scope.row.candidateId }}</span>
+            <span>{{ scope.row.candidateName }}</span
+            >&nbsp;&nbsp;<span>{{ scope.row.candidateExpect }}</span
+            >&nbsp;&nbsp; <span>{{ scope.row.candidateTime }}</span
+            >&nbsp;&nbsp;<el-button type="info" plain size="small"
+              ><span>{{
+                scope.row.candidateStatus == 1
+                  ? '初筛'
+                  : scope.row.candidateStatus == 2
+                    ? '待面试'
+                    : scope.row.candidateStatus == 3
+                      ? '面试中'
+                      : scope.row.candidateStatus == 4
+                        ? '通过面试'
+                        : scope.row.candidateStatus == 5
+                          ? '待入职'
+                          : scope.row.candidateStatus == 6
+                            ? '人才库'
+                            : '已入职'
+              }}</span></el-button
+            ><br />
+            <span>{{ scope.row.candidateSex }}</span
+            >&nbsp;|&nbsp;<span
+              v-if="scope.row && scope.row.candidateDateBirth"
             >
-            <el-link
-              :underline="false"
-              v-if="scope.row.candidateStatus == 4"
-              type="primary"
-              @click="updateStatusCandidate(5, scope.row)"
-              ><el-button type="primary" style="width: 88px; color: aliceblue"
-                >发offer</el-button
-              >&nbsp;&nbsp;</el-link
-            >
-            <el-link
-              :underline="false"
-              v-if="scope.row.candidateStatus == 5"
-              type="primary"
-              @click="updateStatusCandidate(7, scope.row)"
-              ><el-button type="primary" style="color: aliceblue"
-                >确认入职</el-button
-              >&nbsp;&nbsp;</el-link
-            >
-            <el-link
-              :underline="false"
-              v-if="
-                scope.row.candidateStatus != 5 &&
-                scope.row.candidateStatus != 6 &&
-                scope.row.candidateStatus != 7
-              "
-              type="primary"
-              @click="updateStatusCandidate(6, scope.row)"
-              >淘汰&nbsp;&nbsp;</el-link
-            >
-            <el-link
-              :underline="false"
-              v-if="
-                scope.row.candidateStatus != 5 &&
-                scope.row.candidateStatus != 6 &&
-                scope.row.candidateStatus != 7
-              "
-              type="primary"
-              @click="
-                updateStatusCandidate(
-                  stringtoNum(scope.row.candidateStatus),
-                  scope.row
-                )
-              "
-              >通过&nbsp;&nbsp;</el-link
-            >
-            <el-link
-              :underline="false"
-              v-if="scope.row.candidateStatus == 5"
-              type="primary"
-              @click="updateStatusCandidate(6, scope.row)"
-              >放弃&nbsp;&nbsp;</el-link
-            >
-            <el-link
-              :underline="false"
-              v-if="scope.row.candidateStatus == 7"
-              type="primary"
-            >
-              <div style="color: black; font-size: 15px">已入职</div>
-            </el-link>
-          </template>
-        </el-table-column>
-      </el-table>
-
-      <el-dialog
-        :title="dlalogTitel"
-        v-model:visible="centerDialogVisible"
-        width="40%"
-        center
-      >
-        <h1 style="color: red">你确定要删除吗？</h1>
-        <template v-slot:footer>
-          <span class="dialog-footer">
-            <el-button @click="centerDialogVisible = false">取 消</el-button>
-            <el-button type="primary" @click="deletePostMethod()"
-              >确 定</el-button
-            >
-          </span>
+              {{
+                // 假设 today 和 candidateDateBirth 字符串是标准的日期格式（如 "YYYY-MM-DD"）
+                calculateAge(today, scope.row.candidateDateBirth)
+              }}岁</span
+            >&nbsp;|&nbsp;<span>{{ scope.row.candidateExpect }}</span
+            >&nbsp;&nbsp;<br />
+            <span>{{ scope.row.candidateWorkAddres }}</span
+            >&nbsp;|&nbsp;<span>{{ scope.row.candidateWorkDate }}</span
+            >&nbsp;|&nbsp; <span>{{ scope.row.candidateBirthplace }}</span
+            >&nbsp;|&nbsp;
+            <span>{{
+              scope.row.candidateEducation == 1
+                ? '初中'
+                : scope.row.candidateEducation == 2
+                  ? '高中'
+                  : scope.row.candidateEducation == 3
+                    ? '大专'
+                    : scope.row.candidateEducation == 4
+                      ? '本科'
+                      : scope.row.candidateEducation == 5
+                        ? '硕士'
+                        : '博士'
+            }}</span
+            >&nbsp;|&nbsp; <span>{{ scope.row.candidateTime }}</span>
+          </div>
         </template>
-      </el-dialog>
-      <GetPagination
-        :page-num="findCondition.pageNum"
-        :page-size="findCondition.pageSize"
-        :total="total"
-        :handle-current-change="handleCurrentChange"
-        :handle-size-change="handleSizeChange"
-      />
-    </page-container>
+      </el-table-column>
+
+      <el-table-column label="操作" width="250%">
+        <template v-slot="scope">
+          <el-link
+            :underline="false"
+            v-if="
+              scope.row.candidateStatus == 1 || scope.row.candidateStatus == 6
+            "
+            type="primary"
+            @click="sendinterview(scope.row)"
+            ><el-button type="primary" style="color: aliceblue"
+              >安排面试</el-button
+            >&nbsp;&nbsp;</el-link
+          >
+          <el-link
+            :underline="false"
+            v-if="scope.row.candidateStatus == 4"
+            type="primary"
+            @click="updateStatusCandidate(5, scope.row)"
+            ><el-button type="primary" style="width: 88px; color: aliceblue"
+              >发offer</el-button
+            >&nbsp;&nbsp;</el-link
+          >
+          <el-link
+            :underline="false"
+            v-if="scope.row.candidateStatus == 5"
+            type="primary"
+            @click="updateStatusCandidate(7, scope.row)"
+            ><el-button type="primary" style="color: aliceblue"
+              >确认入职</el-button
+            >&nbsp;&nbsp;</el-link
+          >
+          <el-link
+            :underline="false"
+            v-if="
+              scope.row.candidateStatus != 5 &&
+              scope.row.candidateStatus != 6 &&
+              scope.row.candidateStatus != 7
+            "
+            type="primary"
+            @click="updateStatusCandidate(6, scope.row)"
+            >淘汰&nbsp;&nbsp;</el-link
+          >
+          <el-link
+            :underline="false"
+            v-if="
+              scope.row.candidateStatus != 5 &&
+              scope.row.candidateStatus != 6 &&
+              scope.row.candidateStatus != 7
+            "
+            type="primary"
+            @click="
+              updateStatusCandidate(
+                stringtoNum(scope.row.candidateStatus),
+                scope.row
+              )
+            "
+            >通过&nbsp;&nbsp;</el-link
+          >
+          <el-link
+            :underline="false"
+            v-if="scope.row.candidateStatus == 5"
+            type="primary"
+            @click="updateStatusCandidate(6, scope.row)"
+            >放弃&nbsp;&nbsp;</el-link
+          >
+          <el-link
+            :underline="false"
+            v-if="scope.row.candidateStatus == 7"
+            type="primary"
+          >
+            <div style="color: black; font-size: 15px">已入职</div>
+          </el-link>
+        </template>
+      </el-table-column>
+    </el-table>
+
+    <el-dialog
+      :title="dlalogTitel"
+      v-model:visible="centerDialogVisible"
+      width="40%"
+      center
+    >
+      <h1 style="color: red">你确定要删除吗？</h1>
+      <template v-slot:footer>
+        <span class="dialog-footer">
+          <el-button @click="centerDialogVisible = false">取 消</el-button>
+          <el-button type="primary" @click="deletePostMethod()"
+            >确 定</el-button
+          >
+        </span>
+      </template>
+    </el-dialog>
+    <GetPagination
+      :page-num="findCondition.pageNum"
+      :page-size="findCondition.pageSize"
+      :total="total"
+      :handle-current-change="handleCurrentChange"
+      :handle-size-change="handleSizeChange"
+    />
   </div>
 </template>
 

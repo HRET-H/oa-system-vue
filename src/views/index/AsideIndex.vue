@@ -1,5 +1,4 @@
 <script setup>
-import { ref, onMounted, onBeforeUpdate } from 'vue'
 // 导入动态菜单
 import MenuTree from '@/components/menu/MenuTree.vue'
 import axios from 'axios'
@@ -90,49 +89,23 @@ onBeforeUpdate(() => {
     <el-container class="layout-container">
       <!-- 侧边栏容器 -->
       <el-aside style="border-right: 2px solid #d4d7de">
-        <MenuTree :data="MenuData" style="height: 100vh; padding-top: 5%" />
+        <el-scrollbar height="95%">
+          <MenuTree :data="MenuData" style="padding-top: 5%" />
+        </el-scrollbar>
       </el-aside>
       <!-- 主要区域容器 -->
-      <el-main style="height: 100vh">
-        <router-view />
+      <el-main
+        style="
+          height: 93vh;
+          background-color: rgba(242, 242, 242, 0.749019607843137);
+        "
+      >
+        <el-scrollbar height="95%">
+          <router-view />
+        </el-scrollbar>
       </el-main>
     </el-container>
   </div>
 </template>
 
-<style lang="scss" scoped>
-.layout-container {
-  height: 100vh;
-  .el-aside {
-    .el-menu {
-      border-right: none;
-    }
-  }
-  .el-header {
-    background-color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    .el-dropdown__box {
-      display: flex;
-      align-items: center;
-      .el-icon {
-        color: #999;
-        margin-left: 10px;
-      }
-
-      &:active,
-      &:focus {
-        outline: none;
-      }
-    }
-  }
-  .el-footer {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    color: #666;
-  }
-}
-</style>
+<style lang="scss" scoped></style>

@@ -4,4 +4,8 @@
   </div>
 </template>
 
-<style scoped></style>
+<style>
+.el-button--primary {
+  color: #fff !important;
+}
+</style>

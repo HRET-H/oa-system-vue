@@ -1,111 +1,107 @@
 <template>
   <div>
-    <page-container>
-      <!-- 发起指标按钮 -->
-      <div class="btn">
-        <el-button
-          type="primary"
-          @click="this.$router.push('/home/mova/insertAssessIndex')"
-          >新建指标</el-button
-        >
-      </div>
-      <!-- form表单条查 -->
-      <el-form
-        ref="form"
-        :model="assessIndexForm"
-        label-width="80px"
-        inline="true"
+    <!-- 发起指标按钮 -->
+    <div class="btn">
+      <el-button
+        type="primary"
+        @click="this.$router.push('/home/mova/insertAssessIndex')"
+        >新建指标</el-button
       >
-        <el-form-item label="指标名称">
-          <el-input
-            v-model="assessIndexForm.assessIndexName"
-            placeholder="指标名称"
+    </div>
+    <!-- form表单条查 -->
+    <el-form
+      ref="form"
+      :model="assessIndexForm"
+      label-width="80px"
+      inline="true"
+    >
+      <el-form-item label="指标名称">
+        <el-input
+          v-model="assessIndexForm.assessIndexName"
+          placeholder="指标名称"
+          style="width: 300px"
+        ></el-input>
+      </el-form-item>
+      <el-form-item label="状态">
+        <el-select
+          v-model="assessIndexForm.status"
+          placeholder="状态"
+          style="width: 300px"
+        >
+          <el-option
+            label="全部"
+            :value="
+              assessIndexForm.status == '0' || assessIndexForm.status == '1'
+            "
+          ></el-option>
+          <el-option label="启用" :value="0"></el-option>
+          <el-option label="停用" :value="1"></el-option>
+        </el-select>
+      </el-form-item>
+      <el-form-item label="创建时间">
+        <el-col :span="11">
+          <el-date-picker
+            type="date"
+            placeholder="创建时间"
+            v-model="assessIndexForm.createTime"
             style="width: 300px"
-          ></el-input>
-        </el-form-item>
-        <el-form-item label="状态">
-          <el-select
-            v-model="assessIndexForm.status"
-            placeholder="状态"
-            style="width: 300px"
+          ></el-date-picker>
+        </el-col>
+      </el-form-item>
+      <!-- 搜索重置按钮 -->
+      <el-form-item>
+        <el-button type="primary" @click="findAssessIndexListAndPage"
+          >查询</el-button
+        >
+        <el-button @click="resetForm">重置</el-button>
+      </el-form-item>
+    </el-form>
+    <!-- 表格 -->
+    <el-table :data="assessIndexList" style="width: 100%">
+      <el-table-column prop="assessIndexId" label="指标ID" width="180">
+      </el-table-column>
+      <el-table-column prop="assessIndexName" label="指标名称" width="180">
+      </el-table-column>
+      <el-table-column prop="indexDescription" width="180" label="指标类型">
+      </el-table-column>
+      <el-table-column prop="status" label="状态">
+        <template v-slot:default="scope">
+          <el-tag v-if="scope.row.status == 0" type="danger">启用</el-tag>
+          <el-tag v-else-if="scope.row.status == 1" type="warning">停用</el-tag>
+        </template>
+      </el-table-column>
+      <el-table-column prop="createTime" label="创建时间" width="180">
+      </el-table-column>
+      <el-table-column label="操作">
+        <template v-slot:default="scope">
+          <el-link
+            type="primary"
+            :underline="false"
+            @click="detailAssessIndex(scope.row)"
+            >停用</el-link
           >
-            <el-option
-              label="全部"
-              :value="
-                assessIndexForm.status == '0' || assessIndexForm.status == '1'
-              "
-            ></el-option>
-            <el-option label="启用" :value="0"></el-option>
-            <el-option label="停用" :value="1"></el-option>
-          </el-select>
-        </el-form-item>
-        <el-form-item label="创建时间">
-          <el-col :span="11">
-            <el-date-picker
-              type="date"
-              placeholder="创建时间"
-              v-model="assessIndexForm.createTime"
-              style="width: 300px"
-            ></el-date-picker>
-          </el-col>
-        </el-form-item>
-        <!-- 搜索重置按钮 -->
-        <el-form-item>
-          <el-button type="primary" @click="findAssessIndexListAndPage"
-            >查询</el-button
+          <el-link
+            type="primary"
+            :underline="false"
+            @click="editAssessIndex(scope.row)"
+            >修改</el-link
           >
-          <el-button @click="resetForm">重置</el-button>
-        </el-form-item>
-      </el-form>
-      <!-- 表格 -->
-      <el-table :data="assessIndexList" style="width: 100%">
-        <el-table-column prop="assessIndexId" label="指标ID" width="180">
-        </el-table-column>
-        <el-table-column prop="assessIndexName" label="指标名称" width="180">
-        </el-table-column>
-        <el-table-column prop="indexDescription" width="180" label="指标类型">
-        </el-table-column>
-        <el-table-column prop="status" label="状态">
-          <template v-slot:default="scope">
-            <el-tag v-if="scope.row.status == 0" type="danger">启用</el-tag>
-            <el-tag v-else-if="scope.row.status == 1" type="warning"
-              >停用</el-tag
-            >
-          </template>
-        </el-table-column>
-        <el-table-column prop="createTime" label="创建时间" width="180">
-        </el-table-column>
-        <el-table-column label="操作">
-          <template v-slot:default="scope">
-            <el-link
-              type="primary"
-              :underline="false"
-              @click="detailAssessIndex(scope.row)"
-              >停用</el-link
-            >
-            <el-link
-              type="primary"
-              :underline="false"
-              @click="editAssessIndex(scope.row)"
-              >修改</el-link
-            >
-            <el-link
-              type="primary"
-              :underline="false"
-              @click="deleteAssessIndex(scope.row)"
-              >删除</el-link
-            >
-          </template>
-        </el-table-column>
-      </el-table>
-      <GetPagination
-        :page-num="assessIndexForm.pageNum"
-        :page-size="assessIndexForm.pageSize"
-        :total="total"
-        :handle-current-change="handleCurrentChange"
-        :handle-size-change="handleSizeChange"
-      />
-    </page-container>
+          <el-link
+            type="primary"
+            :underline="false"
+            @click="deleteAssessIndex(scope.row)"
+            >删除</el-link
+          >
+        </template>
+      </el-table-column>
+    </el-table>
+    <GetPagination
+      :page-num="assessIndexForm.pageNum"
+      :page-size="assessIndexForm.pageSize"
+      :total="total"
+      :handle-current-change="handleCurrentChange"
+      :handle-size-change="handleSizeChange"
+    />
   </div>
 </template>
 <script>

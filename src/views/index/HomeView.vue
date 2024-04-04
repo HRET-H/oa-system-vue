@@ -1,7 +1,5 @@
 <!-- 使用vue的setup语法糖 -->
 <script setup>
-// 导入动态菜单数据
-import { ref, onMounted } from 'vue'
 import { baseURL } from '@/utils/request'
 // 导入axios
 import axios from 'axios'
@@ -9,18 +7,31 @@ import axios from 'axios'
 import { openFullScreen, closeFullScreen } from '@/utils/loading'
 // 导入动态菜单组件
 import MenuTree from '@/components/menu/MenuTree.vue'
+import router from '@/router'
 
 // 设置axios的baseURL
 axios.defaults.baseURL = baseURL
 
-// 定义一个ref变量，用来存储数据
-let NavDrawer = ref(false)
+// 定义一个ref变量，用来存储抽屉的状态
+const NavDrawer = ref(false)
 
-// 定义一个ref变量，用来存储数据
-let MenuData = ref([])
+// 定义一个ref变量，用来存储菜单数据
+const MenuData = ref([])
+
+// 定义一个ref变量，控制水印的内容
+const watermark_content = ref('')
 
 // 使用onMounted钩子函数，获取菜单数据
 onMounted(() => {
+  // 获取当前时间 格式为 yyyy-MM-dd
+  const now = new Date()
+  const year = now.getFullYear()
+  const month = now.getMonth() + 1
+  const day = now.getDate()
+
+  // 设置水印内容
+  watermark_content.value = 'HRET ' + year + '-' + month + '-' + day
+
   // 开启加载动画
   const loading = openFullScreen()
 
@@ -38,56 +49,71 @@ onMounted(() => {
 </script>
 
 <template>
-  <!-- 外层容器。 当子元素中包含 <el-header> 或 <el-footer> 时，全部子元素会垂直上下排列， 否则会水平左右排列 -->
-  <el-container
-    v-loading.fullscreen.lock="fullscreenLoading"
-    element-loading-svg-view-box="-10, -10, 50, 50"
-  >
-    <!-- 顶栏容器 -->
-    <el-header
-      style="background-color: rgb(35, 43, 64); height: 30%; padding: 0 0"
+  <el-watermark :content="watermark_content">
+    <!-- 外层容器。 当子元素中包含 <el-header> 或 <el-footer> 时，全部子元素会垂直上下排列， 否则会水平左右排列 -->
+    <el-container
+      v-loading.fullscreen.lock="fullscreenLoading"
+      element-loading-svg-view-box="-10, -10, 50, 50"
     >
-      <span style="margin-left: 30px">
-        <el-image
-          style="width: 30px; height: 40px; position: relative; top: 15px"
-          src="https://hret0721.oss-cn-beijing.aliyuncs.com/oa-system/oa-Logo.png"
-          fit="fill"
-        />
-        &nbsp;
-        <h4 style="width: 15%; color: #fff; display: inline-block">
-          OA数字化办公系统
-        </h4>
-      </span>
-      <MenuTree
-        :data="MenuData"
-        mode="horizontal"
-        style="width: 60%; display: inline-block; position: relative; top: 1px"
-      />
-      <el-icon
-        color="#fff"
-        @click="NavDrawer = true"
-        style="position: relative; right: 33%"
-      >
-        <Fold />
-      </el-icon>
-      <el-drawer v-model="NavDrawer" :with-header="false">
-        <span>Hi there!</span>
-      </el-drawer>
-    </el-header>
-    <router-view></router-view>
-  </el-container>
+      <!-- 顶栏容器 -->
+      <el-header style="background-color: rgb(35, 43, 64); height: 68px">
+        <el-row>
+          <el-col :span="20">
+            <span style="margin-left: 30px">
+              <el-image
+                style="width: 30px; height: 40px; position: relative; top: 15px"
+                src="https://hret0721.oss-cn-beijing.aliyuncs.com/oa-system/oa-Logo.png"
+                fit="fill"
+              />
+              &nbsp;
+              <h4 style="width: 15%; color: #fff; display: inline-block">
+                OA数字化办公系统
+              </h4>
+            </span>
+            <MenuTree
+              :data="MenuData"
+              mode="horizontal"
+              style="
+                width: 60%;
+                display: inline-block;
+                position: relative;
+                top: 2px;
+              "
+            />
+            <a href="javascript:void(0)">
+              <el-icon
+                color="#fff"
+                @click="NavDrawer = true"
+                style="position: relative; left: -30%; top: 5px"
+              >
+                <Files />
+              </el-icon>
+            </a>
+          </el-col>
+          <el-col :span="4">
+            <a
+              href="javascript:void(0)"
+              style="position: relative; top: 25px"
+              @click="router.push('/home/system?parentId=72')"
+            >
+              <el-icon color="#fff" size="20">
+                <Setting />
+              </el-icon>
+            </a>
+          </el-col>
+        </el-row>
+
+        <el-drawer v-model="NavDrawer" :with-header="false">
+          <span>Hi there! </span>
+        </el-drawer>
+      </el-header>
+      <router-view></router-view>
+    </el-container>
+  </el-watermark>
 </template>
 
 <style>
-* {
-  -ms-overflow-style: none;
-}
-
 *::-webkit-scrollbar {
   display: none;
-}
-
-* {
-  scrollbar-width: none;
 }
 </style>
