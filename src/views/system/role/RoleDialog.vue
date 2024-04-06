@@ -126,44 +126,57 @@ const getRoleMenuInfo = () => {
   })
 }
 
+// 调用表单ruleFormRef
+const ruleFormRef = ref(null)
+
 // 添加角色
 const addRole = () => {
-  // 调用角色权限处理方法
-  getRoleMenuInfo()
-  // 发送请求
-  axios
-    .post('/role/addRole', roleData.value)
-    .then((res) => {
-      if (res.data.code == 200) {
-        ElMessage.success('添加成功')
-        // 执行关闭方法
-        closeDialog()
-      } else {
-        ElMessage.error('添加失败')
-      }
-    })
-    .catch(() => {
-      ElMessage.error('添加失败')
-    })
+  // 判断是否满足表单验证
+  ruleFormRef.value.validate((valid) => {
+    if (valid) {
+      // 调用角色权限处理方法
+      getRoleMenuInfo()
+      // 发送请求
+      axios
+        .post('/role/addRole', roleData.value)
+        .then((res) => {
+          if (res.data.code == 200) {
+            ElMessage.success('添加成功')
+            // 执行关闭方法
+            closeDialog()
+          } else {
+            ElMessage.error('添加失败')
+          }
+        })
+        .catch(() => {
+          ElMessage.error('添加失败')
+        })
+    }
+  })
 }
 
 const updateRole = () => {
-  // 调用角色权限处理方法
-  getRoleMenuInfo()
-  axios
-    .post('/role/updateRole', roleData.value)
-    .then((res) => {
-      if (res.data.code == 200) {
-        ElMessage.success('修改成功')
-        // 执行关闭方法
-        closeDialog()
-      } else {
-        ElMessage.error('修改失败')
-      }
-    })
-    .catch(() => {
-      ElMessage.error('修改失败')
-    })
+  // 判断是否满足表单验证
+  ruleFormRef.value.validate((valid) => {
+    if (valid) {
+      // 调用角色权限处理方法
+      getRoleMenuInfo()
+      axios
+        .post('/role/updateRole', roleData.value)
+        .then((res) => {
+          if (res.data.code == 200) {
+            ElMessage.success('修改成功')
+            // 执行关闭方法
+            closeDialog()
+          } else {
+            ElMessage.error('修改失败')
+          }
+        })
+        .catch(() => {
+          ElMessage.error('修改失败')
+        })
+    }
+  })
 }
 
 const closeDialog = () => {
@@ -199,7 +212,12 @@ defineExpose({
     @close="closeDialog"
     :destroy-on-close="true"
   >
-    <el-form :model="roleData" :rules="rules" label-width="80px">
+    <el-form
+      ref="ruleFormRef"
+      :model="roleData"
+      :rules="rules"
+      label-width="80px"
+    >
       <el-form-item label="名称" prop="roleName">
         <el-input
           style="width: 500px"

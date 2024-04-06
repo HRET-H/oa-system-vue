@@ -12,9 +12,6 @@ import router from '@/router'
 // 设置axios的baseURL
 axios.defaults.baseURL = baseURL
 
-// 定义一个ref变量，用来存储抽屉的状态
-const NavDrawer = ref(false)
-
 // 定义一个ref变量，用来存储菜单数据
 const MenuData = ref([])
 
@@ -59,36 +56,41 @@ onMounted(() => {
       <el-header style="background-color: rgb(35, 43, 64); height: 68px">
         <el-row>
           <el-col :span="20">
-            <span style="margin-left: 30px">
-              <el-image
-                style="width: 30px; height: 40px; position: relative; top: 15px"
-                src="https://hret0721.oss-cn-beijing.aliyuncs.com/oa-system/oa-Logo.png"
-                fit="fill"
-              />
-              &nbsp;
-              <h4 style="width: 15%; color: #fff; display: inline-block">
-                OA数字化办公系统
-              </h4>
-            </span>
-            <MenuTree
-              :data="MenuData"
-              mode="horizontal"
-              style="
-                width: 60%;
-                display: inline-block;
-                position: relative;
-                top: 2px;
-              "
-            />
-            <a href="javascript:void(0)">
-              <el-icon
-                color="#fff"
-                @click="NavDrawer = true"
-                style="position: relative; left: -30%; top: 5px"
+            <el-row>
+              <el-col :span="6">
+                <span style="margin-left: 30px">
+                  <el-image
+                    style="
+                      width: 30px;
+                      height: 40px;
+                      position: relative;
+                      top: 15px;
+                    "
+                    src="https://hret0721.oss-cn-beijing.aliyuncs.com/oa-system/oa-Logo.png"
+                    fit="fill"
+                  />
+                  &nbsp;
+                  <h4 style="color: #fff; display: inline-block">
+                    OA数字化办公系统
+                  </h4>
+                </span>
+              </el-col>
+              <el-col :span="16">
+                <MenuTree
+                  :data="MenuData"
+                  mode="horizontal"
+                  style="width: 50%; position: relative; top: 5px"
+                />
+              </el-col>
+              <el-col
+                :span="2"
+                style="position: relative; left: -33%; top: 20px"
               >
-                <Files />
-              </el-icon>
-            </a>
+                <a href="javascript:void(0)">
+                  <v-icon color="#fff" icon="mdi-dots-grid" />
+                </a>
+              </el-col>
+            </el-row>
           </el-col>
           <el-col :span="4">
             <a
@@ -102,10 +104,6 @@ onMounted(() => {
             </a>
           </el-col>
         </el-row>
-
-        <el-drawer v-model="NavDrawer" :with-header="false">
-          <span>Hi there! </span>
-        </el-drawer>
       </el-header>
       <router-view></router-view>
     </el-container>
