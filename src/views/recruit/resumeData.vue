@@ -78,7 +78,7 @@
       style="color: #b1b4be"
       >更新时间:2035年6月19日 12:35:59</span
     >
-    <el-table :data="tableData" style="width: 100%">
+    <el-table :data="tableData.arr" style="width: 100%">
       <el-table-column prop="candidateId" label="简历ID"></el-table-column>
       <el-table-column
         prop="candidateName"
@@ -113,6 +113,31 @@ const main6 = ref()
 onMounted(() => {
   init1(), init2(), inti3(), init4(), inti5(), inti6(), getData()
 })
+// let tableData = []
+const tableData = reactive({
+  arr: []
+})
+//搜索
+// 将页码，及每页显示的条数以参数传递提交给后台
+function getData() {
+  // 假设这里的axios.post请求参数已正确设置，仅关注函数调用
+  axios.post('/recruitCandidate/findAll').then((response) => {
+    console.log(response.data)
+    for (let i = 0; i < response.data.length; i++) {
+      tableData.arr.push({
+        candidateId: response.data[i].candidateId,
+        candidateName: response.data[i].candidateName,
+        candidateDepartment: response.data[i].candidateDepartment,
+        candidateExpect: response.data[i].candidateExpect,
+        candidateEducation: response.data[i].candidateEducation,
+        candidateSex: response.data[i].candidateSex,
+        candidateStatus: response.data[i].candidateStatus
+      })
+    }
+
+    console.log(tableData)
+  })
+}
 function init1() {
   let myChart = echarts.init(main.value)
   var option = {
@@ -182,7 +207,7 @@ function init2() {
     },
     series: [
       {
-        name: 'Access From',
+        name: '性别比例',
         type: 'pie',
         radius: ['30%', '50%'],
         avoidLabelOverlap: false,
@@ -281,7 +306,7 @@ function init4() {
     },
     series: [
       {
-        name: '1',
+        name: '各部门招聘完成度',
         type: 'pie',
         radius: ['50%', '70%'],
         avoidLabelOverlap: false,
@@ -446,26 +471,6 @@ function inti6() {
 
   // 使用刚指定的配置项和数据显示图表。
   myChart.setOption(option)
-}
-let tableData = []
-//搜索
-// 将页码，及每页显示的条数以参数传递提交给后台
-function getData() {
-  // 假设这里的axios.post请求参数已正确设置，仅关注函数调用
-  axios.post('/recruitCandidate/findAll').then((response) => {
-    for (let i = 0; i < response.data.length; i++) {
-      tableData.push({
-        candidateId: response.data[i].candidateId,
-        candidateName: response.data[i].candidateName,
-        candidateDepartment: response.data[i].candidateDepartment,
-        candidateExpect: response.data[i].candidateExpect,
-        candidateEducation: response.data[i].candidateEducation,
-        candidateSex: response.data[i].candidateSex,
-        candidateStatus: response.data[i].candidateStatus
-      })
-    }
-    console.log(tableData)
-  })
 }
 </script>
 

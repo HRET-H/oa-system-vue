@@ -6,7 +6,7 @@
     >
     <br />
     <br />
-    <div ref="main" style="width: 800px; height: 500px; margin: auto"></div>
+    <div ref="main" style="width: 100%; height: 700px; margin: auto"></div>
   </div>
 </template>
 
@@ -21,14 +21,30 @@ onMounted(() => {
 function init() {
   // 基于准备好的dom，初始化echarts实例
   var myChart = echarts.init(main.value)
+
   // 指定图表的配置项和数据
   var option = {
+    xAxis: {
+      axisLine: { show: false },
+      // 其他x轴配置项
+      type: 'category'
+    },
+    yAxis: {
+      axisLine: { show: false }
+      // 其他y轴配置项
+    },
+    grid: {
+      borderWidth: 0 // 设置横线和竖线的宽度为0
+    },
     legend: {
       data: ['推荐简历数', '初试人数', '复试人数', '录取人数', '到岗人数']
     },
     tooltip: {
       trigger: 'item',
-      formtter: '{a}<br/>{b} : {c}'
+      formatter: '{a}<br/>{b} : {c}'
+    },
+    splitLine: {
+      show: false
     },
     toolbox: {
       feature: {
@@ -37,16 +53,9 @@ function init() {
         saveAsImage: {}
       }
     },
-    xAxis: { type: 'category' },
-    yAxis: {},
-    // Declare several bar series, each will be mapped
-    // to a column of dataset.source by default.
     series: [
       {
-        splitLine: {
-          show: false
-        },
-        name: 'Actual',
+        name: '招聘详情',
         type: 'funnel',
         left: '10%',
         width: '80%',
@@ -75,11 +84,11 @@ function init() {
           { value: 25, name: '录取人数' },
           { value: 23, name: '到岗人数' }
         ],
-        // Ensure outer shape will not be over inner shape when hover.
         z: 100
       }
     ]
   }
+
   // 使用刚指定的配置项和数据显示图表。
   myChart.setOption(option)
 }
