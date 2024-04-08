@@ -5,168 +5,164 @@
       :postDialog="dialog"
       :dialog-close="closeDialog"
     ></post-dialog>
+
     <!--  主要内容-->
-    <el-main>
-      <el-button
-        @click="dialogPost()"
-        type="primary"
-        style="width: 120px; height: 40px; color: aliceblue"
-        >新建职位
-      </el-button>
-      <br />
-      <br />
-      负责人:
-      <el-input
-        placeholder="输入内容"
-        v-model="findCondition.jobPrincipal"
-        clearable
-        style="width: 250px; margin-left: 10px"
-      ></el-input>
-      &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;部门:
+
+    <el-button
+      @click="dialogPost()"
+      type="primary"
+      style="width: 120px; height: 40px; color: aliceblue"
+      >新建职位
+    </el-button>
+    <br />
+    <br />
+
+    负责人:
+    <el-input
+      placeholder="输入内容"
+      v-model="findCondition.jobPrincipal"
+      clearable
+      style="width: 250px; margin-left: 10px"
+    ></el-input>
+    &nbsp; &nbsp;&nbsp; &nbsp;&nbsp;部门:
+    <el-select
+      v-model="findCondition.jobDept"
+      placeholder="全部"
+      style="width: 250px; margin-left: 10px"
+    >
+      <el-option label="技术部" value="1"></el-option>
+      <el-option label="产品部" value="2"></el-option>
+      <el-option label="销售部" value="3"></el-option>
+      <el-option label="行政部" value="4"></el-option>
+    </el-select>
+    <span>
+      &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 职位性质：
       <el-select
-        v-model="findCondition.jobDept"
+        v-model="findCondition.jobNature"
         placeholder="全部"
         style="width: 250px; margin-left: 10px"
       >
-        <el-option label="技术部" value="1"></el-option>
-        <el-option label="产品部" value="2"></el-option>
-        <el-option label="销售部" value="3"></el-option>
-        <el-option label="行政部" value="4"></el-option>
+        <el-option label="全职" value="1"></el-option>
+        <el-option label="兼职" value="2"></el-option>
+        <el-option label="实习" value="3"></el-option>
+        <el-option label="外派" value="4"></el-option>
+        <el-option label="退休返聘" value="5"></el-option>
       </el-select>
-      <span>
-        &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 职位性质：
-        <el-select
-          v-model="findCondition.jobNature"
-          placeholder="全部"
-          style="width: 250px; margin-left: 10px"
-        >
-          <el-option label="全职" value="1"></el-option>
-          <el-option label="兼职" value="2"></el-option>
-          <el-option label="实习" value="3"></el-option>
-          <el-option label="外派" value="4"></el-option>
-          <el-option label="退休返聘" value="5"></el-option>
-        </el-select>
-      </span>
-      &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 学历要求：
-      <el-select
-        v-model="findCondition.jobEducation"
-        placeholder="全部"
-        style="width: 250px; margin-left: 10px"
-      >
-        <el-option label="不限" value="6"></el-option>
-        <el-option label="高中及以下" value="5"></el-option>
-        <el-option label="大专" value="4"></el-option>
-        <el-option label="本科" value="3"></el-option>
-        <el-option label="硕士" value="2"></el-option>
-        <el-option label="博士及以上" value="1"></el-option>
-      </el-select>
-      <br />
-      <br />
-      发起时间:
-      <el-date-picker
-        v-model="findCondition.jobSumTime"
-        type="datetimerange"
-        start-placeholder="开始时间"
-        end-placeholder="结束时间"
-        format="YYYY-MM-DD HH:mm:ss"
-        date-format="YYYY/MM/DD ddd"
-        time-format="A hh:mm:ss"
-        style="width: 300px"
-      >
-      </el-date-picker>
-      &nbsp;
-      <el-button type="primary" @click="search()" style="color: aliceblue"
-        >搜索</el-button
-      >
+    </span>
+    &nbsp; &nbsp;&nbsp; &nbsp;&nbsp; 学历要求：
+    <el-select
+      v-model="findCondition.jobEducation"
+      placeholder="全部"
+      style="width: 250px; margin-left: 10px"
+    >
+      <el-option label="不限" value="6"></el-option>
+      <el-option label="高中及以下" value="5"></el-option>
+      <el-option label="大专" value="4"></el-option>
+      <el-option label="本科" value="3"></el-option>
+      <el-option label="硕士" value="2"></el-option>
+      <el-option label="博士及以上" value="1"></el-option>
+    </el-select>
+    <br />
+    <br />
+    发起时间:
+    <el-date-picker
+      v-model="findCondition.jobSumTime"
+      type="datetimerange"
+      start-placeholder="开始时间"
+      end-placeholder="结束时间"
+      format="YYYY-MM-DD HH:mm:ss"
+      date-format="YYYY/MM/DD ddd"
+      time-format="A hh:mm:ss"
+      style="width: 300px"
+    >
+    </el-date-picker>
+    &nbsp;
+    <el-button type="primary" @click="search()" style="color: aliceblue"
+      >搜索</el-button
+    >
 
-      <el-button plain @click="exportData()">导出</el-button>
+    <el-button plain @click="exportData()">导出</el-button>
 
-      <el-table :data="tableData" style="width: 100%">
-        <el-table-column label="职位信息">
-          <template v-slot="scope">
-            <div @click="addPosition(scope.row)">
-              <span style="font-size: 16px">{{ scope.row.jobName }}</span
-              >&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 16px"
-                >职位ID:{{ scope.row.jobId }}</span
-              ><br />
-              <span>接受简历:12</span
-              >&nbsp;&nbsp;&nbsp;&nbsp;<span>初筛:5</span>&nbsp;&nbsp;&nbsp;&nbsp;
-              <span>待面试:1</span
-              >&nbsp;&nbsp;&nbsp;&nbsp;<span>通过面试:2</span>&nbsp;&nbsp;&nbsp;&nbsp;
-              <span>已发offer:14</span>&nbsp;&nbsp;&nbsp;&nbsp;<span
-                >人才库:3</span
-              >
-            </div>
-          </template>
-        </el-table-column>
+    <el-table :data="tableData" style="width: 100%">
+      <el-table-column label="职位信息">
+        <template v-slot="scope">
+          <div @click="addPosition(scope.row)">
+            <span style="font-size: 16px">{{ scope.row.jobName }}</span
+            >&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 16px"
+              >职位ID:{{ scope.row.jobId }}</span
+            ><br />
+            <span>接受简历:12</span
+            >&nbsp;&nbsp;&nbsp;&nbsp;<span>初筛:5</span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span>待面试:1</span
+            >&nbsp;&nbsp;&nbsp;&nbsp;<span>通过面试:2</span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span>已发offer:14</span>&nbsp;&nbsp;&nbsp;&nbsp;<span
+              >人才库:3</span
+            >
+          </div>
+        </template>
+      </el-table-column>
 
-        <el-table-column label="操作" width="200%">
-          <template v-slot="scope">
-            <el-link
-              :underline="false"
-              v-if="scope.row.jobStatus == 1"
-              type="primary"
-              @click="updateStatusJob(2, scope.row)"
-              >停止招聘&nbsp;&nbsp;</el-link
-            >
-            <el-link
-              :underline="false"
-              v-if="scope.row.jobStatus == 2"
-              type="primary"
-              @click="updateStatusJob(1, scope.row)"
-              >开始招聘&nbsp;&nbsp;</el-link
-            >
-            <el-link
-              :underline="false"
-              type="primary"
-              @click="dialogPost(scope.row)"
-              >编辑&nbsp;&nbsp;</el-link
-            >
+      <el-table-column label="操作" width="200%">
+        <template v-slot="scope">
+          <el-link
+            :underline="false"
+            v-if="scope.row.jobStatus == 1"
+            type="primary"
+            @click="updateStatusJob(2, scope.row)"
+            >停止招聘&nbsp;&nbsp;</el-link
+          >
+          <el-link
+            :underline="false"
+            v-if="scope.row.jobStatus == 2"
+            type="primary"
+            @click="updateStatusJob(1, scope.row)"
+            >开始招聘&nbsp;&nbsp;</el-link
+          >
+          <el-link
+            :underline="false"
+            type="primary"
+            @click="dialogPost(scope.row)"
+            >编辑&nbsp;&nbsp;</el-link
+          >
 
-            <el-link
-              :underline="false"
-              type="primary"
-              v-if="scope.row.jobStatus == 2"
-              @click="delete1(scope.row)"
-              >删除&nbsp;&nbsp;</el-link
-            >
+          <el-link
+            :underline="false"
+            type="primary"
+            v-if="scope.row.jobStatus == 2"
+            @click="delete1(scope.row)"
+            >删除&nbsp;&nbsp;</el-link
+          >
 
-            <el-dialog
-              v-model="centerDialogVisible"
-              title="dlalogTitel"
-              width="500"
-              :before-close="handleClose"
-            >
-              <span>你确定要删除吗？</span>
-              <template #footer>
-                <div class="dialog-footer">
-                  <el-button @click="centerDialogVisible = false"
-                    >取消</el-button
-                  >
-                  <el-button
-                    type="primary"
-                    @click="deletePostMethod(scope.row)"
-                  >
-                    确定
-                  </el-button>
-                </div>
-              </template>
-            </el-dialog>
-          </template>
-        </el-table-column>
-      </el-table>
-      <span style="top: 20px; position: relative; float: right">
-        <el-pagination
-          @size-change="handleSizeChange"
-          @current-change="handleCurrentChange"
-          :current-page="pageNum"
-          :page-sizes="pageSizes"
-          :page-size="pageSize"
-          layout="total, sizes, prev, pager, next, jumper"
-          :total="totalCount"
-        />
-      </span>
-    </el-main>
+          <el-dialog
+            v-model="centerDialogVisible"
+            title="dlalogTitel"
+            width="500"
+            :before-close="handleClose"
+          >
+            <span>你确定要删除吗？</span>
+            <template #footer>
+              <div class="dialog-footer">
+                <el-button @click="centerDialogVisible = false">取消</el-button>
+                <el-button type="primary" @click="deletePostMethod(scope.row)">
+                  确定
+                </el-button>
+              </div>
+            </template>
+          </el-dialog>
+        </template>
+      </el-table-column>
+    </el-table>
+    <span style="top: 20px; position: relative; float: right">
+      <GetPagination
+        :handle-size-change="handleSizeChange"
+        :handle-current-change="handleCurrentChange"
+        :page-num="pageNum"
+        :page-sizes="pageSizes"
+        :page-size="pageSize"
+        layout="total, sizes, prev, pager, next, jumper"
+        :total="totalCount"
+      />
+    </span>
   </div>
 </template>
 
@@ -187,7 +183,6 @@ export default {
         visible: false,
         data: {}
       },
-
       tableData: [],
       // 默认显示第几页
       pageNum: 1,
@@ -233,7 +228,6 @@ export default {
         // 有值，编辑职位
         this.$refs.postDialog.getData(data)
       }
-
       this.$refs.postDialog.init()
       this.dialog.visible = true
     },
@@ -283,18 +277,16 @@ export default {
         jobId: row.jobId,
         jobStatus: jobStatus
       }
-      axios
-        .post('http://localhost:9999/recruitJob/updateJob', updatedRow)
-        .then((result) => {
-          console.log(row)
-          if (result.data.code == 200) {
-            ElMessage.success('修改状态成功')
-            this.search()
-          } else {
-            ElMessage.error('修改状态失败')
-          }
-          this.centerDialogVisible = false
-        })
+      axios.post('/recruitJob/updateJob', updatedRow).then((result) => {
+        console.log(row)
+        if (result.data.code == 200) {
+          ElMessage.success('修改状态成功')
+          this.search()
+        } else {
+          ElMessage.error('修改状态失败')
+        }
+        this.centerDialogVisible = false
+      })
     },
     // 职位导出
     exportData() {
@@ -302,7 +294,7 @@ export default {
       // showLoadingIndicator();
       axios({
         method: 'get',
-        url: 'http://localhost:9999/recruitJob/exportData',
+        url: '/recruitJob/exportData',
         params: this.findCondition,
         responseType: 'blob' // 告诉axios期望服务器返回的数据类型
       })
@@ -338,18 +330,16 @@ export default {
     deletePostMethod(row) {
       console.log(row)
       console.log(row.jobId)
-      axios
-        .post('http://localhost:9999/recruitJob/deleteJob?JobId=' + row.jobId)
-        .then((result) => {
-          if (result.data.code == 200) {
-            ElMessage.success('删除成功')
-            this.search()
-          } else {
-            ElMessage.error('删除失败')
-          }
-          this.centerDialogVisible = false
+      axios.post('/recruitJob/deleteJob?JobId=' + row.jobId).then((result) => {
+        if (result.data.code == 200) {
+          ElMessage.success('删除成功')
           this.search()
-        })
+        } else {
+          ElMessage.error('删除失败')
+        }
+        this.centerDialogVisible = false
+        this.search()
+      })
     },
     // 搜索
     search() {
@@ -368,12 +358,10 @@ export default {
     getData(n1, n2, findCondition) {
       findCondition.pageNum = n2
       findCondition.pageSize = n1
-      axios
-        .post('http://localhost:9999/recruitJob/findPage', findCondition)
-        .then((res) => {
-          this.tableData = res.data.data.list
-          this.totalCount = res.data.data.total
-        })
+      axios.post('/recruitJob/findPage', findCondition).then((res) => {
+        this.tableData = res.data.data.list
+        this.totalCount = res.data.data.total
+      })
     },
     // 分页
     handleSizeChange(val) {

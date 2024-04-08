@@ -12,6 +12,20 @@ const routes = [
     name: 'home',
     component: () => import('@/views/index/HomeView.vue'),
     children: [
+      // 系统管理
+      {
+        path: 'system',
+        name: '系统管理',
+        component: () => import('@/views/index/AsideIndex.vue'),
+        children: [
+          // 角色管理
+          {
+            path: 'role',
+            name: '角色管理',
+            component: () => import('@/views/system/role/RoleManager.vue')
+          }
+        ]
+      },
       // 跳转到考核页面
       {
         path: 'mova',
@@ -49,6 +63,26 @@ const routes = [
             path: 'InsertAssessIndex',
             name: 'InsertAssessIndex',
             component: () => import('@/views/assess/InsertAssessIndex.vue')
+          },
+          {
+            path: 'performance_file',
+            name: 'performance_file',
+            component: () => import('@/views/assess/PerformanceFile.vue')
+          },
+          {
+            path: 'InsertPerformanceFile',
+            name: 'InsertPerformanceFile',
+            component: () => import('@/views/assess/InsertPerformanceFile.vue')
+          },
+          {
+            path: 'score_setting',
+            name: 'score_setting',
+            component: () => import('@/views/assess/AssessScore.vue')
+          },
+          {
+            path: 'lv_setting',
+            name: 'lv_setting',
+            component: () => import('@/views/assess/AssessLv.vue')
           }
         ]
       },
@@ -129,6 +163,38 @@ const routes = [
             path: 'addCanDidate',
             name: 'addCanDidate',
             component: () => import('@/views/recruit/addCanDidate.vue')
+          },
+          {
+            path: 'talent_pool',
+            name: 'talent_pool',
+            component: () => import('@/views/recruit/talentPool.vue')
+          },
+          {
+            path: 'recruit_setting',
+            name: 'recruit_setting',
+            component: () => import('@/views/recruit/recruitSetting.vue')
+          },
+          {
+            path: 'statistical',
+            name: 'statistical',
+            children: [
+              {
+                path: 'recruit_overview',
+                name: 'recruit_overview',
+                component: () =>
+                  import('@/views/recruit/recruitmentOverview.vue')
+              },
+              {
+                path: 'recruit_funnel',
+                name: 'recruit_funnel',
+                component: () => import('@/views/recruit/recruitFunnel.vue')
+              },
+              {
+                path: 'resume_data',
+                name: 'resume_data',
+                component: () => import('@/views/recruit/resumeData.vue')
+              }
+            ]
           }
         ]
       },
@@ -154,11 +220,6 @@ const routes = [
           }
         ]
       }
-      // {
-      //   path: 'employee_leave',
-      //   name: 'testOSS',
-      //   component: () => import('@/views/test/testOSS.vue')
-      // }
     ]
   }
 ]

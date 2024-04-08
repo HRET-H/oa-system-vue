@@ -117,7 +117,7 @@
     <el-upload
       v-model:file-list="fileList"
       class="avatar-uploader"
-      action="http://localhost:9999/recruitJob/userImg"
+      action="/recruitJob/userImg"
       multiple
       :on-preview="handlePreview"
       :on-remove="handleRemove"
@@ -137,7 +137,7 @@
       <el-button style="width: 125px" @click="returnq">取消</el-button>
       <el-button
         v-if="addPostData != null"
-        style="width: 125px"
+        style="width: 125px; color: aliceblue"
         type="primary"
         @click="addPostDataMethod()"
         >下一步</el-button
@@ -173,23 +173,23 @@ export default {
       fileList: [],
       JobId: '',
       addPostData: {
-        jobId: '',
-        jobName: '',
-        jobNumber: '',
-        jobStatus: '',
-        jobDept: '',
-        jobAddress: '',
-        jobDetailedAddress: '',
-        jobMinPay: '',
-        jobMaxPay: '',
-        jobNumPay: '',
-        jobEducation: '',
-        jobExperience: '',
-        jobMajor: '',
-        jobDescribe: '',
-        jobFile: '',
-        jobPrincipal: '',
-        jobNature: ''
+        jobId: '', // 职位id
+        jobName: '', //职位名称
+        jobNumber: '', //招聘人数
+        jobStatus: '', // 职位状态
+        jobDept: '', // 部门
+        jobAddress: '', // 工作地点
+        jobDetailedAddress: '', // 详细地址
+        jobMinPay: '', // 最低薪资
+        jobMaxPay: '', // 最高薪资
+        jobNumPay: '', // 薪资
+        jobEducation: '', // 学历要求
+        jobExperience: '', // 工作经验
+        jobMajor: '', // 专业
+        jobDescribe: '', // 职位描述
+        jobFile: '', // 文件
+        jobPrincipal: '', // 招聘负责人
+        jobNature: '' // 职位性质
       }
     }
   },
@@ -214,24 +214,19 @@ export default {
     // 添加职位信息
     addPostDataMethod() {
       console.log('添加职位信息')
-      axios
-        .post('http://localhost:9999/recruitJob/addJob', this.addPostData)
-        .then((result) => {
-          if (result.data.code == 200) {
-            console.log(result)
-            ElMessage.success('恭喜你，添加成功')
-            this.$router.push('/home/recruit/setPositionManage')
-          } else {
-            ElMessage.error('添加职位信息失败')
-          }
-        })
+      axios.post('/recruitJob/addJob', this.addPostData).then((result) => {
+        if (result.data.code == 200) {
+          console.log(result)
+          ElMessage.success('恭喜你，添加成功')
+          this.$router.push('/home/recruit/setPositionManage')
+        } else {
+          ElMessage.error('添加职位信息失败')
+        }
+      })
     },
     findById() {
       axios
-        .post(
-          'http://localhost:9999/recruitJob/findById?JobId=' +
-            this.$route.query.JobId
-        )
+        .post('/recruitJob/findById?JobId=' + this.$route.query.JobId)
         .then((res) => {
           console.log(res)
           this.addPostData = res.data
@@ -240,17 +235,15 @@ export default {
     },
     updatePost() {
       console.log('修改职位信息')
-      axios
-        .post('http://localhost:9999/recruitJob/updateJob', this.addPostData)
-        .then((res) => {
-          if (res.data.code == 200) {
-            console.log('修改成功')
-            ElMessage.success('修改成功')
-            this.$router.push('/home/recruit/setPositionManage')
-          } else {
-            ElMessage.error('修改失败')
-          }
-        })
+      axios.post('/recruitJob/updateJob', this.addPostData).then((res) => {
+        if (res.data.code == 200) {
+          console.log('修改成功')
+          ElMessage.success('修改成功')
+          this.$router.push('/home/recruit/setPositionManage')
+        } else {
+          ElMessage.error('修改失败')
+        }
+      })
     }
   },
   // 添加职位信息

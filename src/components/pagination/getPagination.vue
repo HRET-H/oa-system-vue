@@ -1,6 +1,5 @@
 <script setup>
 import zhCn from 'element-plus/dist/locale/zh-cn.mjs'
-import { computed } from 'vue'
 
 // 使用defineOptions 设置组件的选项 例如 name  props  data  methods  components  setup  emits
 defineOptions({
@@ -19,7 +18,9 @@ const locale = computed(() => zhCn)
 </script>
 
 <template>
-  <span style="top: 20px; position: relative; float: right">
+  <span
+    style="top: 20px; position: relative; float: right; margin-bottom: 20px"
+  >
     <el-config-provider :locale="locale">
       <el-pagination
         :current-page="pageNum"
