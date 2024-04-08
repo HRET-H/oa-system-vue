@@ -4,6 +4,7 @@ import { ElMessage } from 'element-plus'
 import router from '@/router'
 
 // 设置请求地址
+// const baseURL = 'https://43.249.193.55:29386'
 const baseURL = 'http://localhost:9999'
 
 const instance = axios.create({

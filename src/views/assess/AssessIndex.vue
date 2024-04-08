@@ -142,10 +142,7 @@ export default {
     // 查询考核方法列表和分页
     findAssessIndexListAndPage() {
       axios
-        .post(
-          'http://localhost:9999/assessIndex/findAssessIndexListAndPage',
-          this.assessIndexForm
-        )
+        .post('/assessIndex/findAssessIndexListAndPage', this.assessIndexForm)
         .then((res) => {
           this.assessIndexList = res.data.list
           this.total = res.data.total
@@ -184,8 +181,7 @@ export default {
     deleteAssessIndex(row) {
       axios
         .get(
-          'http://localhost:9999/assessIndex/deleteAssessIndex?assessIndexId=' +
-            row.assessIndexId
+          '/assessIndex/deleteAssessIndex?assessIndexId=' + row.assessIndexId
         )
         .then((res) => {
           if (res.data.code == 200) {

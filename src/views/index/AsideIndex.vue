@@ -4,7 +4,6 @@ import MenuTree from '@/components/menu/MenuTree.vue'
 import axios from 'axios'
 import { useRoute } from 'vue-router'
 import { subMenuStore } from '@/stores/modules/menu'
-import { baseURL } from '@/utils/request'
 
 // 获取route
 const route = useRoute()
@@ -14,7 +13,7 @@ const store = subMenuStore()
 
 const MenuData = ref([])
 
-axios.defaults.baseURL = baseURL
+// axios.defaults.baseURL = baseURL
 
 // 获取菜单数据
 function getMenuData(id) {

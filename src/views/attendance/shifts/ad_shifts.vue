@@ -25,21 +25,19 @@ const seccessData = (selectUser) => {
 }
 </script>
 <template>
-  <page-container title="班次管理">
-    <el-form :model="shiftsData" ref="shiftsRef" label-width="100px">
-      <el-form-item label="班次名称" required>
-        <el-input
-          style="width: 240px"
-          v-model="shiftsData.shiftsName"
-          placeholder="请输入班次名称"
-        >
-        </el-input>
-      </el-form-item>
-      <el-form-item label="班次负责人" required
-        ><CustomTransfer :type="true" :seccessData="seccessData" />
-      </el-form-item>
-    </el-form>
-  </page-container>
+  <el-form :model="shiftsData" ref="shiftsRef" label-width="100px">
+    <el-form-item label="班次名称" required>
+      <el-input
+        style="width: 240px"
+        v-model="shiftsData.shiftsName"
+        placeholder="请输入班次名称"
+      >
+      </el-input>
+    </el-form-item>
+    <el-form-item label="班次负责人" required
+      ><CustomTransfer :type="true" :seccessData="seccessData" />
+    </el-form-item>
+  </el-form>
 </template>
 
 <style></style>

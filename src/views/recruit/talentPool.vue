@@ -429,7 +429,7 @@ export default {
       console.log(data)
       axios({
         method: 'post',
-        url: 'http://localhost:9999/recruitCandidate/exportData',
+        url: '/recruitCandidate/exportData',
         data: data,
         responseType: 'blob'
       })

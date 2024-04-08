@@ -187,10 +187,7 @@ export default {
     // 查询考核方法列表和分页
     findAssessScoreListAndPage() {
       axios
-        .post(
-          'http://localhost:9999/assessScore/findAssessScoreListAndPage',
-          this.Assessform
-        )
+        .post('/assessScore/findAssessScoreListAndPage', this.Assessform)
         .then((res) => {
           console.log(res)
           this.assessScoreList = res.data.list
@@ -199,10 +196,7 @@ export default {
     },
     addAssessScore() {
       axios
-        .post(
-          'http://localhost:9999/assessScore/addAssessScore',
-          this.InsertAssessIndexForm
-        )
+        .post('/assessScore/addAssessScore', this.InsertAssessIndexForm)
         .then((res) => {
           console.log(res)
           if (res.data.code == 200) {
@@ -220,8 +214,7 @@ export default {
     editAssessScore(row) {
       axios
         .get(
-          'http://localhost:9999/assessScore/findAssessScoreById?assessScoreId=' +
-            row.assessScoreId
+          '/assessScore/findAssessScoreById?assessScoreId=' + row.assessScoreId
         )
         .then((res) => {
           console.log(res)
@@ -256,8 +249,7 @@ export default {
     deleteAssessScore(row) {
       axios
         .get(
-          'http://localhost:9999/assessScore/deleteAssessScore?assessScoreId=' +
-            row.assessScoreId
+          '/assessScore/deleteAssessScore?assessScoreId=' + row.assessScoreId
         )
         .then((res) => {
           if (res.data.code == 200) {

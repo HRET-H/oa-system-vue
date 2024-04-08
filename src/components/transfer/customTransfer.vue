@@ -1,8 +1,5 @@
 <script setup>
-// 导入element-plus图标
-// import { Search, ArrowRight, Plus } from '@element-plus/icons-vue'
 import axios from 'axios'
-import { baseURL } from '@/utils/request'
 
 // 使用defineOptions 设置组件的选项 例如 name  props  data  methods  components  setup  emits
 defineOptions({
@@ -19,7 +16,7 @@ const props = defineProps({
   successData: Function
 })
 
-axios.defaults.baseURL = baseURL
+// axios.defaults.baseURL = baseURL
 
 // 弹窗信息
 const dialogVisible = ref(false)
@@ -285,6 +282,7 @@ const handleClose = () => {
                 @click="updateDataAndUserData(item.deptName, item.userList)"
               >
                 <v-icon icon="mdi-domain" color="blue-darken-2" />
+                &nbsp;
                 {{ item.deptName }}
                 <span v-if="item.userList != null && item.userList.length > 0">
                   （{{ item.userList.length }}）
@@ -307,7 +305,7 @@ const handleClose = () => {
                 <el-radio :value="user.userId">
                   <el-avatar
                     :src="user.profilePhoto"
-                    v-if="user.profilePhoto != null && user.profilePhoto != ''"
+                    v-if="user.profilePhoto != null && user.profilePhoto !== ''"
                   />
                   <el-avatar
                     src="https://hret0721.oss-cn-beijing.aliyuncs.com/oa-system/userAll.png"

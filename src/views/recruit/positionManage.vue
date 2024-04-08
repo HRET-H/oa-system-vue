@@ -277,18 +277,16 @@ export default {
         jobId: row.jobId,
         jobStatus: jobStatus
       }
-      axios
-        .post('http://localhost:9999/recruitJob/updateJob', updatedRow)
-        .then((result) => {
-          console.log(row)
-          if (result.data.code == 200) {
-            ElMessage.success('修改状态成功')
-            this.search()
-          } else {
-            ElMessage.error('修改状态失败')
-          }
-          this.centerDialogVisible = false
-        })
+      axios.post('/recruitJob/updateJob', updatedRow).then((result) => {
+        console.log(row)
+        if (result.data.code == 200) {
+          ElMessage.success('修改状态成功')
+          this.search()
+        } else {
+          ElMessage.error('修改状态失败')
+        }
+        this.centerDialogVisible = false
+      })
     },
     // 职位导出
     exportData() {
@@ -296,7 +294,7 @@ export default {
       // showLoadingIndicator();
       axios({
         method: 'get',
-        url: 'http://localhost:9999/recruitJob/exportData',
+        url: '/recruitJob/exportData',
         params: this.findCondition,
         responseType: 'blob' // 告诉axios期望服务器返回的数据类型
       })
@@ -332,18 +330,16 @@ export default {
     deletePostMethod(row) {
       console.log(row)
       console.log(row.jobId)
-      axios
-        .post('http://localhost:9999/recruitJob/deleteJob?JobId=' + row.jobId)
-        .then((result) => {
-          if (result.data.code == 200) {
-            ElMessage.success('删除成功')
-            this.search()
-          } else {
-            ElMessage.error('删除失败')
-          }
-          this.centerDialogVisible = false
+      axios.post('/recruitJob/deleteJob?JobId=' + row.jobId).then((result) => {
+        if (result.data.code == 200) {
+          ElMessage.success('删除成功')
           this.search()
-        })
+        } else {
+          ElMessage.error('删除失败')
+        }
+        this.centerDialogVisible = false
+        this.search()
+      })
     },
     // 搜索
     search() {
@@ -362,12 +358,10 @@ export default {
     getData(n1, n2, findCondition) {
       findCondition.pageNum = n2
       findCondition.pageSize = n1
-      axios
-        .post('http://localhost:9999/recruitJob/findPage', findCondition)
-        .then((res) => {
-          this.tableData = res.data.data.list
-          this.totalCount = res.data.data.total
-        })
+      axios.post('/recruitJob/findPage', findCondition).then((res) => {
+        this.tableData = res.data.data.list
+        this.totalCount = res.data.data.total
+      })
     },
     // 分页
     handleSizeChange(val) {

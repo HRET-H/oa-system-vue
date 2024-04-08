@@ -102,7 +102,7 @@
               <el-upload
                 v-model:file-list="fileList"
                 class="avatar-uploader"
-                action="http://localhost:9999/recruitJob/userImg"
+                action="/recruitJob/userImg"
                 multiple
                 :on-preview="handlePreview"
                 :on-remove="handleRemove"

@@ -121,7 +121,7 @@ export default {
     findAssessTemplateListAndPage() {
       axios
         .post(
-          'http://localhost:9999/assessTemplate/findAssessTemplateListAndPage',
+          '/assessTemplate/findAssessTemplateListAndPage',
           this.assessTemplateForm
         )
         .then((res) => {
@@ -153,8 +153,7 @@ export default {
     deleteAssessTemplate(row) {
       axios
         .post(
-          'http://localhost:9999/assessTemplate/deleteAssessTemplate?templateId=' +
-            row.templateId
+          '/assessTemplate/deleteAssessTemplate?templateId=' + row.templateId
         )
         .then((res) => {
           if (res.data.code == 200) {
