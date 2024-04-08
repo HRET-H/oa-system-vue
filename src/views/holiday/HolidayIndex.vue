@@ -27,6 +27,27 @@
             >
           </el-form-item>
         </el-form>
+        <!-- form表单条查 -->
+        <el-form
+          ref="form"
+          :model="holidayForm"
+          label-width="80px"
+          inline="true"
+        >
+          <el-form-item>
+            <el-input
+              v-model="holidayForm.holidayType"
+              placeholder="请输入关键词"
+              style="width: 300px"
+            ></el-input>
+          </el-form-item>
+          <!-- 搜索重置按钮 -->
+          <el-form-item>
+            <el-button type="primary" @click="findHolidayPaginationList"
+              >查询</el-button
+            >
+          </el-form-item>
+        </el-form>
       </div>
 
       <!-- 表格 -->
@@ -117,6 +138,7 @@ export default {
           this.holidayForm
         )
         .then((res) => {
+          console.log(res.data)
           this.holidayList = res.data.list
           this.total = res.data.total
         })

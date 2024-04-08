@@ -56,12 +56,12 @@
               >查询</el-button
             >
             <el-button plain @click="exportData()" style="margin-right: 10px"
-        >导出</el-button
-      >
+              >导出</el-button
+            >
           </el-form-item>
         </el-form>
       </div>
-<br>
+      <br />
       <!-- 表格 -->
       <el-table :data="holidayList" style="width: 100%">
         <el-table-column prop="approvalId" label="审批id" width="180">
@@ -124,7 +124,7 @@ export default {
   created() {
     this.findHolidayPaginationList()
   },
-  
+
   methods: {
     // 分页
     handleSizeChange(val) {
@@ -150,7 +150,7 @@ export default {
         })
     },
     // 导出
-  exportData() {
+    exportData() {
       // 显示加载指示器（如果有的话）
       // showLoadingIndicator();
       axios({
