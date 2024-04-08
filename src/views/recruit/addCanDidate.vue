@@ -387,10 +387,7 @@ export default {
     // 获取用户列表
     addCanDidateMethod() {
       axios
-        .post(
-          'http://localhost:9999/recruitCandidate/addRecruitCandidate',
-          this.addCanDidate
-        )
+        .post('/recruitCandidate/addRecruitCandidate', this.addCanDidate)
         .then((res) => {
           if (res.data.code == 200) {
             console.log(res)

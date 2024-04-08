@@ -246,7 +246,7 @@ export default {
     addInsetrTemplate() {
       axios
         .post(
-          'http://localhost:9999/assessTemplate/addAssessTemplate',
+          '/assessTemplate/addAssessTemplate',
           this.insertAssessTemplateForm
         )
         .then((res) => {
@@ -261,7 +261,7 @@ export default {
     findAssessTemplateListAndPage() {
       axios
         .post(
-          'http://localhost:9999/assessTemplate/findAssessTemplateListAndPage',
+          '/assessTemplate/findAssessTemplateListAndPage',
           this.insertAssessTemplateForm
         )
         .then((res) => {
@@ -274,7 +274,7 @@ export default {
     findAssessTemplateById() {
       axios
         .post(
-          'http://localhost:9999/assessTemplate/findAssessTemplateById?templateId=' +
+          '/assessTemplate/findAssessTemplateById?templateId=' +
             this.$route.query.templateId
         )
         .then((res) => {
@@ -286,10 +286,7 @@ export default {
     deleteAssessIndex(row) {
       console.log(row)
       axios
-        .get(
-          'http://localhost:9999/assessIndex/deleteAssessIndex?assessIndexId=' +
-            row
-        )
+        .get('/assessIndex/deleteAssessIndex?assessIndexId=' + row)
         .then((res) => {
           if (res.data.code == 200) {
             ElMessage.success('删除成功')

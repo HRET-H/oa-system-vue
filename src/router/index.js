@@ -220,11 +220,6 @@ const routes = [
           }
         ]
       }
-      // {
-      //   path: 'employee_leave',
-      //   name: 'testOSS',
-      //   component: () => import('@/views/test/testOSS.vue')
-      // }
     ]
   }
 ]

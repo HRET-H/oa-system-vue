@@ -172,10 +172,7 @@ export default {
     // 查询考核方法列表和分页
     findAssessListAndPage() {
       axios
-        .post(
-          'http://localhost:9999/assess/findAssessListAndPage',
-          this.assessForm
-        )
+        .post('/assess/findAssessListAndPage', this.assessForm)
         .then((res) => {
           this.assessList = res.data.list
           this.total = res.data.total
@@ -206,10 +203,7 @@ export default {
     // 删除考核
     deleteAssess(row) {
       axios
-        .get(
-          'http://localhost:9999/assess/deleteAssessMent?assessId=' +
-            row.assessId
-        )
+        .get('/assess/deleteAssessMent?assessId=' + row.assessId)
         .then((res) => {
           if (res.data.code == 200) {
             ElMessage.success('删除成功')

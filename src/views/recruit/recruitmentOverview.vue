@@ -1,52 +1,50 @@
 <template>
   <div>
-    <page-container>
-      <span style="font-size: 30px">招聘数据</span>&nbsp;&nbsp;&nbsp;&nbsp;<span
-        style="color: #b1b4be"
-        >更新时间:2035年6月19日 12:35:59</span
-      >
-      <br />
-      <br />
-      <span>
-        <img src="/public/image/RecruitmentOverview/招聘统计1.png" alt="" />
-      </span>
-      &nbsp;&nbsp;
-      <span>
-        <img src="/public/image/RecruitmentOverview/招聘统计2.png" alt="" />
-      </span>
-      &nbsp;&nbsp;
-      <span>
-        <img src="/public/image/RecruitmentOverview/招聘统计3.png" alt="" />
-      </span>
-      &nbsp;&nbsp;
-      <span>
-        <img src="/public/image/RecruitmentOverview/招聘统计4.png" alt="" />
-      </span>
-      <br />
-      <br />
-      <span>
-        <img src="/public/image/RecruitmentOverview/招聘统计5.png" alt="" />
-      </span>
-      &nbsp;&nbsp;
-      <span>
-        <img src="/public/image/RecruitmentOverview/招聘统计6.png" alt="" />
-      </span>
-      &nbsp;&nbsp;
-      <span>
-        <img src="/public/image/RecruitmentOverview/招聘统计7.png" alt="" />
-      </span>
-      &nbsp;&nbsp;
-      <span>
-        <img src="/public/image/RecruitmentOverview/招聘统计8.png" alt="" />
-      </span>
-      &nbsp;&nbsp;
-      <span>
-        <img src="/public/image/RecruitmentOverview/招聘统计9.png" alt="" />
-      </span>
-      <br />
-      <br />
-      <div ref="main" style="width: 100%; height: 400px"></div>
-    </page-container>
+    <span style="font-size: 30px">招聘数据</span>&nbsp;&nbsp;&nbsp;&nbsp;<span
+      style="color: #b1b4be"
+      >更新时间:2035年6月19日 12:35:59</span
+    >
+    <br />
+    <br />
+    <span>
+      <img src="/public/image/RecruitmentOverview/招聘统计1.png" alt="" />
+    </span>
+    &nbsp;&nbsp;
+    <span>
+      <img src="/public/image/RecruitmentOverview/招聘统计2.png" alt="" />
+    </span>
+    &nbsp;&nbsp;
+    <span>
+      <img src="/public/image/RecruitmentOverview/招聘统计3.png" alt="" />
+    </span>
+    &nbsp;&nbsp;
+    <span>
+      <img src="/public/image/RecruitmentOverview/招聘统计4.png" alt="" />
+    </span>
+    <br />
+    <br />
+    <span>
+      <img src="/public/image/RecruitmentOverview/招聘统计5.png" alt="" />
+    </span>
+    &nbsp;&nbsp;
+    <span>
+      <img src="/public/image/RecruitmentOverview/招聘统计6.png" alt="" />
+    </span>
+    &nbsp;&nbsp;
+    <span>
+      <img src="/public/image/RecruitmentOverview/招聘统计7.png" alt="" />
+    </span>
+    &nbsp;&nbsp;
+    <span>
+      <img src="/public/image/RecruitmentOverview/招聘统计8.png" alt="" />
+    </span>
+    &nbsp;&nbsp;
+    <span>
+      <img src="/public/image/RecruitmentOverview/招聘统计9.png" alt="" />
+    </span>
+    <br />
+    <br />
+    <div ref="main" style="width: 100%; height: 400px"></div>
   </div>
 </template>
 

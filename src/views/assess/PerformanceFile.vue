@@ -91,10 +91,7 @@ export default {
     // 查询考核方法列表和分页
     findAssessAndUserListAndPage() {
       axios
-        .post(
-          'http://localhost:9999/assess/findAssessAndUserListAndPage',
-          this.userAndAssessForm
-        )
+        .post('/assess/findAssessAndUserListAndPage', this.userAndAssessForm)
         .then((res) => {
           console.log(res)
           this.userAndAssessList = res.data.list

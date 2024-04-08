@@ -115,10 +115,7 @@ export default {
   methods: {
     findAssessScoreListAndPage() {
       axios
-        .post(
-          'http://localhost:9999/assessScore/findAssessScoreListAndPage',
-          this.assessScoreForm
-        )
+        .post('/assessScore/findAssessScoreListAndPage', this.assessScoreForm)
         .then((res) => {
           console.log(res)
           this.assessScoreList = res.data.list
@@ -127,10 +124,7 @@ export default {
     },
     addAssessScore() {
       axios
-        .post(
-          'http://localhost:9999/assessScore/addAssessScore',
-          this.InsertAssessIndexForm
-        )
+        .post('/assessScore/addAssessScore', this.InsertAssessIndexForm)
         .then((res) => {
           console.log(res)
           if (res.data.code == 200) {

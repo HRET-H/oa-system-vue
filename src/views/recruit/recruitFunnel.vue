@@ -1,14 +1,12 @@
 <template>
   <div>
-    <page-container>
-      <span style="font-size: 30px">招聘漏斗</span>&nbsp;&nbsp;&nbsp;&nbsp;<span
-        style="color: #b1b4be"
-        >更新时间:2035年6月19日 12:35:59</span
-      >
-      <br />
-      <br />
-      <div ref="main" style="width: 800px; height: 500px; margin: auto"></div>
-    </page-container>
+    <span style="font-size: 30px">招聘漏斗</span>&nbsp;&nbsp;&nbsp;&nbsp;<span
+      style="color: #b1b4be"
+      >更新时间:2035年6月19日 12:35:59</span
+    >
+    <br />
+    <br />
+    <div ref="main" style="width: 800px; height: 500px; margin: auto"></div>
   </div>
 </template>
 

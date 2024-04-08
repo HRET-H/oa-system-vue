@@ -85,7 +85,7 @@ export default {
   },
   methods: {
     init() {
-      axios.post('http://localhost:9999/recruitJob/findAll').then((res) => {
+      axios.post('/recruitJob/findAll').then((res) => {
         this.userList = res.data
       })
     },
@@ -113,7 +113,7 @@ export default {
         if (valid) {
           // 发送请求
           axios
-            .post('http://localhost:9999/recruitJob/addJob', this.addPost)
+            .post('/recruitJob/addJob', this.addPost)
             .then((res) => {
               // 判断是否成功
               if (res.data.code == 200) {
@@ -150,7 +150,7 @@ export default {
         if (valid) {
           // 发送请求
           axios
-            .post('http://localhost:9999/recruitJob/updateJob', this.addPost)
+            .post('/recruitJob/updateJob', this.addPost)
             .then((res) => {
               // 判断是否成功
               if (res.data.code == 200) {
@@ -288,7 +288,7 @@ export default {
               <el-upload
                 v-model:file-list="fileList"
                 class="avatar-uploader"
-                action="http://localhost:9999/recruitJob/userImg"
+                action="/recruitJob/userImg"
                 multiple
                 :on-preview="handlePreview"
                 :on-remove="handleRemove"

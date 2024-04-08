@@ -1,9 +1,5 @@
 <script setup>
 import axios from 'axios'
-import { baseURL } from '@/utils/request'
-
-// 配置axios默认请求地址
-axios.defaults.baseURL = baseURL
 
 // 设置父组件传过来的值
 defineProps({

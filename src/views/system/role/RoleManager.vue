@@ -1,10 +1,6 @@
 <script setup>
 import axios from 'axios'
-import { baseURL } from '@/utils/request'
 import RoleDialog from './RoleDialog.vue'
-
-// 配置axios默认请求地址
-axios.defaults.baseURL = baseURL
 
 // 初始化表单数据
 const form = ref({
@@ -67,7 +63,7 @@ const deleteRole = (roleId) => {
     axios
       .post('/role/deleteRole', formData)
       .then((res) => {
-        if (res.data.code == 200) {
+        if (res.data.code === 200) {
           ElMessage({
             type: 'success',
             message: '删除成功!'

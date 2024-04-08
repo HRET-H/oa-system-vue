@@ -93,10 +93,7 @@ export default {
     },
     findAssessAndUserListAndPage() {
       axios
-        .post(
-          'http://localhost:9999/assess/findAssessAndUserListAndPage',
-          this.userAndAssessList
-        )
+        .post('/assess/findAssessAndUserListAndPage', this.userAndAssessList)
         .then((res) => {
           console.log(res)
           this.userAndAssessList = res.data.list
@@ -105,10 +102,7 @@ export default {
     },
     findAssess() {
       axios
-        .post(
-          'http://localhost:9999/assess/findAssessListAndPage',
-          this.userAndAssessForm
-        )
+        .post('/assess/findAssessListAndPage', this.userAndAssessForm)
         .then((res) => {
           console.log(res)
           this.userAndAssessForm.assessList = res.data.list

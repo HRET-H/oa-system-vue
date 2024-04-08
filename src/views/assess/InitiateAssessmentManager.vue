@@ -157,10 +157,7 @@ export default {
   methods: {
     addAssessMent() {
       axios
-        .post(
-          'http://localhost:9999/assess/addAssessMent',
-          this.initiateAssessmentForm
-        )
+        .post('/assess/addAssessMent', this.initiateAssessmentForm)
         .then((res) => {
           console.log(res)
           if (res.data.code == 200) {
@@ -178,8 +175,7 @@ export default {
     findAssessMentById() {
       axios
         .get(
-          'http://localhost:9999/assess/findAssessMentById?assessId=' +
-            this.$route.query.assessId
+          '/assess/findAssessMentById?assessId=' + this.$route.query.assessId
         )
         .then((res) => {
           console.log(res)
