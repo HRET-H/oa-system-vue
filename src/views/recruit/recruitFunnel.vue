@@ -78,11 +78,11 @@ function init() {
           }
         },
         data: [
-          { value: 2469, name: '推荐简历数' },
-          { value: 689, name: '初试人数' },
-          { value: 127, name: '复试人数' },
-          { value: 25, name: '录取人数' },
-          { value: 23, name: '到岗人数' }
+          { value: 2469, name: '推荐简历数', itemStyle: { color: '#347fb9' } },
+          { value: 689, name: '初试人数', itemStyle: { color: '#994da5' } },
+          { value: 127, name: '复试人数', itemStyle: { color: '#ff8000' } },
+          { value: 25, name: '录取人数', itemStyle: { color: '#9a9a9a' } },
+          { value: 23, name: '到岗人数', itemStyle: { color: '#ff5d5d' } }
         ],
         z: 100
       }

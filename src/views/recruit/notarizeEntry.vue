@@ -23,7 +23,7 @@
     <div style="font-size: 30px">个人信息</div>
     出生日期:
     <el-date-picker
-      v-model="addlaunchOfferData.candidateDateBirth"
+      v-model="addnotarizeEntryData.candidateDateBirth"
       type="datetime"
       value-format="YYYY-MM-DD HH:mm:ss"
       placeholder="选择日期"
@@ -31,7 +31,7 @@
     /><br /><br />
     性别:
     <el-select
-      v-model="addlaunchOfferData.candidateSex"
+      v-model="addnotarizeEntryData.candidateSex"
       placeholder="请选择"
       style="width: 250px"
     >
@@ -42,7 +42,7 @@
     <br /><br />
     婚姻状况:
     <el-select
-      v-model="addlaunchOfferData.candidateMarriage"
+      v-model="addnotarizeEntryData.candidateMarriage"
       placeholder="请选择"
       style="width: 250px"
     >
@@ -52,21 +52,21 @@
     ><br /><br />
     民族：
     <el-input
-      v-model="addlaunchOfferData.candidateNation"
+      v-model="addnotarizeEntryData.candidateNation"
       placeholder="输入"
       style="width: 250px"
     ></el-input>
     <br /><br />
     籍贯：
     <el-input
-      v-model="addlaunchOfferData.candidateBirthplace"
+      v-model="addnotarizeEntryData.candidateBirthplace"
       placeholder="输入"
       style="width: 250px"
     ></el-input
     ><br /><br />
     参加工作时间:
     <el-date-picker
-      v-model="addlaunchOfferData.candidateWorkDate"
+      v-model="addnotarizeEntryData.candidateWorkDate"
       type="datetime"
       value-format="YYYY-MM-DD HH:mm:ss"
       placeholder="选择日期"
@@ -74,7 +74,7 @@
     /><br /><br />
     政治面貌:
     <el-input
-      v-model="addlaunchOfferData.candidatePhoneNumber"
+      v-model="addnotarizeEntryData.candidatePhoneNumber"
       placeholder="输入"
       style="width: 250px"
     ></el-input>
@@ -83,7 +83,7 @@
     <br />
     学历：
     <el-select
-      v-model="addlaunchOfferData.candidateEducation"
+      v-model="addnotarizeEntryData.candidateEducation"
       placeholder="请选择"
       style="width: 250px"
     >
@@ -146,7 +146,8 @@ export default {
         copyPerson: '',
         inform: '',
         candidateStorage: '',
-        emailContent2: ''
+        emailContent2: '',
+        candidateDateBirth: ''
       }
     }
   },
