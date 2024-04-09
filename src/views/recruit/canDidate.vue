@@ -215,7 +215,7 @@
             :underline="false"
             v-if="scope.row.candidateStatus == 4"
             type="primary"
-            @click="updateStatusCandidate(5, scope.row)"
+            @click="launchoffer(scope.row)"
             ><el-button type="primary" style="width: 88px; color: aliceblue"
               >发offer</el-button
             >&nbsp;&nbsp;</el-link
@@ -224,7 +224,7 @@
             :underline="false"
             v-if="scope.row.candidateStatus == 5"
             type="primary"
-            @click="updateStatusCandidate(7, scope.row)"
+            @click="notarizeEntry(scope.row)"
             ><el-button type="primary" style="color: aliceblue"
               >确认入职</el-button
             >&nbsp;&nbsp;</el-link
@@ -375,6 +375,46 @@ export default {
       console.log(queryObject)
       this.$router.push({
         path: 'interview',
+        query: { queryObject: queryObject.candidateId }
+      })
+
+      console.log(row)
+    },
+    // 发offer
+    launchoffer(row) {
+      // 序列化对象为查询参数
+      const queryObject = Object.entries(row).reduce(
+        (acc, [key, value]) => ({
+          ...acc,
+          [key]: encodeURIComponent(value) // 对值进行编码，防止特殊字符导致问题
+        }),
+        {}
+      )
+
+      console.log(queryObject.candidateId)
+      console.log(queryObject)
+      this.$router.push({
+        path: 'launchoffer',
+        query: { queryObject: queryObject.candidateId }
+      })
+
+      console.log(row)
+    },
+    // 确认入职
+    notarizeEntry(row) {
+      // 序列化对象为查询参数
+      const queryObject = Object.entries(row).reduce(
+        (acc, [key, value]) => ({
+          ...acc,
+          [key]: encodeURIComponent(value) // 对值进行编码，防止特殊字符导致问题
+        }),
+        {}
+      )
+
+      console.log(queryObject.candidateId)
+      console.log(queryObject)
+      this.$router.push({
+        path: 'notarizeentry',
         query: { queryObject: queryObject.candidateId }
       })
 

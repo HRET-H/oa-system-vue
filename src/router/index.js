@@ -160,6 +160,16 @@ const routes = [
             component: () => import('@/views/recruit/InterView.vue')
           },
           {
+            path: 'launchoffer',
+            name: 'launchoffer',
+            component: () => import('@/views/recruit/launchOffer.vue')
+          },
+          {
+            path: 'notarizeentry',
+            name: 'notarizeentry',
+            component: () => import('@/views/recruit/notarizeEntry.vue')
+          },
+          {
             path: 'addCanDidate',
             name: 'addCanDidate',
             component: () => import('@/views/recruit/addCanDidate.vue')

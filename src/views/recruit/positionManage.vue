@@ -1,13 +1,13 @@
 <template>
   <div>
+    <!-- 使用组件-->
     <post-dialog
       ref="postDialog"
       :postDialog="dialog"
       :dialog-close="closeDialog"
-    ></post-dialog>
+    />
 
     <!--  主要内容-->
-
     <el-button
       @click="dialogPost()"
       type="primary"
@@ -86,18 +86,21 @@
     <el-table :data="tableData" style="width: 100%">
       <el-table-column label="职位信息">
         <template v-slot="scope">
-          <div @click="addPosition(scope.row)">
+          <div @click="dialogPost(scope.row)">
             <span style="font-size: 16px">{{ scope.row.jobName }}</span
             >&nbsp;&nbsp;&nbsp;&nbsp;<span style="font-size: 16px"
               >职位ID:{{ scope.row.jobId }}</span
             ><br />
-            <span>接受简历:12</span
-            >&nbsp;&nbsp;&nbsp;&nbsp;<span>初筛:5</span>&nbsp;&nbsp;&nbsp;&nbsp;
-            <span>待面试:1</span
-            >&nbsp;&nbsp;&nbsp;&nbsp;<span>通过面试:2</span>&nbsp;&nbsp;&nbsp;&nbsp;
-            <span>已发offer:14</span>&nbsp;&nbsp;&nbsp;&nbsp;<span
-              >人才库:3</span
-            >
+            <span>接受简历:{{ scope.row.jobEducation }}</span
+            >&nbsp;&nbsp;&nbsp;&nbsp;<span
+              >初筛:{{ scope.row.jobDescribe }}</span
+            >&nbsp;&nbsp;&nbsp;&nbsp;
+            <span>待面试:{{ scope.row.jobExperience }}</span
+            >&nbsp;&nbsp;&nbsp;&nbsp;<span
+              >通过面试:{{ scope.row.jobMajor }}</span
+            >&nbsp;&nbsp;&nbsp;&nbsp;
+            <span>已发offer:{{ scope.row.jobNature }}</span
+            >&nbsp;&nbsp;&nbsp;&nbsp;<span>人才库:{{ scope.row.jobSex }}</span>
           </div>
         </template>
       </el-table-column>
@@ -223,13 +226,13 @@ export default {
   methods: {
     // 新建/编辑职位
     dialogPost(data) {
+      this.dialog.visible = true
       // 判断data是否有值
       if (data) {
         // 有值，编辑职位
         this.$refs.postDialog.getData(data)
       }
       this.$refs.postDialog.init()
-      this.dialog.visible = true
     },
     closeDialog() {
       this.dialog.visible = false
