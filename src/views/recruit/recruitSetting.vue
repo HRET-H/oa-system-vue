@@ -202,4 +202,10 @@
 export default {}
 </script>
 
-<style></style>
+<style scoped>
+.el-row {
+  background-color: white;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+</style>

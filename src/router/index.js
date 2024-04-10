@@ -209,6 +209,18 @@ const routes = [
         ]
       },
       {
+        path: 'conference_room',
+        name: 'conference_room',
+        component: () => import('@/views/index/AsideIndex.vue'),
+        children: [
+          {
+            path: 'myReservation',
+            name: 'myReservation',
+            component: () => import('@/views/conference/MeetingBooking.vue')
+          }
+        ]
+      },
+      {
         path: 'clocking_in',
         name: 'clocking_in',
         component: () => import('@/views/index/AsideIndex.vue'),

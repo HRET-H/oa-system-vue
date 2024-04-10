@@ -1,20 +1,21 @@
 <template>
   <div style="height: 100%">
-    <el-button
-      @click="addcanDidate()"
-      type="primary"
-      style="width: 117px; height: 35px; color: aliceblue"
-    >
-      新增候选人 </el-button
-    ><br />
-    <br />
-    <page-container>
+    <el-row>
+      <el-button
+        @click="addcanDidate()"
+        type="primary"
+        style="width: 117px; height: 35px; color: aliceblue"
+      >
+        新增候选人
+      </el-button>
+    </el-row>
+    <el-row>
       关键字：
       <el-input
         placeholder="输入内容"
         v-model="findCondition.candidateName"
         clearable
-        style="width: 250px; margin-left: 10px"
+        style="width: 250px; margin-left: 10px; height: 32px"
       >
       </el-input>
       &nbsp;&nbsp;&nbsp;&nbsp; 部门：
@@ -55,18 +56,20 @@
       </el-select>
       <br />
       <br />
-      申请时间：
-      <el-date-picker
-        v-model="findCondition.candidateSumTime"
-        type="datetimerange"
-        start-placeholder="开始时间"
-        end-placeholder="结束时间"
-        range-separator="至"
-        value-format="YYYY-MM-DD HH:mm:ss"
-        style="width: 300px"
-      >
-      </el-date-picker>
-      &nbsp;
+      <span>
+        申请时间：
+        <el-date-picker
+          v-model="findCondition.candidateSumTime"
+          type="datetimerange"
+          start-placeholder="开始时间"
+          end-placeholder="结束时间"
+          range-separator="至"
+          value-format="YYYY-MM-DD HH:mm:ss"
+          style="width: 300px"
+        >
+        </el-date-picker>
+      </span>
+      &nbsp;&nbsp;&nbsp;&nbsp;
       <el-button
         type="primary"
         style="width: 100px; height: 35px; color: aliceblue"
@@ -77,8 +80,8 @@
       <el-button @click="exportData()" style="width: 100px; height: 35px"
         >导出</el-button
       >
-      <br /><br />
-
+    </el-row>
+    <el-row>
       <el-button
         class="custom-button"
         @click="(findCondition.candidateTalentPoolStatus = ''), search()"
@@ -253,7 +256,7 @@
         :handle-current-change="handleCurrentChange"
         :handle-size-change="handleSizeChange"
       />
-    </page-container>
+    </el-row>
   </div>
 </template>
 
@@ -584,5 +587,10 @@ export default {
   white-space: pre-line;
   width: 200px;
   height: 80px;
+}
+.el-row {
+  background-color: white;
+  padding: 15px;
+  margin-bottom: 20px;
 }
 </style>
