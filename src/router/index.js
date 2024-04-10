@@ -8,8 +8,13 @@ const routes = [
     component: () => import('@/views/error/404.vue')
   },
   {
+    path: '/',
+    name: '登录',
+    component: () => import('@/views/index/Login.vue')
+  },
+  {
     path: '/home',
-    name: 'home',
+    name: '首页',
     component: () => import('@/views/index/HomeView.vue'),
     children: [
       // 系统管理

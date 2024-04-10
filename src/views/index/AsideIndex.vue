@@ -3,7 +3,7 @@
 import MenuTree from '@/components/menu/MenuTree.vue'
 import axios from 'axios'
 import { useRoute } from 'vue-router'
-import { subMenuStore } from '@/stores/modules/menu'
+import { subMenuStore } from '@/stores'
 
 // 获取route
 const route = useRoute()

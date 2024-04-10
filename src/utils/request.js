@@ -4,8 +4,8 @@ import { ElMessage } from 'element-plus'
 import router from '@/router'
 
 // 设置请求地址
-// const baseURL = 'https://43.249.193.55:29386'
-const baseURL = 'http://localhost:9999'
+const baseURL = 'https://43.249.193.55:49605'
+// const baseURL = 'http://localhost:9999'
 
 const instance = axios.create({
   // TODO 1. 基础地址，超时时间
