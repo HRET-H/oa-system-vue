@@ -156,14 +156,14 @@ function init1() {
     },
     series: [
       {
-        name: '各部门入职人数',
+        name: '已入职人数',
         type: 'pie',
         radius: ['40%', '70%'],
         avoidLabelOverlap: false,
         label: {
           show: true,
           position: 'center',
-          formatter: '{a}'
+          formatter: '{a}:{c}'
         },
         emphasis: {
           label: {

@@ -57,14 +57,14 @@ function init() {
       {
         name: '招聘详情',
         type: 'funnel',
-        left: '10%',
-        width: '80%',
-        height: '70%',
+        left: '20%',
+        width: '60%',
+        height: '60%',
         minSize: '5%',
         label: {
           position: 'inside',
-          formatter: '{c}%',
-          color: '#fff'
+          formatter: '{c}人',
+          color: '#232b40'
         },
         itemStyle: {
           opacity: 0.5,
