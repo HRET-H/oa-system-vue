@@ -49,6 +49,7 @@ module.exports = {
     defineExpose: 'readonly',
     withDefaults: 'readonly',
     ref: 'readonly',
+    unref: 'readonly',
     reactive: 'readonly',
     computed: 'readonly',
     onBeforeUpdate: 'readonly',
