@@ -64,10 +64,7 @@ export default {
   methods: {
     addAssessIndex() {
       axios
-        .post(
-          'http://localhost:9999/assessIndex/addAssessIndex',
-          this.InsertAssessIndexForm
-        )
+        .post('/assessIndex/addAssessIndex', this.InsertAssessIndexForm)
         .then((res) => {
           console.log(res)
           if (res.data.code == 200) {
@@ -85,7 +82,7 @@ export default {
     findAssessIndexById() {
       axios
         .get(
-          'http://localhost:9999/assessIndex/findAssessIndexById?assessIndexId=' +
+          '/assessIndex/findAssessIndexById?assessIndexId=' +
             this.$route.query.assessIndexId
         )
         .then((res) => {

@@ -62,18 +62,18 @@ const editAdShifts = (query) => {
 </script>
 
 <template>
-  <page-container title="考勤管理"
-    ><div><h1>我是考勤管理</h1></div>
-    <el-button type="primary" @click="addFrameTimeList">添加</el-button>
-    <div v-for="(item, index) in frameTimeList" :key="index">
-      {{ item.id }}
-      <el-checkbox
-        v-model="item.frameTimeAndRulesDown.day_allow"
-        label="下班打卡"
-        size="large"
-      />
-    </div>
-    <el-button @Click="editAdShifts(13)">修改班次</el-button>
-  </page-container>
+  <div>
+    <h1>我是考勤管理</h1>
+  </div>
+  <el-button type="primary" @click="addFrameTimeList">添加</el-button>
+  <div v-for="(item, index) in frameTimeList" :key="index">
+    {{ item.id }}
+    <el-checkbox
+      v-model="item.frameTimeAndRulesDown.day_allow"
+      label="下班打卡"
+      size="large"
+    />
+  </div>
+  <el-button @Click="editAdShifts(13)">修改班次</el-button>
 </template>
 <style></style>

@@ -3,6 +3,9 @@ require('@rushstack/eslint-patch/modern-module-resolution')
 
 module.exports = {
   root: true,
+  ignorePatterns: [
+    "src/typings/**",
+  ],
   extends: [
     'plugin:vue/vue3-essential',
     'eslint:recommended',
@@ -40,6 +43,17 @@ module.exports = {
   globals: {
     ElMessage: 'readonly',
     ElMessageBox: 'readonly',
-    ElLoading: 'readonly'
+    ElLoading: 'readonly',
+    defineProps: 'readonly',
+    defineEmits: 'readonly',
+    defineExpose: 'readonly',
+    withDefaults: 'readonly',
+    ref: 'readonly',
+    unref: 'readonly',
+    reactive: 'readonly',
+    computed: 'readonly',
+    onBeforeUpdate: 'readonly',
+    onMounted: 'readonly',
+    __dirname: 'readonly',
   }
 }

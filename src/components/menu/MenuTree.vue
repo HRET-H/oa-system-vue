@@ -1,6 +1,4 @@
 <script setup>
-import { ref } from 'vue'
-
 // defineProps等价于 props
 defineProps({
   data: {
@@ -15,7 +13,7 @@ defineProps({
 </script>
 
 <template>
-  <div>
+  <div class="menu-tree">
     <!-- // 注意： 在template标签上使用v-for，:key="index"不能写在template标签上，因为其标签不会被渲染，会引起循环错误 -->
     <el-menu
       v-if="mode === 'horizontal'"
@@ -42,7 +40,19 @@ defineProps({
             :key="menu_index"
             :index="menu_item.menuPath + '?parentId=' + menu_item.menuId"
             v-for="(menu_item, menu_index) in item.children"
+            style="background-color: #fff; color: #989daa"
           >
+            <v-icon
+              :icon="menu_item.menuIcon.split('|')[0]"
+              :color="menu_item.menuIcon.split('|')[1]"
+              v-if="
+                menu_item.menuIcon != null &&
+                menu_item.menuIcon !== '' &&
+                menu_item.menuIcon !== '#'
+              "
+            />
+            <v-icon icon="mdi-atom" color="#F56C6C" v-else />
+            &nbsp;&nbsp;
             <span>{{ menu_item.menuName }}</span>
           </el-menu-item>
         </el-sub-menu>
@@ -88,8 +98,24 @@ defineProps({
 </template>
 
 <style scoped>
-/* 设置激活菜单的样式 */
-.el-menu-item.is-active {
-  font-weight: bold;
+/** 解决纵向菜单侧划线样式 */
+.el-menu {
+  border-right: none;
+}
+
+/** 解决横向菜单下划线样式 */
+.el-menu--horizontal.el-menu {
+  border-bottom: none;
+}
+
+/** 解决横向菜单子菜单样式 */
+:global(.el-menu--popup) {
+  background-color: #fff;
+  border: none;
+  border-radius: 15px;
+  box-shadow: var(--el-box-shadow-light);
+  min-width: 120px;
+  padding: 5px 0;
+  z-index: 100;
 }
 </style>

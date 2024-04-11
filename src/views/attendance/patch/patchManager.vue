@@ -48,70 +48,69 @@ const seccessData = (selectUser) => {
 </script>
 
 <template>
-  <page-container title="补卡规则"
-    ><el-form ref="patchRef" :model="patchData" label-width="100px">
-      <el-form-item label="规则名称" required>
-        <el-input
-          style="width: 240px"
-          v-model="patchData.adPatchName"
-          placeholder="请输入"
-        ></el-input>
-      </el-form-item>
-      <el-form-item label="应用范围">
-        <el-select
-          style="width: 240px"
-          v-model="patchData.adPatchScope"
-          placeholder="请选择"
-        >
-          <el-option
-            v-for="item in options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          />
-        </el-select>
-      </el-form-item>
-      <el-form-item label="负责人" required>
-        <CustomTransfer :type="true" :seccessData="seccessData" />
-      </el-form-item>
-      <el-form-item label="允许补卡">
-        <el-switch v-model="patchData.patchAllow" />
-      </el-form-item>
-      <el-form-item label="补卡次数">
-        <el-text>
-          每月最多可提交
-          <el-input-number
-            v-model="patchData.patchNum"
-            class="mx-4"
-            :min="1"
-            :max="10"
-            controls-position="right"
-            size="small"
-          />
-          次补卡
-        </el-text>
-      </el-form-item>
-      <el-form-item label="补卡时限">
-        <el-text>
-          可申请过去
-          <el-input-number
-            v-model="patchData.patchDays"
-            class="mx-4"
-            :min="1"
-            :max="31"
-            controls-position="right"
-            size="small"
-          />
-          天内的补卡
-        </el-text>
-      </el-form-item>
-      <el-form-item label="补卡类型">
-        <el-checkbox v-model="checked1" label="缺卡" size="large" />
-        <el-checkbox v-model="checked2" label="迟到" size="large" />
-        <el-checkbox v-model="checked3" label="早退" size="large" />
-        <el-checkbox v-model="checked4" label="正常" size="large" />
-      </el-form-item> </el-form
-  ></page-container>
+  ><el-form ref="patchRef" :model="patchData" label-width="100px">
+    <el-form-item label="规则名称" required>
+      <el-input
+        style="width: 240px"
+        v-model="patchData.adPatchName"
+        placeholder="请输入"
+      ></el-input>
+    </el-form-item>
+    <el-form-item label="应用范围">
+      <el-select
+        style="width: 240px"
+        v-model="patchData.adPatchScope"
+        placeholder="请选择"
+      >
+        <el-option
+          v-for="item in options"
+          :key="item.value"
+          :label="item.label"
+          :value="item.value"
+        />
+      </el-select>
+    </el-form-item>
+    <el-form-item label="负责人" required>
+      <CustomTransfer :type="true" :seccessData="seccessData" />
+    </el-form-item>
+    <el-form-item label="允许补卡">
+      <el-switch v-model="patchData.patchAllow" />
+    </el-form-item>
+    <el-form-item label="补卡次数">
+      <el-text>
+        每月最多可提交
+        <el-input-number
+          v-model="patchData.patchNum"
+          class="mx-4"
+          :min="1"
+          :max="10"
+          controls-position="right"
+          size="small"
+        />
+        次补卡
+      </el-text>
+    </el-form-item>
+    <el-form-item label="补卡时限">
+      <el-text>
+        可申请过去
+        <el-input-number
+          v-model="patchData.patchDays"
+          class="mx-4"
+          :min="1"
+          :max="31"
+          controls-position="right"
+          size="small"
+        />
+        天内的补卡
+      </el-text>
+    </el-form-item>
+    <el-form-item label="补卡类型">
+      <el-checkbox v-model="checked1" label="缺卡" size="large" />
+      <el-checkbox v-model="checked2" label="迟到" size="large" />
+      <el-checkbox v-model="checked3" label="早退" size="large" />
+      <el-checkbox v-model="checked4" label="正常" size="large" />
+    </el-form-item>
+  </el-form>
 </template>
 
 <style lang="scss" scoped>

@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
-// import { useUserStore } from '@/stores'
+import { useUserStore } from '@/stores'
+import { getAuthorityMenu } from '@/utils/getAuthorityMenu.js'
 
 // router路由
 const routes = [
@@ -8,10 +9,29 @@ const routes = [
     component: () => import('@/views/error/404.vue')
   },
   {
+    path: '/',
+    name: 'Login',
+    component: () => import('@/views/index/Login.vue')
+  },
+  {
     path: '/home',
-    name: 'home',
+    name: '首页',
     component: () => import('@/views/index/HomeView.vue'),
     children: [
+      // 系统管理
+      {
+        path: 'system',
+        name: '系统管理',
+        component: () => import('@/views/index/AsideIndex.vue'),
+        children: [
+          // 角色管理
+          {
+            path: 'role',
+            name: '角色管理',
+            component: () => import('@/views/system/role/RoleManager.vue')
+          }
+        ]
+      },
       // 跳转到考核页面
       {
         path: 'mova',
@@ -49,6 +69,26 @@ const routes = [
             path: 'InsertAssessIndex',
             name: 'InsertAssessIndex',
             component: () => import('@/views/assess/InsertAssessIndex.vue')
+          },
+          {
+            path: 'performance_file',
+            name: 'performance_file',
+            component: () => import('@/views/assess/PerformanceFile.vue')
+          },
+          {
+            path: 'InsertPerformanceFile',
+            name: 'InsertPerformanceFile',
+            component: () => import('@/views/assess/InsertPerformanceFile.vue')
+          },
+          {
+            path: 'score_setting',
+            name: 'score_setting',
+            component: () => import('@/views/assess/AssessScore.vue')
+          },
+          {
+            path: 'lv_setting',
+            name: 'lv_setting',
+            component: () => import('@/views/assess/AssessLv.vue')
           }
         ]
       },
@@ -59,12 +99,12 @@ const routes = [
         component: () => import('@/views/index/AsideIndex.vue'),
         children: [
           {
-            path: '/holiday_type',
+            path: 'holiday_type',
             name: 'holiday_type',
             component: () => import('@/views/holiday/HolidayIndex.vue')
           },
           {
-            path: '/addHolidayIndex',
+            path: 'addHolidayIndex',
             name: 'addHolidayIndex',
             component: () => import('@/views/holiday/addHolidayIndex.vue')
           },
@@ -126,9 +166,63 @@ const routes = [
             component: () => import('@/views/recruit/InterView.vue')
           },
           {
+            path: 'launchoffer',
+            name: 'launchoffer',
+            component: () => import('@/views/recruit/launchOffer.vue')
+          },
+          {
+            path: 'notarizeentry',
+            name: 'notarizeentry',
+            component: () => import('@/views/recruit/notarizeEntry.vue')
+          },
+          {
             path: 'addCanDidate',
             name: 'addCanDidate',
             component: () => import('@/views/recruit/addCanDidate.vue')
+          },
+          {
+            path: 'talent_pool',
+            name: 'talent_pool',
+            component: () => import('@/views/recruit/talentPool.vue')
+          },
+          {
+            path: 'recruit_setting',
+            name: 'recruit_setting',
+            component: () => import('@/views/recruit/recruitSetting.vue')
+          },
+          {
+            path: 'statistical',
+            name: 'statistical',
+            children: [
+              {
+                path: 'recruit_overview',
+                name: 'recruit_overview',
+                component: () =>
+                  import('@/views/recruit/recruitmentOverview.vue')
+              },
+              {
+                path: 'recruit_funnel',
+                name: 'recruit_funnel',
+                component: () => import('@/views/recruit/recruitFunnel.vue')
+              },
+              {
+                path: 'resume_data',
+                name: 'resume_data',
+                component: () => import('@/views/recruit/resumeData.vue')
+              }
+            ]
+          }
+        ]
+      },
+      {
+        path: 'conference_room',
+        name: 'conference_room',
+        component: () => import('@/views/index/AsideIndex.vue'),
+        children: [
+          {
+            path: 'myReservation',
+            name: 'myReservation',
+            component: () => import('@/views/conference/MeetingBooking.vue')
           }
         ]
       },
@@ -171,18 +265,42 @@ const router = createRouter({
   routes
 })
 
-// 登录访问拦截 => 默认是直接放行的
+// 权限访问拦截 => 默认是直接放行的
 // 根据返回值决定，是放行还是拦截
-// 返回值：
-// 1. undefined / true  直接放行
-// 2. false 拦回from的地址页面
-// 3. 具体路径 或 路径对象  拦截到对应的地址
-//    '/login'   { name: 'login' }
-// router.beforeEach((to) => {
-//   // 如果没有token, 且访问的是非登录页，拦截到登录，其他情况正常放行
-//   const useStore = useUserStore()
-//   // if (!useStore.token && to.path !== '/login') return '/login'
-//   console.log(useStore.token && to.path)
-// })
+router.beforeEach(async (to, from) => {
+  if (to.path !== '/') {
+    // 如果没有值, 且访问的是非登录页，拦截到登录，其他情况正常放行
+    const useStore = useUserStore()
+    // 判断useStore.user是否为空对象
+    const isEmptyObject =
+      Object.keys(useStore.user).length === 0 &&
+      useStore.user.constructor === Object
+
+    if (!isEmptyObject) {
+      // 获取权限
+      const getAuthority =
+        to.path !== '/home' &&
+        to.path !== '/home/system' &&
+        to.path !== '/home/system/operation_log' &&
+        to.path !== '/home/system/message_notification' &&
+        to.path !== '/home/system/update_password'
+
+      if (getAuthority) {
+        // 判断用户是否有权限
+        const result = await getAuthorityMenu(useStore, to, from, null)
+        // 利用双重否定运算符 任何非空非零的值转换为 true，包括非零数字、非空对象、非空数组、非空字符串等；反之：!! 运算后将返回 false
+        return !!result
+      }
+    } else {
+      ElMessage.error({
+        message: '您还没登录，先去登录一下叭🎈',
+        grouping: true,
+        type: 'error'
+      })
+      // 重定向至登录页
+      return { name: 'Login' }
+    }
+  }
+})
 
 export default router

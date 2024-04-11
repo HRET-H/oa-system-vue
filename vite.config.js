@@ -1,39 +1,51 @@
-import { fileURLToPath, URL } from 'node:url'
+import path from 'path'
 import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-// 自动导入vue中hook reactive ref等
+import Vue from '@vitejs/plugin-vue'
 import AutoImport from 'unplugin-auto-import/vite'
-//自动导入ui-组件 比如说ant-design-vue  element-plus等
 import Components from 'unplugin-vue-components/vite'
-//element
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import VueDevTools from 'vite-plugin-vue-devtools'
 
+// 获取当前路径
+const pathSrc = path.resolve(__dirname, 'src')
+
 // 配置vite
 export default defineConfig({
+  resolve: {
+    alias: {
+      '@': pathSrc
+    }
+  },
   plugins: [
-    // 配置vue插件
-    vue(),
-    //element按需导入
+    Vue({
+      reactivityTransform: true
+    }),
     AutoImport({
-      //element
-      resolvers: [ElementPlusResolver()]
+      // Auto import functions from Vue, e.g. ref, reactive, toRef...
+      // 自动导入 Vue 相关函数，如：ref, reactive, toRef 等
+      imports: ['vue'],
+      dirs: [path.resolve(pathSrc, 'composables')],
+
+      // Auto import functions from Element Plus, e.g. ElMessage, ElMessageBox... (with style)
+      // 自动导入 Element Plus 相关函数，如：ElMessage, ElMessageBox... (带样式)
+      resolvers: [ElementPlusResolver()],
+      vueTemplate: true,
+      dts: path.resolve(pathSrc, 'typings', 'auto-imports.d.ts')
     }),
+
     Components({
-      //element
-      resolvers: [ElementPlusResolver()]
+      resolvers: [
+        // Auto register Element Plus components
+        // 自动导入 Element Plus 组件
+        ElementPlusResolver()
+      ],
+
+      dts: path.resolve(pathSrc, 'typings', 'components.d.ts')
     }),
+
     // 配置vue-devtools插件
     VueDevTools()
   ],
-  // 配置路径
-  base: '/',
-  // 配置别名
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
-    }
-  },
 
   // 配置启动端口和配置
   server: {

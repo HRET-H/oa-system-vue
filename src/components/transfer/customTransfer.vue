@@ -1,9 +1,5 @@
 <script setup>
-import { ref } from 'vue'
-// 导入element-plus图标
-import { Search, ArrowRight, Plus } from '@element-plus/icons-vue'
 import axios from 'axios'
-import { baseURL } from '@/utils/request'
 
 // 使用defineOptions 设置组件的选项 例如 name  props  data  methods  components  setup  emits
 defineOptions({
@@ -20,7 +16,7 @@ const props = defineProps({
   successData: Function
 })
 
-axios.defaults.baseURL = baseURL
+// axios.defaults.baseURL = baseURL
 
 // 弹窗信息
 const dialogVisible = ref(false)
@@ -215,7 +211,7 @@ const handleClose = () => {
     <el-col>
       <el-button
         size="large"
-        :icon="Plus"
+        icon="plus"
         circle
         v-if="selectUser.length === 0"
         @click="openDialog()"
@@ -253,12 +249,13 @@ const handleClose = () => {
               v-model="searchInput"
               style="width: 240px"
               placeholder="请输入"
-              :prefix-icon="Search"
+              prefix-icon="Search"
               @change="getByUserNameDeptValue"
+              clearable
             />
           </el-row>
-          <el-row style="margin-top: 30px">
-            <el-breadcrumb :separator-icon="ArrowRight">
+          <el-row style="margin-top: 30px; margin-bottom: 10px">
+            <el-breadcrumb separator-icon="ArrowRight">
               <el-breadcrumb-item
                 :to="{ path: '' }"
                 v-for="(item, index) in items"
@@ -273,166 +270,139 @@ const handleClose = () => {
               </el-breadcrumb-item>
             </el-breadcrumb>
           </el-row>
-          <el-row style="height: 20px">
-            <v-app>
-              <v-container>
-                <!-- 部门信息 -->
-                <div
-                  v-for="(item, index) in data"
-                  :key="index"
-                  v-show="userData.length == 0"
-                >
-                  <v-btn
-                    variant="text"
-                    @click="updateDataAndUserData(item.deptName, item.userList)"
-                  >
-                    <v-icon icon="mdi-domain" color="blue-darken-2" />
-                    {{ item.deptName }}
-                    <span
-                      v-if="item.userList != null && item.userList.length > 0"
-                    >
-                      （{{ item.userList.length }}）
-                    </span>
-                  </v-btn>
-                </div>
-                <!-- 部门下的用户列表 -->
-                <div
-                  style="
-                    margin-top: 20px;
-                    margin-bottom: 30px;
-                    position: relative;
-                  "
-                  v-for="(user, index) in userData"
-                  :key="index + 1"
-                  v-show="userData.length > 0"
-                >
-                  <!-- 单选用户信息 -->
-                  <el-radio-group
-                    v-model="radioActive"
-                    @click="handleRadioChange(user, deptName)"
-                    v-if="type"
-                  >
-                    <el-radio :value="user.userId">
-                      <el-avatar
-                        :src="user.profilePhoto"
-                        v-if="
-                          user.profilePhoto != null && user.profilePhoto != ''
-                        "
-                      />
-                      <el-avatar
-                        src="https://hret0721.oss-cn-beijing.aliyuncs.com/oa-system/userAll.png"
-                        v-else
-                      />
-                      <span style="position: absolute; top: 0px; left: 66px">
-                        {{ user.userName }}
-                      </span>
-                      <span
-                        style="
-                          position: absolute;
-                          top: 20px;
-                          left: 66px;
-                          font-size: 10px;
-                          color: #cdd0d6;
-                        "
-                      >
-                        {{ deptName }}
-                      </span>
-                    </el-radio>
-                  </el-radio-group>
-                  <!-- 复选用户信息 -->
-                  <el-checkbox
-                    v-model="selectActive[user.userId]"
-                    @click="handleCheckedChange(user, deptName)"
+          <el-scrollbar height="400px">
+            <!-- 部门信息 -->
+            <div
+              v-for="(item, index) in data"
+              :key="index"
+              v-show="userData.length == 0"
+            >
+              <el-button
+                text
+                @click="updateDataAndUserData(item.deptName, item.userList)"
+              >
+                <v-icon icon="mdi-domain" color="blue-darken-2" />
+                &nbsp;
+                {{ item.deptName }}
+                <span v-if="item.userList != null && item.userList.length > 0">
+                  （{{ item.userList.length }}）
+                </span>
+              </el-button>
+            </div>
+            <!-- 部门下的用户列表 -->
+            <div
+              style="margin-top: 20px; margin-bottom: 30px; position: relative"
+              v-for="(user, index) in userData"
+              :key="index + 1"
+              v-show="userData.length > 0"
+            >
+              <!-- 单选用户信息 -->
+              <el-radio-group
+                v-model="radioActive"
+                @click="handleRadioChange(user, deptName)"
+                v-if="type"
+              >
+                <el-radio :value="user.userId">
+                  <el-avatar
+                    :src="user.profilePhoto"
+                    v-if="user.profilePhoto != null && user.profilePhoto !== ''"
+                  />
+                  <el-avatar
+                    src="https://hret0721.oss-cn-beijing.aliyuncs.com/oa-system/userAll.png"
                     v-else
+                  />
+                  <span style="position: absolute; top: -15px; left: 66px">
+                    {{ user.userName }}
+                  </span>
+                  <span
+                    style="
+                      position: absolute;
+                      top: 5px;
+                      left: 66px;
+                      font-size: 10px;
+                      color: #cdd0d6;
+                    "
                   >
-                    <el-avatar
-                      :src="user.profilePhoto"
-                      v-if="
-                        user.profilePhoto != null && user.profilePhoto != ''
-                      "
-                    />
-                    <el-avatar
-                      src="https://hret0721.oss-cn-beijing.aliyuncs.com/oa-system/userAll.png"
-                      v-else
-                    />
-                    <span style="position: absolute; top: 0px; left: 66px">
-                      {{ user.userName }}
-                    </span>
-                    <span
-                      style="
-                        position: absolute;
-                        top: 20px;
-                        left: 66px;
-                        font-size: 10px;
-                        color: #cdd0d6;
-                      "
-                    >
-                      {{ deptName }}
-                    </span>
-                  </el-checkbox>
-                </div>
-              </v-container>
-            </v-app>
-          </el-row>
+                    {{ deptName }}
+                  </span>
+                </el-radio>
+              </el-radio-group>
+              <!-- 复选用户信息 -->
+              <el-checkbox
+                v-model="selectActive[user.userId]"
+                @click="handleCheckedChange(user, deptName)"
+                v-else
+              >
+                <el-avatar
+                  :src="user.profilePhoto"
+                  v-if="user.profilePhoto != null && user.profilePhoto != ''"
+                />
+                <el-avatar
+                  src="https://hret0721.oss-cn-beijing.aliyuncs.com/oa-system/userAll.png"
+                  v-else
+                />
+                <span style="position: absolute; top: 0px; left: 66px">
+                  {{ user.userName }}
+                </span>
+                <span
+                  style="
+                    position: absolute;
+                    top: 20px;
+                    left: 66px;
+                    font-size: 10px;
+                    color: #cdd0d6;
+                  "
+                >
+                  {{ deptName }}
+                </span>
+              </el-checkbox>
+            </div>
+          </el-scrollbar>
         </el-col>
         <el-col
           :span="12"
           style="border-left: 1px solid #ebeef5; padding-left: 20px"
         >
           <el-row> 已选择{{ selectUser.length }}位员工 </el-row>
-          <el-row>
-            <v-app>
-              <v-container>
-                <div
-                  style="
-                    margin-top: 20px;
-                    margin-bottom: 30px;
-                    position: relative;
-                  "
-                  v-for="(item, index) in selectUser"
-                  :key="index"
-                >
-                  <div>
-                    <el-avatar
-                      :src="item.profilePhoto"
-                      v-if="
-                        item.profilePhoto != null && item.profilePhoto != ''
-                      "
-                    />
-                    <el-avatar
-                      src="https://hret0721.oss-cn-beijing.aliyuncs.com/oa-system/userAll.png"
-                      v-else
-                    />
-                    <span style="position: absolute; top: 0px; left: 66px">
-                      {{ item.userName }}
-                    </span>
-                    <span
-                      style="
-                        position: absolute;
-                        top: 20px;
-                        left: 66px;
-                        font-size: 10px;
-                        color: #cdd0d6;
-                      "
-                    >
-                      {{ item.deptName }}
-                    </span>
-                    <a
-                      href="javascript:void(0)"
-                      style="color: dimgray"
-                      @click="delSelect(item)"
-                    >
-                      <el-icon
-                        style="position: relative; left: 60%; top: -15px"
-                      >
-                        <Close />
-                      </el-icon>
-                    </a>
-                  </div>
-                </div>
-              </v-container>
-            </v-app>
-          </el-row>
+          <div
+            style="margin-top: 20px; margin-bottom: 30px; position: relative"
+            v-for="(item, index) in selectUser"
+            :key="index"
+          >
+            <div>
+              <el-avatar
+                :src="item.profilePhoto"
+                v-if="item.profilePhoto != null && item.profilePhoto != ''"
+              />
+              <el-avatar
+                src="https://hret0721.oss-cn-beijing.aliyuncs.com/oa-system/userAll.png"
+                v-else
+              />
+              <span style="position: absolute; top: -10px; left: 50px">
+                {{ item.userName }}
+              </span>
+              <span
+                style="
+                  position: relative;
+                  top: -2px;
+                  left: 10px;
+                  font-size: 10px;
+                  color: #cdd0d6;
+                "
+              >
+                {{ item.deptName }}
+              </span>
+              <a
+                href="javascript:void(0)"
+                style="color: dimgray"
+                @click="delSelect(item)"
+              >
+                <el-icon style="position: relative; left: 60%; top: -15px">
+                  <Close />
+                </el-icon>
+              </a>
+            </div>
+          </div>
         </el-col>
       </el-row>
       <template #footer>
