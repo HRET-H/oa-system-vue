@@ -296,8 +296,8 @@ router.beforeEach(async (to, from) => {
         grouping: true,
         type: 'error'
       })
-      // 取消跳转
-      return false
+      // 重定向至登录页
+      return { name: 'Login' }
     }
   }
 })
