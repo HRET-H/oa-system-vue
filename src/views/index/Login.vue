@@ -90,13 +90,17 @@ const screenWidth = ref(
       style="
         width: 50%;
         height: 600px;
+        border-radius: 10px;
         margin: 0 auto;
         position: relative;
         top: 20%;
       "
       v-if="screenWidth >= 768"
     >
-      <el-col style="background-color: #fff" :span="12">
+      <el-col
+        style="background-color: #fff; border-radius: 10px 0 0 10px"
+        :span="12"
+      >
         <div style="margin: 60px">
           <div>
             <p style="color: #f56692; font-size: 25px">
@@ -165,12 +169,100 @@ const screenWidth = ref(
           </div>
         </div>
       </el-col>
-      <el-col style="background-color: #f8eff6; width: 50%" :span="12">
+      <el-col
+        style="
+          background-color: #f8eff6;
+          width: 50%;
+          border-radius: 0 10px 10px 0;
+        "
+        :span="12"
+      >
         <el-image
           style="width: 450px; position: absolute; top: -15%; left: 50%"
           src="https://hret0721.oss-cn-beijing.aliyuncs.com/oa-system/login/login.png"
         />
       </el-col>
+    </el-row>
+    <el-row
+      class="g-glossy"
+      style="
+        height: 77%;
+        border-radius: 10px;
+        margin: 0 auto;
+        position: relative;
+        top: 8%;
+      "
+      v-else
+    >
+      <div style="margin: 10% 15%">
+        <div>
+          <p style="color: #f56692; font-size: 25px; text-align: center">
+            <span>欢迎来到</span>
+            <br />
+            <span>OA数字化办公平台</span>
+          </p>
+          <p style="color: #909399; margin: 20px 0">
+            每一次登录都是与你の邂逅。
+          </p>
+        </div>
+        <div>
+          <el-form
+            ref="loginFormRef"
+            :rules="rules"
+            :model="form"
+            :hide-required-asterisk="true"
+          >
+            <el-form-item
+              label="账号"
+              prop="userAccount"
+              style="margin-top: 50px"
+            >
+              <el-input
+                v-model="form.userAccount"
+                placeholder="请输入账号或手机号"
+                clearable
+              ></el-input>
+            </el-form-item>
+            <el-form-item
+              label="密码"
+              prop="userPassword"
+              style="margin-top: 50px"
+            >
+              <el-input
+                v-model="form.userPassword"
+                placeholder="请输入密码"
+                show-password
+                clearable
+              ></el-input>
+            </el-form-item>
+            <el-form-item label="验证码" style="margin-top: 50px">
+              <el-button
+                ref="captchaButtonRef"
+                id="captcha-button"
+                :type="getCaptchaButton.type"
+                :key="getCaptchaButton.text"
+                link
+                :disabled="getCaptchaDisabled"
+                >{{ getCaptchaButton.text }}</el-button
+              >
+              <span id="captcha-element"></span>
+            </el-form-item>
+          </el-form>
+          <div style="margin-top: 20px; position: relative; top: 20px">
+            <el-button
+              type="primary"
+              style="
+                width: 100%;
+                text-align: center;
+                font-size: 20px;
+                font-family: qiantu, serif;
+              "
+              @click="login"
+              >登 录</el-button
+            >
+          </div>
+        </div>
+      </div>
     </el-row>
   </div>
 </template>
@@ -224,14 +316,25 @@ export default {
       this.captcha = instance
     },
     async captchaVerifyCallback(captchaVerifyParam) {
-      // 1.向后端发起业务请求，获取验证码验证结果和业务结果
-      const formData = new FormData()
-      formData.append('captchaVerifyParam', captchaVerifyParam)
-      const result = await axios.post(baseURL + '/user/getCaptcha', formData)
-      // 2.构造标准返回参数
-      return {
-        captchaResult: result.data.data, // 验证码验证是否通过，boolean类型，必选
-        bizResult: true // 业务验证是否通过，boolean类型，可选；若为无业务验证结果的场景，bizResult可以为空
+      try {
+        // 1.向后端发起业务请求，获取验证码验证结果和业务结果
+        const formData = new FormData()
+        formData.append('captchaVerifyParam', captchaVerifyParam)
+        const result = await axios.post(baseURL + '/user/getCaptcha', formData)
+        // 2.构造标准返回参数
+        return {
+          captchaResult: result.data.data, // 验证码验证是否通过，boolean类型，必选
+          bizResult: true // 业务验证是否通过，boolean类型，可选；若为无业务验证结果的场景，bizResult可以为空
+        }
+      } catch (error) {
+        // 处理错误
+        console.error('Captcha verification failed:', error.message)
+        alert('网络连接异常，请稍后重试')
+        // 返回错误处理结果
+        return {
+          captchaResult: false,
+          bizResult: false
+        }
       }
     },
     // 验证通过后调用
@@ -258,7 +361,33 @@ export default {
 <style scoped>
 #login {
   height: 100vh;
+  display: flex;
   background-image: url(https://hret0721.oss-cn-beijing.aliyuncs.com/oa-system/login/loginBackgroud.png);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+}
+.g-glossy {
+  position: relative;
+  width: 80%;
+  background-color: rgba(255, 255, 255, 0.5);
+  overflow: hidden;
+  z-index: 10;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url(https://hret0721.oss-cn-beijing.aliyuncs.com/oa-system/login/loginBackgroud.png);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    filter: blur(10px);
+    z-index: -1;
+  }
 }
 @font-face {
   font-family: 'qiantu';
@@ -267,18 +396,15 @@ export default {
 
 :deep(.el-input) {
   width: 100% !important;
-  height: 42px;
-  position: relative;
-  top: -8px;
-}
-:deep(.el-input_wrapper:focus) {
-  box-shadow: 0 0 0 1px #f56692;
-  border: 1px solid #f56692;
+  height: 35px;
 }
 
 :deep(.el-form-item__label) {
   color: #f56692 !important;
-  font-family: 'qiantu';
+}
+
+:deep(.el-input__wrapper) {
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 .el-button--primary {

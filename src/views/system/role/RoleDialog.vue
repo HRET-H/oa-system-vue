@@ -136,7 +136,7 @@ const addRole = () => {
       axios
         .post('/role/addRole', roleData.value)
         .then((res) => {
-          if (res.data.code == 200) {
+          if (res.data.code === 200) {
             ElMessage.success('添加成功')
             // 执行关闭方法
             closeDialog()
@@ -160,7 +160,7 @@ const updateRole = () => {
       axios
         .post('/role/updateRole', roleData.value)
         .then((res) => {
-          if (res.data.code == 200) {
+          if (res.data.code === 200) {
             ElMessage.success('修改成功')
             // 执行关闭方法
             closeDialog()
