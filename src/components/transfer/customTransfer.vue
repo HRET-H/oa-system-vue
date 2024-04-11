@@ -188,7 +188,7 @@ const handleClose = () => {
 
   if (selectUser.value.length !== 0) {
     // 调用回调函数
-    props.seccessData(selectUser.value)
+    props.successData(selectUser.value)
   } else {
     // 面包屑列表
     items.value = [{ title: '部门信息' }]

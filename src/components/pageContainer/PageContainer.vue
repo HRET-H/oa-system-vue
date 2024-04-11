@@ -23,7 +23,10 @@ defineProps({
 
 <style lang="scss" scoped>
 .page-container {
-  min-height: 200%;
+  width: 95%;
+  margin: auto;
+  margin-top: 1%;
+  min-height: 50%;
   box-sizing: border-box;
   .header {
     display: flex;

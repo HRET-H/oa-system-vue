@@ -104,10 +104,15 @@ onBeforeUpdate(() => {
 .layout-container {
   height: 100vh;
   .el-aside {
+    width: 200px;
     .el-menu {
       border-right: none;
     }
   }
+  .el-main {
+    background-color: #ececec;
+  }
+
   .el-header {
     background-color: #fff;
     display: flex;

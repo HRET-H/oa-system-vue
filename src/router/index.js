@@ -132,6 +132,7 @@ const routes = [
           }
         ]
       },
+      //考勤模块
       {
         path: 'clocking_in',
         name: 'clocking_in',
@@ -148,17 +149,12 @@ const routes = [
             component: () => import('@/views/attendance/patch/patchManager.vue')
           },
           {
-            path: 'classes',
-            name: 'shifts',
+            path: 'attendance_section_xuguangjie',
+            name: 'attendance_section_xuguangjie',
             component: () => import('@/views/attendance/shifts/ad_shifts.vue')
           }
         ]
       }
-      // {
-      //   path: 'employee_leave',
-      //   name: 'testOSS',
-      //   component: () => import('@/views/test/testOSS.vue')
-      // }
     ]
   }
 ]
