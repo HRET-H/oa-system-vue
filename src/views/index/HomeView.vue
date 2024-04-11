@@ -42,45 +42,31 @@ const getExamine = () => {
 
 // 使用onMounted钩子函数，获取菜单数据
 onMounted(() => {
-  // 判断obj是否为空对象
-  const isEmptyObject =
-    Object.keys(userStore.user).length === 0 &&
-    userStore.user.constructor === Object
+  // 获取当前时间 格式为 yyyy-MM-dd
+  const now = new Date()
+  const year = now.getFullYear()
+  const month = now.getMonth() + 1
+  const day = now.getDate()
 
-  if (isEmptyObject) {
-    ElMessage.error({
-      message: '您还没登录，先去登录一下叭🎈',
-      grouping: true,
-      type: 'error'
+  // 设置水印内容
+  watermark_content.value =
+    userStore.user.userName + ' ' + year + '-' + month + '-' + day
+
+  // 开启加载动画
+  const loading = openFullScreen()
+
+  axios
+    .get('/menu/selectMenuTree?parentId=' + 0)
+    .then((res) => {
+      MenuData.value = res.data
+
+      getExamine()
+
+      closeFullScreen(loading)
     })
-    router.push('/')
-  } else {
-    // 获取当前时间 格式为 yyyy-MM-dd
-    const now = new Date()
-    const year = now.getFullYear()
-    const month = now.getMonth() + 1
-    const day = now.getDate()
-
-    // 设置水印内容
-    watermark_content.value =
-      userStore.user.userName + ' ' + year + '-' + month + '-' + day
-
-    // 开启加载动画
-    const loading = openFullScreen()
-
-    axios
-      .get('/menu/selectMenuTree?parentId=' + 0)
-      .then((res) => {
-        MenuData.value = res.data
-
-        getExamine()
-
-        closeFullScreen(loading)
-      })
-      .catch(() => {
-        ElMessage.error('网络不佳请稍后重试!!!')
-      })
-  }
+    .catch(() => {
+      ElMessage.error('网络不佳请稍后重试!!!')
+    })
 })
 
 // 获取菜单合集点击按钮的ref引用
@@ -294,15 +280,15 @@ const logout = () => {
 
                 <template #dropdown>
                   <el-dropdown-menu>
-                    <el-dropdown-item>
+                    <el-dropdown-item style="margin: 5px">
                       <v-icon icon="mdi-account-box-edit-outline" />
                       资料设置
                     </el-dropdown-item>
-                    <el-dropdown-item>
+                    <el-dropdown-item style="margin: 5px">
                       <v-icon icon="mdi-key-variant" />
                       修改密码
                     </el-dropdown-item>
-                    <el-dropdown-item @click="logout">
+                    <el-dropdown-item style="margin: 5px" @click="logout">
                       <v-icon icon="mdi-application-export" />
                       退出登录
                     </el-dropdown-item>

@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
-// import { useUserStore } from '@/stores'
+import { useUserStore } from '@/stores'
+import { getAuthorityMenu } from '@/utils/getAuthorityMenu.js'
 
 // router路由
 const routes = [
@@ -9,7 +10,7 @@ const routes = [
   },
   {
     path: '/',
-    name: '登录',
+    name: 'Login',
     component: () => import('@/views/index/Login.vue')
   },
   {
@@ -251,18 +252,42 @@ const router = createRouter({
   routes
 })
 
-// 登录访问拦截 => 默认是直接放行的
+// 权限访问拦截 => 默认是直接放行的
 // 根据返回值决定，是放行还是拦截
-// 返回值：
-// 1. undefined / true  直接放行
-// 2. false 拦回from的地址页面
-// 3. 具体路径 或 路径对象  拦截到对应的地址
-//    '/login'   { name: 'login' }
-// router.beforeEach((to) => {
-//   // 如果没有token, 且访问的是非登录页，拦截到登录，其他情况正常放行
-//   const useStore = useUserStore()
-//   // if (!useStore.token && to.path !== '/login') return '/login'
-//   console.log(useStore.token && to.path)
-// })
+router.beforeEach(async (to, from) => {
+  if (to.path !== '/') {
+    // 如果没有值, 且访问的是非登录页，拦截到登录，其他情况正常放行
+    const useStore = useUserStore()
+    // 判断useStore.user是否为空对象
+    const isEmptyObject =
+      Object.keys(useStore.user).length === 0 &&
+      useStore.user.constructor === Object
+
+    if (!isEmptyObject) {
+      // 获取权限
+      const getAuthority =
+        to.path !== '/home' &&
+        to.path !== '/home/system' &&
+        to.path !== '/home/system/operation_log' &&
+        to.path !== '/home/system/message_notification' &&
+        to.path !== '/home/system/update_password'
+
+      if (getAuthority) {
+        // 判断用户是否有权限
+        const result = await getAuthorityMenu(useStore, to, from, null)
+        // 利用双重否定运算符 任何非空非零的值转换为 true，包括非零数字、非空对象、非空数组、非空字符串等；反之：!! 运算后将返回 false
+        return !!result
+      }
+    } else {
+      ElMessage.error({
+        message: '您还没登录，先去登录一下叭🎈',
+        grouping: true,
+        type: 'error'
+      })
+      // 取消跳转
+      return false
+    }
+  }
+})
 
 export default router
