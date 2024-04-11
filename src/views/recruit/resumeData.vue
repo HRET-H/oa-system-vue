@@ -1,83 +1,85 @@
 <template>
   <div>
-    <span style="font-size: 30px">数据分析图</span>&nbsp;&nbsp;&nbsp;&nbsp;<span
-      style="color: #b1b4be"
-      >更新时间:2035年6月19日 12:35:59</span
-    >
-    <br />
-    <br />
-    <span
-      ref="main"
-      style="
-        width: 40%;
-        height: 300px;
-        border: solid 1px #e9eaee;
-        margin: auto;
-        display: inline-block;
-      "
-    ></span
-    >&nbsp;&nbsp;&nbsp;&nbsp;
-    <span
-      ref="main2"
-      style="
-        width: 28%;
-        height: 300px;
-        border: solid 1px #e9eaee;
-        margin: auto;
-        display: inline-block;
-      "
-    ></span
-    >&nbsp;&nbsp;&nbsp;&nbsp;
-    <span
-      ref="main3"
-      style="
-        width: 29%;
-        height: 300px;
-        border: solid 1px #e9eaee;
-        margin: auto;
-        display: inline-block;
-      "
-    ></span>
-    <br />
-    <br />
-    <span
-      ref="main4"
-      style="
-        width: 40%;
-        height: 300px;
-        border: solid 1px #e9eaee;
-        margin: auto;
-        display: inline-block;
-      "
-    ></span
-    >&nbsp;&nbsp;&nbsp;&nbsp;
-    <span
-      ref="main5"
-      style="
-        width: 28%;
-        height: 300px;
-        border: solid 1px #e9eaee;
-        margin: auto;
-        display: inline-block;
-      "
-    ></span
-    >&nbsp;&nbsp;&nbsp;&nbsp;
-    <span
-      ref="main6"
-      style="
-        width: 29%;
-        height: 300px;
-        border: solid 1px #e9eaee;
-        margin: auto;
-        display: inline-block;
-      "
-    ></span>
-    <br />
-    <br />
-    <span style="font-size: 30px">数据分析表</span>&nbsp;&nbsp;&nbsp;&nbsp;<span
-      style="color: #b1b4be"
-      >更新时间:2035年6月19日 12:35:59</span
-    >
+    <el-row>
+      <span style="font-size: 30px">数据分析图</span
+      >&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #b1b4be; margin-top: 12px"
+        >更新时间:2035年6月19日 12:35:59</span
+      >
+    </el-row>
+    <el-row>
+      <span
+        ref="main"
+        style="
+          width: 40%;
+          height: 300px;
+          border: solid 1px #e9eaee;
+          margin: auto;
+          display: inline-block;
+        "
+      ></span
+      >&nbsp;&nbsp;&nbsp;&nbsp;
+      <span
+        ref="main2"
+        style="
+          width: 28%;
+          height: 300px;
+          border: solid 1px #e9eaee;
+          margin: auto;
+          display: inline-block;
+        "
+      ></span
+      >&nbsp;&nbsp;&nbsp;&nbsp;
+      <span
+        ref="main3"
+        style="
+          width: 29%;
+          height: 300px;
+          border: solid 1px #e9eaee;
+          margin: auto;
+          display: inline-block;
+        "
+      ></span>
+      <br />
+      <br />
+      <span
+        ref="main4"
+        style="
+          width: 40%;
+          height: 300px;
+          border: solid 1px #e9eaee;
+          margin: auto;
+          display: inline-block;
+        "
+      ></span
+      >&nbsp;&nbsp;&nbsp;&nbsp;
+      <span
+        ref="main5"
+        style="
+          width: 28%;
+          height: 300px;
+          border: solid 1px #e9eaee;
+          margin: auto;
+          display: inline-block;
+        "
+      ></span
+      >&nbsp;&nbsp;&nbsp;&nbsp;
+      <span
+        ref="main6"
+        style="
+          width: 29%;
+          height: 300px;
+          border: solid 1px #e9eaee;
+          margin: auto;
+          display: inline-block;
+        "
+      ></span>
+      <br />
+      <br />
+      <span style="font-size: 30px">数据分析表</span
+      >&nbsp;&nbsp;&nbsp;&nbsp;<span style="color: #b1b4be"
+        >更新时间:2035年6月19日 12:35:59</span
+      >
+    </el-row>
     <el-table :data="tableData.arr" style="width: 100%">
       <el-table-column prop="candidateId" label="简历ID"></el-table-column>
       <el-table-column
@@ -474,4 +476,10 @@ function inti6() {
 }
 </script>
 
-<style></style>
+<style scoped>
+.el-row {
+  background-color: white;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+</style>

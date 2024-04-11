@@ -1,12 +1,14 @@
 <template>
   <div>
-    <span style="font-size: 30px">招聘漏斗</span>&nbsp;&nbsp;&nbsp;&nbsp;<span
-      style="color: #b1b4be"
-      >更新时间:2035年6月19日 12:35:59</span
-    >
-    <br />
-    <br />
-    <div ref="main" style="width: 100%; height: 700px; margin: auto"></div>
+    <el-row>
+      <span style="font-size: 30px">招聘漏斗</span>&nbsp;&nbsp;&nbsp;&nbsp;<span
+        style="color: #b1b4be; margin-top: 12px"
+        >更新时间:2035年6月19日 12:35:59</span
+      >
+    </el-row>
+    <el-row>
+      <div ref="main" style="width: 100%; height: 500px; margin: auto"></div>
+    </el-row>
   </div>
 </template>
 
@@ -94,4 +96,10 @@ function init() {
 }
 </script>
 
-<style></style>
+<style scoped>
+.el-row {
+  background-color: white;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+</style>
