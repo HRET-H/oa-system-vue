@@ -59,12 +59,16 @@ const login = () => {
             ElMessage.error('账号或密码错误😥😥😥')
             // 关闭加载动画
             closeFullScreen(loading)
+            // 刷新页面
+            location.reload()
           }
         })
         .catch(() => {
           ElMessage.error('账号或密码错误😥😥😥')
           // 关闭加载动画
           closeFullScreen(loading)
+          // 刷新页面
+          location.reload()
         })
     } else {
       ElMessage({

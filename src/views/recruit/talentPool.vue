@@ -151,7 +151,15 @@
               <span>{{ scope.row.candidateName }}</span
               >&nbsp;&nbsp;<span>{{ scope.row.candidateExpect }}</span
               >&nbsp;&nbsp; <span>{{ scope.row.candidateTime }}</span
-              >&nbsp;&nbsp;<el-button type="info" plain size="small"
+              >&nbsp;&nbsp;<el-button
+                type="info"
+                plain
+                size="small"
+                style="
+                  background-color: darkgray;
+                  color: black;
+                  border-color: darkgray;
+                "
                 ><span>{{
                   scope.row.candidateStatus == 1
                     ? '初筛'
