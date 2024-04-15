@@ -1,35 +1,41 @@
 <template>
   <div>
     <el-row>
-      &nbsp;&nbsp;&nbsp;&nbsp;会议主题：
-      <el-input
-        placeholder="输入内容"
-        v-model="meeting.conferenceTheme"
-        clearable
-        style="width: 300px; margin-left: 10px; height: 32px"
-      ></el-input>
-      &nbsp;&nbsp;&nbsp;&nbsp; 会议类型:<el-select
-        placeholder="全部"
-        v-model="meeting.conferenceType"
-        style="width: 300px; margin-left: 10px"
-      >
-        <el-option label="我发起的" value="1"></el-option>
-        <el-option label="我主持的" value="2"></el-option>
-        <el-option label="我参与的" value="3"></el-option>
-      </el-select>
-      &nbsp;&nbsp;&nbsp;&nbsp; 会议状态:
-      <el-select
-        placeholder="全部"
-        v-model="meeting.conferenceStatus"
-        style="width: 300px; margin-left: 10px"
-      >
-        <el-option label="未开始" value="1"></el-option>
-        <el-option label="进行中" value="2"></el-option>
-        <el-option label="已结束" value="3"></el-option>
-      </el-select>
+      <span style="margin-top: 10px">
+        &nbsp;&nbsp;&nbsp;&nbsp;会议主题：
+        <el-input
+          placeholder="输入内容"
+          v-model="meeting.conferenceTheme"
+          clearable
+          style="width: 300px; margin-left: 10px; height: 32px"
+        ></el-input>
+      </span>
+      <span style="margin-top: 10px">
+        &nbsp;&nbsp;&nbsp;&nbsp; 会议类型:<el-select
+          placeholder="全部"
+          v-model="meeting.conferenceType"
+          style="width: 300px; margin-left: 10px"
+        >
+          <el-option label="我发起的" value="1"></el-option>
+          <el-option label="我主持的" value="2"></el-option>
+          <el-option label="我参与的" value="3"></el-option>
+        </el-select>
+      </span>
+      <span style="margin-top: 10px">
+        &nbsp;&nbsp;&nbsp;&nbsp; 会议状态:
+        <el-select
+          placeholder="全部"
+          v-model="meeting.conferenceStatus"
+          style="width: 300px; margin-left: 10px"
+        >
+          <el-option label="未开始" value="1"></el-option>
+          <el-option label="进行中" value="2"></el-option>
+          <el-option label="已结束" value="3"></el-option>
+        </el-select>
+      </span>
       <br />
       <br />
-      <span>
+      <span style="margin-top: 10px">
         &nbsp;&nbsp;&nbsp;&nbsp; 会议时间：
         <el-date-picker
           v-model="meeting.meetingSumTime"
@@ -43,7 +49,7 @@
         </el-date-picker>
       </span>
       &nbsp;&nbsp;&nbsp;&nbsp;
-      <span>
+      <span style="margin-top: 10px">
         <el-button type="primary" @click="search()" style="color: aliceblue"
           >搜索</el-button
         >
@@ -94,9 +100,30 @@
           label="状态"
           width="180"
           align="center"
-        ></el-table-column>
+        >
+          <template #default="{ row }">
+            <span v-if="row.conferenceStatus === '1'" style="color: #1890ff"
+              >未开始</span
+            >
+            <span
+              v-else-if="row.conferenceStatus === '2'"
+              style="color: #2ac857"
+              >进行中</span
+            >
+            <span
+              v-else-if="row.conferenceStatus === '3'"
+              style="color: #fb7b13"
+              >已结束</span
+            >
+            <span v-else-if="row.conferenceStatus === '4'" style="#ffffff"
+              >已取消</span
+            >
+            <!-- 添加其他状态判断... -->
+            <span v-else>异常状态</span>
+          </template>
+        </el-table-column>
         <el-table-column label="操作" width="180" align="center">
-          <el-button>详情</el-button>
+          <el-button @click="particulars" plain>详情</el-button>
         </el-table-column>
       </el-table>
       <GetPagination
@@ -112,6 +139,7 @@
 
 <script>
 import axios from 'axios'
+import moment from 'moment'
 export default {
   name: 'MeetingBooking',
   data() {
@@ -165,6 +193,15 @@ export default {
         this.meeting
       )
     },
+    // 详情的跳转
+    particulars() {
+      console.log(this.tableData),
+        this.$router.push({
+          path: 'MeetingBookingdetails',
+
+          particulars: this.tableData
+        })
+    },
     // 将页码，及每页显示的条数以参数传递提交给后台
     getData() {
       axios
@@ -175,6 +212,12 @@ export default {
           // 将数据的长度赋值给totalCount
           // 将数据赋值给tableData
           this.tableData = reponse.data.data.list
+          // 格式化日期
+          this.tableData.forEach((item) => {
+            item.meetingTime = moment(item.meetingTime).format(
+              'YYYY-MM-DD HH:mm:ss'
+            )
+          })
         })
     },
     // 重置表单数据

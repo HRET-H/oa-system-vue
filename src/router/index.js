@@ -134,10 +134,10 @@ const routes = [
           }
         ]
       },
-
+      // 职位管理
       {
         path: 'recruit',
-        name: 'recruit',
+        name: '职位管理',
         component: () => import('@/views/index/AsideIndex.vue'),
         children: [
           {
@@ -223,9 +223,16 @@ const routes = [
             path: 'myReservation',
             name: 'myReservation',
             component: () => import('@/views/conference/MeetingBooking.vue')
+          },
+          {
+            path: 'MeetingBookingdetails',
+            name: 'MeetingBookingdetails',
+            component: () =>
+              import('@/views/conference/MeetingBookingdetails.vue')
           }
         ]
       },
+      //考勤模块
       {
         path: 'clocking_in',
         name: 'clocking_in',
@@ -242,8 +249,8 @@ const routes = [
             component: () => import('@/views/attendance/patch/patchManager.vue')
           },
           {
-            path: 'classes',
-            name: 'shifts',
+            path: 'attendance_section_xuguangjie',
+            name: 'attendance_section_xuguangjie',
             component: () => import('@/views/attendance/shifts/ad_shifts.vue')
           }
         ]
