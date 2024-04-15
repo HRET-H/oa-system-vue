@@ -134,10 +134,10 @@ const routes = [
           }
         ]
       },
-
+      // 职位管理
       {
         path: 'recruit',
-        name: 'recruit',
+        name: '职位管理',
         component: () => import('@/views/index/AsideIndex.vue'),
         children: [
           {

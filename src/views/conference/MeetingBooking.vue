@@ -96,7 +96,7 @@
           align="center"
         ></el-table-column>
         <el-table-column label="操作" width="180" align="center">
-          <el-button>详情</el-button>
+          <el-button @click="particulars">详情</el-button>
         </el-table-column>
       </el-table>
       <GetPagination
@@ -165,6 +165,8 @@ export default {
         this.meeting
       )
     },
+    // 详情的跳转
+    particulars() {},
     // 将页码，及每页显示的条数以参数传递提交给后台
     getData() {
       axios
