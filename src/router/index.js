@@ -223,6 +223,12 @@ const routes = [
             path: 'myReservation',
             name: 'myReservation',
             component: () => import('@/views/conference/MeetingBooking.vue')
+          },
+          {
+            path: 'MeetingBookingdetails',
+            name: 'MeetingBookingdetails',
+            component: () =>
+              import('@/views/conference/MeetingBookingdetails.vue')
           }
         ]
       },
