@@ -226,6 +226,7 @@ const routes = [
           }
         ]
       },
+      //考勤模块
       {
         path: 'clocking_in',
         name: 'clocking_in',
@@ -242,8 +243,8 @@ const routes = [
             component: () => import('@/views/attendance/patch/patchManager.vue')
           },
           {
-            path: 'classes',
-            name: 'shifts',
+            path: 'attendance_section_xuguangjie',
+            name: 'attendance_section_xuguangjie',
             component: () => import('@/views/attendance/shifts/ad_shifts.vue')
           }
         ]
@@ -296,8 +297,8 @@ router.beforeEach(async (to, from) => {
         grouping: true,
         type: 'error'
       })
-      // 取消跳转
-      return false
+      // 重定向至登录页
+      return { name: 'Login' }
     }
   }
 })
