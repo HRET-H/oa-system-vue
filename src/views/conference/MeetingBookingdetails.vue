@@ -96,7 +96,7 @@
       <el-col>
         会议主题:
         <el-input
-          placeholder="请输入"
+          placeholder="产品演示"
           v-model="conferenceTheme"
           style="width: 350px"
         ></el-input>
