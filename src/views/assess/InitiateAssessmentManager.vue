@@ -17,7 +17,8 @@
       <el-form-item label="考核周期">
         <el-col :span="11">
           <el-date-picker
-            type="date"
+            type="datetime"
+            value-format="YYYY-MM-DD HH:mm:ss"
             placeholder="选择日期"
             v-model="initiateAssessmentForm.assessTime"
             style="width: 100%"
@@ -144,7 +145,7 @@ export default {
         assessRange: '',
         assessDescription: '',
         assessTemplateId: '',
-        assessVisibe: [],
+        assessVisibe: '',
         PerformanceAnnouncement: ''
       },
       labelPosition: 'right',

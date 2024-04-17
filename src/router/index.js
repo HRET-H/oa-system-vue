@@ -81,7 +81,7 @@ const routes = [
             component: () => import('@/views/assess/InsertPerformanceFile.vue')
           },
           {
-            path: 'score_setting',
+            path: '/home/mova/mova_setting/score_setting',
             name: 'score_setting',
             component: () => import('@/views/assess/AssessScore.vue')
           },
