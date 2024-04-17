@@ -1,37 +1,38 @@
 <template>
   <div>
-    <page-container>
-      <div class="btn">
-        <!-- form表单条查 -->
-        <el-form
-          ref="form"
-          :model="holidayForm"
-          label-width="80px"
-          inline="true"
-        >
-          <el-form-item>
-            <el-form-item label="请假人">
-              <el-input
-                v-model="holidayForm.MarriageLeavess"
-                placeholder="请输入内容"
-                style="width: 300px"
-              ></el-input>
+    <PageContainer>
+      <el-row>
+        <div class="btn">
+          <!-- form表单条查 -->
+          <el-form
+            ref="form"
+            :model="holidayForm"
+            label-width="80px"
+            inline="true"
+          >
+            <el-form-item>
+              <el-form-item label="请假人">
+                <el-input
+                  v-model="holidayForm.MarriageLeavess"
+                  placeholder="请输入内容"
+                  style="width: 300px"
+                ></el-input>
+              </el-form-item>
             </el-form-item>
-          </el-form-item>
-          <!-- 搜索重置按钮 -->
-          <el-form-item>
-            <el-button type="primary" @click="findHolidayPaginationList"
-              >查询</el-button
-            >
-            <el-button plain @click="exportData()" style="margin-right: 10px"
-              >导出</el-button
-            >
-          </el-form-item>
-        </el-form>
-      </div>
-
+            <!-- 搜索重置按钮 -->
+            <el-form-item>
+              <el-button type="primary" @click="findHolidayPaginationList"
+                >查询</el-button
+              >
+              <el-button plain @click="exportData()" style="margin-right: 10px"
+                >导出</el-button
+              >
+            </el-form-item>
+          </el-form>
+        </div>
+      </el-row>
       <!-- 表格 -->
-      <el-table :data="holidayList" style="width: 100%">
+      <el-table border :data="holidayList" style="width: 100%">
         <el-table-column
           prop="userNames"
           label="姓名"
@@ -66,17 +67,14 @@
           </template>
         </el-table-column>
       </el-table>
-      <el-pagination
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page="holidayForm.pageNum"
+      <GetPagination
+        :page-num="holidayForm.pageNum"
         :page-size="holidayForm.pageSize"
         :total="total"
-        background
-        layout="prev, pager, next"
-      >
-      </el-pagination>
-    </page-container>
+        :handle-current-change="handleCurrentChange"
+        :handle-size-change="handleSizeChange"
+      />
+    </PageContainer>
   </div>
 </template>
 
@@ -88,7 +86,7 @@ export default {
     return {
       // 考核查询表单
       holidayForm: {
-        pageNum: 0,
+        pageNum: 1,
         pageSize: 10
       },
       balanceId: '',
@@ -186,9 +184,14 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .el-form-item .asterisk-left {
   width: 160px !important;
+}
+.el-row {
+  background-color: white;
+  padding: 15px;
+  margin-bottom: 20px;
 }
 
 .btn {

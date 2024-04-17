@@ -1,100 +1,105 @@
 <template>
   <div>
-    <page-container>
-      <div class="btn">
-        <!-- form表单条查 -->
-        <el-form
-          ref="form"
-          :model="holidayForm"
-          label-width="80px"
-          inline="true"
-        >
-          <el-form-item>
-            <el-form-item label="请假人">
-              <el-input
-                v-model="holidayForm.holidayName"
-                placeholder="请输入内容"
-                style="width: 300px"
-              ></el-input>
+    <PageContainer>
+      <!-- <el-row> 表格低-->
+
+      <el-row>
+        <div class="btn" style="line-height: 80px">
+          <!-- form表单条查 -->
+          <el-form
+            ref="form"
+            :model="holidayForm"
+            label-width="80px"
+            inline="true"
+          >
+            <el-form-item>
+              <el-form-item label="请假人">
+                <el-input
+                  v-model="holidayForm.holidayName"
+                  placeholder="请输入"
+                  style="width: 200px"
+                ></el-input>
+              </el-form-item>
             </el-form-item>
-          </el-form-item>
-          <el-form-item label="请假类型">
-            <el-select
-              v-model="holidayForm.holidayType"
-              placeholder="请选择请假类型"
-              style="width: 300px"
-            >
-              <el-option label="全部" value="0"></el-option>
-              <el-option label="事假" value="1"></el-option>
-              <el-option label="年假" value="2"></el-option>
-              <el-option label="病假" value="3"></el-option>
-            </el-select>
-          </el-form-item>
-          <el-form-item label="完成时间">
-            <el-col :span="11">
-              <el-date-picker
-                type="date"
-                placeholder="完成时间"
-                v-model="holidayForm.endTime"
-                style="width: 300px"
-              ></el-date-picker>
-            </el-col>
-          </el-form-item>
-          <el-form-item label="发起时间">
-            <el-col :span="11">
-              <el-date-picker
-                type="date"
-                placeholder="发起时间"
-                v-model="holidayForm.lnitiationTime"
-                style="width: 300px"
-              ></el-date-picker>
-            </el-col>
-          </el-form-item>
-          <!-- 搜索重置按钮 -->
-          <el-form-item>
-            <el-button type="primary" @click="findHolidayPaginationList"
-              >查询</el-button
-            >
-            <el-button plain @click="exportData()" style="margin-right: 10px"
-              >导出</el-button
-            >
-          </el-form-item>
-        </el-form>
-      </div>
-      <br />
+            <el-form-item label="请假类型">
+              <el-select
+                v-model="holidayForm.holidayType"
+                style="width: 160px"
+                placeholder="请选择请假类型"
+              >
+                <el-option label="全部" value="0"></el-option>
+                <el-option label="事假" value="1"></el-option>
+                <el-option label="年假" value="2"></el-option>
+                <el-option label="病假" value="3"></el-option>
+              </el-select>
+            </el-form-item>
+            <el-form-item label="完成时间">
+              <el-col :span="11">
+                <el-date-picker
+                  type="date"
+                  placeholder="完成时间"
+                  v-model="holidayForm.endTime"
+                  style="width: 160px"
+                ></el-date-picker>
+              </el-col>
+            </el-form-item>
+            <el-form-item label="发起时间">
+              <el-col :span="11">
+                <el-date-picker
+                  type="date"
+                  placeholder="发起时间"
+                  v-model="holidayForm.lnitiationTime"
+                  style="width: 160px"
+                ></el-date-picker>
+              </el-col>
+            </el-form-item>
+            <!-- 搜索重置按钮 -->
+            <el-form-item>
+              <el-button type="primary" @click="findHolidayPaginationList"
+                >查询</el-button
+              >
+              <el-button plain @click="exportData()" style="margin-right: 10px"
+                >导出</el-button
+              >
+            </el-form-item>
+          </el-form>
+        </div>
+
+        <br />
+      </el-row>
       <!-- 表格 -->
-      <el-table :data="holidayList" style="width: 100%">
-        <el-table-column prop="approvalId" label="审批id" width="180">
-        </el-table-column>
-        <el-table-column prop="holidayName" label="请假人"> </el-table-column>
-        <el-table-column prop="holidayType" label="请假类型"> </el-table-column>
-        <el-table-column prop="holidayDuration" label="请假时长">
-        </el-table-column>
-        <el-table-column prop="lnitiationTime" label="发起时间">
-        </el-table-column>
-        <el-table-column prop="endTime" label="完成时间"> </el-table-column>
-        <el-table-column label="操作">
-          <template v-slot:default="scope">
-            <el-link
-              type="primary"
-              :underline="false"
-              @click="deleteHoliday(scope.row)"
-              >删除</el-link
-            >
-          </template>
-        </el-table-column>
-      </el-table>
-      <el-pagination
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page="holidayForm.pageNum"
+      <el-row>
+        <el-table border :data="holidayList" style="width: 100%">
+          <el-table-column prop="approvalId" label="审批id" width="180">
+          </el-table-column>
+          <el-table-column prop="holidayName" label="请假人"> </el-table-column>
+          <el-table-column prop="holidayType" label="请假类型">
+          </el-table-column>
+          <el-table-column prop="holidayDuration" label="请假时长">
+          </el-table-column>
+          <el-table-column prop="lnitiationTime" label="发起时间">
+          </el-table-column>
+          <el-table-column prop="endTime" label="完成时间"> </el-table-column>
+          <el-table-column label="操作">
+            <template v-slot:default="scope">
+              <el-link
+                type="primary"
+                :underline="false"
+                @click="deleteHoliday(scope.row)"
+                >删除</el-link
+              >
+            </template>
+          </el-table-column>
+        </el-table>
+      </el-row>
+      <GetPagination
+        :page-num="holidayForm.pageNum"
         :page-size="holidayForm.pageSize"
         :total="total"
-        background
-        layout="prev, pager, next"
-      >
-      </el-pagination>
-    </page-container>
+        :handle-current-change="handleCurrentChange"
+        :handle-size-change="handleSizeChange"
+      />
+    </PageContainer>
   </div>
 </template>
 
@@ -110,7 +115,7 @@ export default {
         holidayType: '',
         endTime: '',
         lnitiationTime: '',
-        pageNum: 0,
+        pageNum: 1,
         pageSize: 10
       },
       approvalId: '',
@@ -208,9 +213,15 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .el-form-item .asterisk-left {
   width: 160px !important;
+}
+/* 边框低 */
+.el-row {
+  background-color: white;
+  padding: 15px;
+  margin-bottom: 20px;
 }
 
 .btn {
