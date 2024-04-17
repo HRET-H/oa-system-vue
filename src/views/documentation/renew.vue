@@ -83,6 +83,7 @@
         </el-table>
       </el-row>
       <GetPagination
+        style="top: 10px"
         :page-num="borrowingForm.pageNum"
         :page-size="borrowingForm.pageSize"
         :total="total"

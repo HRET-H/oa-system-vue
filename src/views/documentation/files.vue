@@ -87,6 +87,7 @@
         </el-table>
       </el-row>
       <GetPagination
+        style="top: 10px"
         :page-num="wholeForm.pageNum"
         :page-size="wholeForm.pageSize"
         :total="total"

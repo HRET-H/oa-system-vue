@@ -76,6 +76,7 @@
         </el-table>
       </el-row>
       <GetPagination
+        style="top: 10px"
         :page-num="lockerForm.pageNum"
         :page-size="lockerForm.pageSize"
         :total="total"

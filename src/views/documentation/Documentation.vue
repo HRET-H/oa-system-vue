@@ -151,8 +151,8 @@
           </template>
         </el-table-column>
       </el-table>
-
       <GetPagination
+        style="top: 10px"
         :page-num="documentationForm.pageNum"
         :page-size="documentationForm.pageSize"
         :total="total"
