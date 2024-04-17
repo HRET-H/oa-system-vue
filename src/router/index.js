@@ -56,7 +56,7 @@ const routes = [
             component: () => import('@/views/assess/AssessTemplate.vue')
           },
           {
-            path: 'insertAssessTemplate',
+            path: '/home/mova/insertAssessTemplate',
             name: 'insertAssessTemplate',
             component: () => import('@/views/assess/InsertAssessTemplate.vue')
           },

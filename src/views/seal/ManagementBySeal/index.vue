@@ -76,6 +76,7 @@
         <el-col :span="24">
           <div class="grid-content bg-purple-dark">
             <el-table
+              border
               :data="tableData"
               tooltip-effect="dark"
               style="width: 100%"
@@ -228,7 +229,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .zong {
   background-color: #f4f4f4;
 

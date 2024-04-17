@@ -5,7 +5,7 @@
       <div class="btn">
         <el-button
           type="primary"
-          @click="this.$router.push('/insertAssessTemplate')"
+          @click="this.$router.push('/home/mova/insertAssessTemplate')"
           >新建考核模板</el-button
         >
         <el-input
@@ -21,7 +21,7 @@
     <el-form :model="assessTemplateForm"> </el-form>
     <el-row>
       <!-- 表格 -->
-      <el-table :data="assessTemplateList" style="width: 100%">
+      <el-table border :data="assessTemplateList" style="width: 100%">
         <el-table-column prop="templateId" label="模板ID"> </el-table-column>
         <el-table-column prop="templateName" label="模板名称"></el-table-column>
         <el-table-column prop="scoreMethod" label="评分制" width="180">
@@ -170,7 +170,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .el-form-item .asterisk-left {
   width: 160px !important;
 }

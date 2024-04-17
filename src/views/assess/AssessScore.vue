@@ -100,7 +100,7 @@
     </el-row>
     <el-row>
       <!-- 表格 -->
-      <el-table :data="assessScoreList" style="width: 100%">
+      <el-table border :data="assessScoreList" style="width: 100%">
         <el-table-column prop="scoreName" label="评分名称" width="180">
         </el-table-column>
         <el-table-column prop="scoreBands" width="180" label="评分区间">
@@ -271,7 +271,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .el-form-item .asterisk-left {
   width: 160px !important;
 }

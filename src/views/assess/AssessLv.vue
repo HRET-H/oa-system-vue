@@ -29,6 +29,7 @@
         <br />
         <!-- 表格 -->
         <el-table
+          border
           :data="assessScoreList"
           style="width: 100%"
           v-show="(listOne = true)"

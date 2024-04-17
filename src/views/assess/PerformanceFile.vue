@@ -19,7 +19,7 @@
     </el-row>
     <!-- 表格 -->
     <el-row>
-      <el-table :data="userAndAssessList" style="width: 100%">
+      <el-table border :data="userAndAssessList" style="width: 100%">
         <el-table-column prop="users[0].userId" label="员工ID" width="180">
         </el-table-column>
         <el-table-column prop="users[0].userName" width="180" label="姓名">
@@ -116,7 +116,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .el-form-item .asterisk-left {
   width: 160px !important;
 }

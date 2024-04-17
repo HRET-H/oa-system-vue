@@ -1,54 +1,56 @@
 <template>
-  <div>
-    <div class="block">
-      <el-avatar
-        :size="100"
-        src="https://hret0721.oss-cn-beijing.aliyuncs.com/oa-system/2126366332.jpg"
-      ></el-avatar>
-      <el-descriptions title="绩效考核档案" v-model="userAndAssessList">
-        <el-descriptions-item
-          label="职位"
-          v-model="jobName"
-        ></el-descriptions-item>
-        <el-descriptions-item
-          label="部门"
-          v-model="deptName"
-        ></el-descriptions-item>
-        <el-descriptions-item
-          label="入职时间"
-          v-model="jobTime"
-        ></el-descriptions-item>
-        <el-descriptions-item
-          label="转职时间"
-          v-model="jobTime"
-        ></el-descriptions-item>
-      </el-descriptions>
+  <PageContainer>
+    <div>
+      <div class="block">
+        <el-avatar
+          :size="100"
+          src="https://hret0721.oss-cn-beijing.aliyuncs.com/oa-system/2126366332.jpg"
+        ></el-avatar>
+        <el-descriptions title="绩效考核档案" v-model="userAndAssessList">
+          <el-descriptions-item
+            label="职位"
+            v-model="jobName"
+          ></el-descriptions-item>
+          <el-descriptions-item
+            label="部门"
+            v-model="deptName"
+          ></el-descriptions-item>
+          <el-descriptions-item
+            label="入职时间"
+            v-model="jobTime"
+          ></el-descriptions-item>
+          <el-descriptions-item
+            label="转职时间"
+            v-model="jobTime"
+          ></el-descriptions-item>
+        </el-descriptions>
+      </div>
+      <el-table border :data="userAndAssessForm.assessList" style="width: 100%">
+        <el-table-column prop="assessName" label="考核计划" width="180">
+        </el-table-column>
+        <el-table-column prop="assessTime" label="考核期" width="180">
+        </el-table-column>
+        <el-table-column prop="assessScore" label="绩效得分"> </el-table-column>
+        <el-table-column label="操作">
+          <template v-slot:default="scope">
+            <el-link
+              type="primary"
+              :underline="false"
+              @click="detailAssess(scope.row)"
+              >详情</el-link
+            >
+          </template>
+        </el-table-column>
+      </el-table>
+      <GetPagination
+        :page-num="userAndAssessForm.pageNum"
+        :page-size="userAndAssessForm.pageSize"
+        :total="total"
+        :handle-current-change="handleCurrentChange"
+        :handle-size-change="handleSizeChange"
+      />
     </div>
-    <el-table :data="userAndAssessForm.assessList" style="width: 100%">
-      <el-table-column prop="assessName" label="考核计划" width="180">
-      </el-table-column>
-      <el-table-column prop="assessTime" label="考核期" width="180">
-      </el-table-column>
-      <el-table-column prop="assessScore" label="绩效得分"> </el-table-column>
-      <el-table-column label="操作">
-        <template v-slot:default="scope">
-          <el-link
-            type="primary"
-            :underline="false"
-            @click="detailAssess(scope.row)"
-            >详情</el-link
-          >
-        </template>
-      </el-table-column>
-    </el-table>
-    <GetPagination
-      :page-num="userAndAssessForm.pageNum"
-      :page-size="userAndAssessForm.pageSize"
-      :total="total"
-      :handle-current-change="handleCurrentChange"
-      :handle-size-change="handleSizeChange"
-    />
-  </div>
+  </PageContainer>
 </template>
 <script>
 import axios from 'axios'

@@ -62,7 +62,7 @@
     </el-row>
     <el-row>
       <!-- 表格 -->
-      <el-table :data="assessIndexList" style="width: 100%">
+      <el-table border :data="assessIndexList" style="width: 100%">
         <el-table-column prop="assessIndexId" label="指标ID" width="180">
         </el-table-column>
         <el-table-column prop="assessIndexName" label="指标名称" width="180">
