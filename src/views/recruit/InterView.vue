@@ -1,6 +1,7 @@
 <template>
   <div>
-    <h1>基本信息</h1>
+    <div style="font-size: 30px">基本信息</div>
+    <br />
     面试方法:
     <el-select
       v-model="addinterviewData.method"
@@ -12,14 +13,7 @@
       <el-option label="电话面试" value="3"></el-option> </el-select
     ><br /><br />
     面试联系人:
-    <el-select
-      v-model="addinterviewData.userId"
-      placeholder="全部"
-      style="width: 250px"
-    >
-      <el-option label="admin" value="1"></el-option>
-      <el-option label="admin2" value="2"></el-option> </el-select
-    ><br /><br />
+    <CustomTransfer :type="type" :successData="successData" /><br /><br />
     面试轮次:<el-input
       placeholder="请输入内容"
       v-model="addinterviewData.numbers"
@@ -50,31 +44,26 @@
     ></el-input
     ><br /><br />
     面试官:
-    <el-select
-      v-model="addinterviewData.interviewer"
-      placeholder="全部"
-      style="width: 250px"
-    >
-      <el-option label="admin" value="1"></el-option>
-      <el-option label="admin2" value="2"></el-option> </el-select
-    ><br /><br />
+    <CustomTransfer :type="type" :successData="successData" /><br /><br />
     <h1>通知方式</h1>
     面试官通知:
     <el-checkbox-group
       v-model="addinterviewData.inform"
       @change="changeCheckBox"
     >
+      <el-checkbox label="短息通知" checked></el-checkbox>
       <el-checkbox label="邮件通知"></el-checkbox>
       <el-checkbox label="站内通知"></el-checkbox>
-      <el-checkbox label="短息通知"></el-checkbox><br />
+      <br />
     </el-checkbox-group>
     候选人通知
     <el-checkbox-group
       v-model="addinterviewData.inform2"
       @change="changeCheckBox2"
     >
+      <el-checkbox label="短息通知" checked></el-checkbox>
       <el-checkbox label="邮件通知"></el-checkbox>
-      <el-checkbox label="短息通知"></el-checkbox><br />
+      <br />
     </el-checkbox-group>
 
     <br />

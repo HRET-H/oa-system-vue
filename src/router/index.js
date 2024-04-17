@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
-// import { useUserStore } from '@/stores'
+import { useUserStore } from '@/stores'
+import { getAuthorityMenu } from '@/utils/getAuthorityMenu.js'
 
 // router路由
 const routes = [
@@ -8,8 +9,13 @@ const routes = [
     component: () => import('@/views/error/404.vue')
   },
   {
+    path: '/',
+    name: 'Login',
+    component: () => import('@/views/index/Login.vue')
+  },
+  {
     path: '/home',
-    name: 'home',
+    name: '首页',
     component: () => import('@/views/index/HomeView.vue'),
     children: [
       // 系统管理
@@ -195,16 +201,56 @@ const routes = [
         component: () => import('@/views/index/AsideIndex.vue'),
         children: [
           {
-            path: '/seals',
+            path: '/home/seal/seals',
             name: 'seals',
-            component: () => import('@/views/seal/SealIndex.vue')
+            component: () => import('@/views/seal/ManagementBySeal/index.vue')
+          },
+          {
+            path: 'sealAdd',
+            name: 'sealAdd',
+            component: () => import('@/views/seal/ManagementBySeal/add.vue')
+          },
+          {
+            path: 'sealXiang',
+            name: 'sealXiang',
+            component: () => import('@/views/seal/ManagementBySeal/xiang.vue')
+          },
+          {
+            path: '/home/seal/sealReturn',
+            name: 'sealReturn',
+            component: () => import('@/views/seal/sealReturn/index.vue')
+          },
+          {
+            path: 'sealReturnAdd',
+            name: 'sealReturnAdd',
+            component: () => import('@/views/seal/sealReturn/add.vue')
+          },
+          {
+            path: 'sealReturnXiang',
+            name: 'sealReturnXiang',
+            component: () => import('@/views/seal/sealReturn/xiang.vue')
+          },
+          {
+            path: '/home/seal/sealLibrary',
+            name: 'sealLibrary',
+            component: () => import('@/views/seal/sealVault/index.vue')
+          },
+          {
+            path: 'sealLibraryAdd',
+            name: 'sealLibraryAdd',
+            component: () => import('@/views/seal/sealVault/add.vue')
+          },
+          {
+            path: 'sealLibraryUpdate',
+            name: 'sealLibraryUpdate',
+            component: () => import('@/views/seal/sealVault/update.vue')
           }
         ]
       },
-
+      // 职位管理
       {
         path: 'recruit',
-        name: 'recruit',
+        name: '职位管理',
         component: () => import('@/views/index/AsideIndex.vue'),
         children: [
           {
@@ -231,6 +277,16 @@ const routes = [
             path: 'interview',
             name: 'interview',
             component: () => import('@/views/recruit/InterView.vue')
+          },
+          {
+            path: 'launchoffer',
+            name: 'launchoffer',
+            component: () => import('@/views/recruit/launchOffer.vue')
+          },
+          {
+            path: 'notarizeentry',
+            name: 'notarizeentry',
+            component: () => import('@/views/recruit/notarizeEntry.vue')
           },
           {
             path: 'addCanDidate',
@@ -272,6 +328,25 @@ const routes = [
         ]
       },
       {
+        path: 'conference_room',
+        name: 'conference_room',
+        component: () => import('@/views/index/AsideIndex.vue'),
+        children: [
+          {
+            path: 'myReservation',
+            name: 'myReservation',
+            component: () => import('@/views/conference/MeetingBooking.vue')
+          },
+          {
+            path: 'MeetingBookingdetails',
+            name: 'MeetingBookingdetails',
+            component: () =>
+              import('@/views/conference/MeetingBookingdetails.vue')
+          }
+        ]
+      },
+      //考勤模块
+      {
         path: 'clocking_in',
         name: 'clocking_in',
         component: () => import('@/views/index/AsideIndex.vue'),
@@ -287,8 +362,8 @@ const routes = [
             component: () => import('@/views/attendance/patch/patchManager.vue')
           },
           {
-            path: 'classes',
-            name: 'shifts',
+            path: 'attendance_section_xuguangjie',
+            name: 'attendance_section_xuguangjie',
             component: () => import('@/views/attendance/shifts/ad_shifts.vue')
           }
         ]
@@ -309,18 +384,42 @@ const router = createRouter({
   routes
 })
 
-// 登录访问拦截 => 默认是直接放行的
+// 权限访问拦截 => 默认是直接放行的
 // 根据返回值决定，是放行还是拦截
-// 返回值：
-// 1. undefined / true  直接放行
-// 2. false 拦回from的地址页面
-// 3. 具体路径 或 路径对象  拦截到对应的地址
-//    '/login'   { name: 'login' }
-// router.beforeEach((to) => {
-//   // 如果没有token, 且访问的是非登录页，拦截到登录，其他情况正常放行
-//   const useStore = useUserStore()
-//   // if (!useStore.token && to.path !== '/login') return '/login'
-//   console.log(useStore.token && to.path)
-// })
+router.beforeEach(async (to, from) => {
+  if (to.path !== '/') {
+    // 如果没有值, 且访问的是非登录页，拦截到登录，其他情况正常放行
+    const useStore = useUserStore()
+    // 判断useStore.user是否为空对象
+    const isEmptyObject =
+      Object.keys(useStore.user).length === 0 &&
+      useStore.user.constructor === Object
+
+    if (!isEmptyObject) {
+      // 获取权限
+      const getAuthority =
+        to.path !== '/home' &&
+        to.path !== '/home/system' &&
+        to.path !== '/home/system/operation_log' &&
+        to.path !== '/home/system/message_notification' &&
+        to.path !== '/home/system/update_password'
+
+      if (getAuthority) {
+        // 判断用户是否有权限
+        const result = await getAuthorityMenu(useStore, to, from, null)
+        // 利用双重否定运算符 任何非空非零的值转换为 true，包括非零数字、非空对象、非空数组、非空字符串等；反之：!! 运算后将返回 false
+        return !!result
+      }
+    } else {
+      ElMessage.error({
+        message: '您还没登录，先去登录一下叭🎈',
+        grouping: true,
+        type: 'error'
+      })
+      // 重定向至登录页
+      return { name: 'Login' }
+    }
+  }
+})
 
 export default router

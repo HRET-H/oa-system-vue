@@ -45,9 +45,13 @@ defineProps({
             <v-icon
               :icon="menu_item.menuIcon.split('|')[0]"
               :color="menu_item.menuIcon.split('|')[1]"
-              v-if="menu_item.menuIcon != null && menu_item.menuIcon !== '#'"
+              v-if="
+                menu_item.menuIcon != null &&
+                menu_item.menuIcon !== '' &&
+                menu_item.menuIcon !== '#'
+              "
             />
-            <v-icon icon="mdi-apple-finder" v-else />
+            <v-icon icon="mdi-atom" color="#F56C6C" v-else />
             &nbsp;&nbsp;
             <span>{{ menu_item.menuName }}</span>
           </el-menu-item>

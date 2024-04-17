@@ -4,7 +4,7 @@ import { ElMessage } from 'element-plus'
 import router from '@/router'
 
 // 设置请求地址
-// const baseURL = 'https://43.249.193.55:29386'
+// const baseURL = 'https://43.249.193.55:49605'
 const baseURL = 'http://localhost:9999'
 
 const instance = axios.create({
@@ -48,7 +48,7 @@ instance.interceptors.response.use(
     }
 
     // 错误的默认情况 => 只要给提示
-    ElMessage.error(err.response.data.message || '服务异常')
+    ElMessage.error('服务异常')
     return Promise.reject(err)
   }
 )
