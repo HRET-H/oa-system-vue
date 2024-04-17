@@ -153,7 +153,7 @@ export default {
         pageNum: 1,
         pageSize: 5
       },
-      assessScoreId: '',
+      scoreId: '',
       // 评分设置查询表单
       //   考核列表
       assessScoreList: [],
@@ -195,27 +195,25 @@ export default {
         })
     },
     addAssessScore() {
-      axios
-        .post('/assessScore/addAssessScore', this.InsertAssessIndexForm)
-        .then((res) => {
-          console.log(res)
-          if (res.data.code == 200) {
-            ElMessage.success('新增成功')
-            // this.$message({
-            //   message: '新增成功',
-            //   type: 'success'
-            // })
-            ;(this.scoreForm = false), (this.leaveForm = false)
-          } else {
-            ElMessage.error('新增失败')
-          }
-        })
+      axios.post('/assessScore/addAssessScore', this.Assessform).then((res) => {
+        console.log(res)
+        if (res.data.code == 200) {
+          ElMessage.success('新增成功')
+          // this.$message({
+          //   message: '新增成功',
+          //   type: 'success'
+          // })
+          ;(this.scoreForm = false),
+            (this.leaveForm = false),
+            this.findAssessScoreListAndPage()
+        } else {
+          ElMessage.error('新增失败')
+        }
+      })
     },
     editAssessScore(row) {
       axios
-        .get(
-          '/assessScore/findAssessScoreById?assessScoreId=' + row.assessScoreId
-        )
+        .get('/assessScore/findAssessScoreById?assessScoreId=' + row.scoreId)
         .then((res) => {
           console.log(res)
           this.Assessform = res.data
@@ -247,10 +245,9 @@ export default {
     // },
     // 删除考核
     deleteAssessScore(row) {
+      console.log(row)
       axios
-        .get(
-          '/assessScore/deleteAssessScore?assessScoreId=' + row.assessScoreId
-        )
+        .get('/assessScore/deleteAssessScore?assessScoreId=' + row.scoreId)
         .then((res) => {
           if (res.data.code == 200) {
             ElMessage.success('删除成功')

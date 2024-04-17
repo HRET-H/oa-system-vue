@@ -5,7 +5,7 @@
       <div class="btn">
         <el-button
           type="primary"
-          @click="this.$router.push('/insertAssessTemplate')"
+          @click="this.$router.push('insertAssessTemplate')"
           >新建考核模板</el-button
         >
         <el-input

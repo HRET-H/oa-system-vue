@@ -56,7 +56,7 @@
     </el-form>
     <!-- 表格 -->
     <el-table :data="assessList" style="width: 100%">
-      <el-table-column prop="assessName" label="计划日期" width="180">
+      <el-table-column prop="assessName" label="考核计划" width="180">
       </el-table-column>
       <el-table-column prop="assessRange" width="180" label="考核范围">
         <template v-slot:default="scope">

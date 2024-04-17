@@ -81,7 +81,7 @@ const routes = [
             component: () => import('@/views/assess/InsertPerformanceFile.vue')
           },
           {
-            path: 'score_setting',
+            path: '/home/mova/mova_setting/score_setting',
             name: 'score_setting',
             component: () => import('@/views/assess/AssessScore.vue')
           },
@@ -121,6 +121,79 @@ const routes = [
           }
         ]
       },
+      // 档案模块
+      {
+        path: 'record',
+        name: 'record',
+        component: () => import('@/views/index/AsideIndex.vue'),
+        children: [
+          {
+            path: 'archives_documentation',
+            name: 'archives_documentation',
+            component: () => import('@/views/documentation/Documentation.vue')
+          },
+          {
+            path: 'AddDocumentation',
+            name: 'AddDocumentation',
+            component: () =>
+              import('@/views/documentation/AddDocumentation.vue')
+          },
+          {
+            path: 'archives_borrowing',
+            name: 'archives_borrowing',
+            component: () => import('@/views/documentation/Borrowing.vue')
+          },
+          {
+            path: 'archives_renew',
+            name: 'archives_renew',
+            component: () => import('@/views/documentation/renew.vue')
+          },
+          {
+            path: 'archives_returns',
+            name: 'archives_returns',
+            component: () => import('@/views/documentation/returns.vue')
+          }
+
+          // {
+          //   path: 'archives_whole',
+          //   name: 'archives_whole',
+          //   component: () => import('@/views/documentation/whole.vue')
+          // },
+          // {
+          //   path: 'archives_files',
+          //   name: 'archives_files',
+          //   component: () => import('@/views/documentation/files.vue')
+          // },
+          // {
+          //   path: 'archives_locker',
+          //   name: 'archives_locker',
+          //   component: () => import('@/views/documentation/locker.vue')
+          // },
+        ]
+      },
+      // 全局设置
+      {
+        path: 'conference_room/setting',
+        name: 'conference_room/setting',
+        component: () => import('@/views/index/AsideIndex.vue'),
+        children: [
+          {
+            path: 'archives_whole',
+            name: 'archives_whole',
+            component: () => import('@/views/documentation/whole.vue')
+          },
+          {
+            path: 'archives_files',
+            name: 'archives_files',
+            component: () => import('@/views/documentation/files.vue')
+          },
+          {
+            path: 'archives_locker',
+            name: 'archives_locker',
+            component: () => import('@/views/documentation/locker.vue')
+          }
+        ]
+      },
       // 用章模块
       {
         path: 'seal',
@@ -128,9 +201,49 @@ const routes = [
         component: () => import('@/views/index/AsideIndex.vue'),
         children: [
           {
-            path: '/seals',
+            path: '/home/seal/seals',
             name: 'seals',
-            component: () => import('@/views/seal/SealIndex.vue')
+            component: () => import('@/views/seal/ManagementBySeal/index.vue')
+          },
+          {
+            path: 'sealAdd',
+            name: 'sealAdd',
+            component: () => import('@/views/seal/ManagementBySeal/add.vue')
+          },
+          {
+            path: 'sealXiang',
+            name: 'sealXiang',
+            component: () => import('@/views/seal/ManagementBySeal/xiang.vue')
+          },
+          {
+            path: '/home/seal/sealReturn',
+            name: 'sealReturn',
+            component: () => import('@/views/seal/sealReturn/index.vue')
+          },
+          {
+            path: 'sealReturnAdd',
+            name: 'sealReturnAdd',
+            component: () => import('@/views/seal/sealReturn/add.vue')
+          },
+          {
+            path: 'sealReturnXiang',
+            name: 'sealReturnXiang',
+            component: () => import('@/views/seal/sealReturn/xiang.vue')
+          },
+          {
+            path: '/home/seal/sealLibrary',
+            name: 'sealLibrary',
+            component: () => import('@/views/seal/sealVault/index.vue')
+          },
+          {
+            path: 'sealLibraryAdd',
+            name: 'sealLibraryAdd',
+            component: () => import('@/views/seal/sealVault/add.vue')
+          },
+          {
+            path: 'sealLibraryUpdate',
+            name: 'sealLibraryUpdate',
+            component: () => import('@/views/seal/sealVault/update.vue')
           }
         ]
       },

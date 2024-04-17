@@ -66,7 +66,7 @@ function init() {
         label: {
           position: 'inside',
           formatter: '{c}人',
-          color: '#232b40'
+          color: 'black'
         },
         itemStyle: {
           opacity: 0.5,

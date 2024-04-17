@@ -157,14 +157,10 @@
       <el-text class="mx-1">上级评价</el-text>
       <el-form-item label="可执行人">
         <el-checkbox-group v-model="insertAssessTemplateForm.executor">
-          <el-checkbox label="上级" name="executor" value="0"></el-checkbox>
-          <el-checkbox
-            label="部门负责人"
-            name="executor"
-            value="1"
-          ></el-checkbox>
-          <el-checkbox label="HRBP" name="executor" value="2"></el-checkbox>
-          <el-checkbox label="指定人员" name="executor" value="3"></el-checkbox>
+          <el-checkbox label="上级" value="0"></el-checkbox>
+          <el-checkbox label="部门负责人" value="1"></el-checkbox>
+          <el-checkbox label="HRBP" value="2"></el-checkbox>
+          <el-checkbox label="指定人员" value="3"></el-checkbox>
         </el-checkbox-group>
       </el-form-item>
       <el-form-item label="评价权限">
@@ -250,9 +246,11 @@ export default {
           this.insertAssessTemplateForm
         )
         .then((res) => {
+          console.log(this.insertAssessTemplateForm)
+          console.log(res)
           if (res.data.code == 200) {
             ElMessage.success('新增成功')
-            this.$router.push('/appraisal_template')
+            this.$router.push('appraisal_template')
           } else {
             ElMessage.error('新增失败')
           }
