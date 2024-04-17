@@ -375,7 +375,7 @@ export default {
                   prop="interviewId"
                   label-width="90px"
                 >
-                <CustomTransfer :type="type" :successData="successData" />
+                  <CustomTransfer :type="type" :successData="successData" />
                 </el-form-item>
                 <el-form-item label="会议室">
                   <el-select

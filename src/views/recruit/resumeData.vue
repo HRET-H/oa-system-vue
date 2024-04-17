@@ -82,16 +82,31 @@
     </el-row>
     <el-table :data="tableData.arr" style="width: 100%">
       <el-table-column prop="candidateId" label="简历ID"></el-table-column>
-      <el-table-column prop="candidateName" label="候选人姓名"></el-table-column>
+      <el-table-column
+        prop="candidateName"
+        label="候选人姓名"
+      ></el-table-column>
       <el-table-column
         prop="candidateDepartment"
         label="部门"
         :formatter="formatDepartment"
       ></el-table-column>
-      <el-table-column prop="candidateExpect" label="职位" ></el-table-column>
-      <el-table-column prop="candidateEducation" label="学历" :formatter="formatEducation"></el-table-column>
-      <el-table-column prop="candidateSex" label="性别" :formatter="formatSex"></el-table-column>
-      <el-table-column prop="candidateStatus" label="当前状态" :formatter="formatStatus"></el-table-column>
+      <el-table-column prop="candidateExpect" label="职位"></el-table-column>
+      <el-table-column
+        prop="candidateEducation"
+        label="学历"
+        :formatter="formatEducation"
+      ></el-table-column>
+      <el-table-column
+        prop="candidateSex"
+        label="性别"
+        :formatter="formatSex"
+      ></el-table-column>
+      <el-table-column
+        prop="candidateStatus"
+        label="当前状态"
+        :formatter="formatStatus"
+      ></el-table-column>
     </el-table>
   </div>
 </template>
@@ -118,55 +133,55 @@ const tableData = reactive({
 // 部门的值转换
 const departmentMap = {
   // 部门(1.技术部，2.产品部，3.销售部，4.行政部)
-  "1": '技术部',
-  "2": '产品部',
-  "3": '销售部',
-  "4":'行政部'
-};
+  '1': '技术部',
+  '2': '产品部',
+  '3': '销售部',
+  '4': '行政部'
+}
 
 function formatDepartment(value) {
-  console.log(value);
-  
-  return departmentMap[value.candidateDepartment] || '未知部门';
+  console.log(value)
+
+  return departmentMap[value.candidateDepartment] || '未知部门'
 }
 
 // 学历的值转换
 const departmentMapEducation = {
   // 学历要求(1.博士及以上2.硕士3.本科4.大专5.高中6.不限)
-  "1": '博士及以上',
-  "2": '硕士',
-  "3": '本科',
-  "4":'大专',
-  "5":'高中',
-  "6":'不限'
+  '1': '博士及以上',
+  '2': '硕士',
+  '3': '本科',
+  '4': '大专',
+  '5': '高中',
+  '6': '不限'
 }
-function formatEducation(value){
+function formatEducation(value) {
   return departmentMapEducation[value.candidateEducation] || '未知学历'
 }
 
 // 性别的转换
 const departmentMapSex = {
   // 性别(1.男2.女3.不限)
-  "1": '男',
-  "2": '女',
-  "3": '不限'
+  '1': '男',
+  '2': '女',
+  '3': '不限'
 }
-function formatSex(value){
+function formatSex(value) {
   return departmentMapSex[value.candidateSex] || '未知性别'
 }
 
 // 状态的值转换
 const departmentMapStatus = {
   // 流程(1.等待面试，2.面试中，3.面试通过,4.面试淘汰5.待入职6.人才库7.入职成功)
-  "1": '等待面试',
-  "2": '面试中',
-  "3": '面试通过',
-  "4": '面试淘汰',
-  "5": '待入职',
-  "6": '人才库',
-  "7": '入职成功'
+  '1': '等待面试',
+  '2': '面试中',
+  '3': '面试通过',
+  '4': '面试淘汰',
+  '5': '待入职',
+  '6': '人才库',
+  '7': '入职成功'
 }
-function formatStatus(value){
+function formatStatus(value) {
   return departmentMapStatus[value.candidateStatus] || '未知状态'
 }
 
@@ -232,7 +247,7 @@ function init1() {
           { value: 537, name: '销售部' },
           { value: 376, name: '人事部' },
           { value: 183, name: '产品部' },
-          { value: 276, name: '技术部', itemStyle: { color: '#15d4a3' }  }
+          { value: 276, name: '技术部', itemStyle: { color: '#15d4a3' } }
         ]
       }
     ]

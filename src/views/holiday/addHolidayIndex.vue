@@ -25,8 +25,11 @@
           <el-option label="销售部考勤" value="4"></el-option>
         </el-select>
       </el-form-item>
+      <el-form-item label="余额规则" style="width: 800px">
+        <el-input v-model="initiateHolidayForm.balanceRules"></el-input>
+      </el-form-item>
       <el-form-item label="负责人">
-        <CustomTransfer :type="type" :seccessData="seccessData" />
+        <CustomTransfer :type="type" :head="head" />
       </el-form-item>
       <el-form-item label="单位时长" style="width: 200px">
         <el-select
@@ -242,6 +245,8 @@ export default {
       initiateHolidayForm: {
         holidayType: '',
         scopeOfApplication: '',
+        balanceRules: '',
+        head: '',
         holidayDuration: '',
         oneConversion: '',
         limitss: '',
@@ -313,7 +318,7 @@ export default {
 
       this.$router.go(-1)
     },
-    seccessData() {
+    head() {
       this.$message({
         message: '操作成功',
         type: 'success'

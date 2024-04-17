@@ -166,7 +166,7 @@
           </template>
         </el-table-column>
       </el-table>
-      <span style="top: 20px;">
+      <span style="top: 20px">
         <GetPagination
           :handle-size-change="handleSizeChange"
           :handle-current-change="handleCurrentChange"
