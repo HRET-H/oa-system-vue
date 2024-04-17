@@ -128,9 +128,49 @@ const routes = [
         component: () => import('@/views/index/AsideIndex.vue'),
         children: [
           {
-            path: '/seals',
+            path: '/home/seal/seals',
             name: 'seals',
-            component: () => import('@/views/seal/SealIndex.vue')
+            component: () => import('@/views/seal/ManagementBySeal/index.vue')
+          },
+          {
+            path: 'sealAdd',
+            name: 'sealAdd',
+            component: () => import('@/views/seal/ManagementBySeal/add.vue')
+          },
+          {
+            path: 'sealXiang',
+            name: 'sealXiang',
+            component: () => import('@/views/seal/ManagementBySeal/xiang.vue')
+          },
+          {
+            path: '/home/seal/sealReturn',
+            name: 'sealReturn',
+            component: () => import('@/views/seal/sealReturn/index.vue')
+          },
+          {
+            path: 'sealReturnAdd',
+            name: 'sealReturnAdd',
+            component: () => import('@/views/seal/sealReturn/add.vue')
+          },
+          {
+            path: 'sealReturnXiang',
+            name: 'sealReturnXiang',
+            component: () => import('@/views/seal/sealReturn/xiang.vue')
+          },
+          {
+            path: '/home/seal/sealLibrary',
+            name: 'sealLibrary',
+            component: () => import('@/views/seal/sealVault/index.vue')
+          },
+          {
+            path: 'sealLibraryAdd',
+            name: 'sealLibraryAdd',
+            component: () => import('@/views/seal/sealVault/add.vue')
+          },
+          {
+            path: 'sealLibraryUpdate',
+            name: 'sealLibraryUpdate',
+            component: () => import('@/views/seal/sealVault/update.vue')
           }
         ]
       },
