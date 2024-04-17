@@ -136,7 +136,7 @@ export default {
         if (valid) {
           // 发送请求
           axios
-            .post('RecruitJob/updateJob', this.form)
+            .post('/recruitJob/updateJob', this.addPostData)
             .then((res) => {
               // 判断是否成功
               if (res.data.code == 200) {
@@ -375,18 +375,7 @@ export default {
                   prop="interviewId"
                   label-width="90px"
                 >
-                  <el-select
-                    v-model="item.interviewId"
-                    placeholder="请选择面试官"
-                    style="width: 190px"
-                  >
-                    <el-option
-                      v-for="item in userList"
-                      :key="item.userId"
-                      :label="item.userName"
-                      :value="item.userId"
-                    ></el-option>
-                  </el-select>
+                <CustomTransfer :type="type" :successData="successData" />
                 </el-form-item>
                 <el-form-item label="会议室">
                   <el-select
