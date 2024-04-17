@@ -156,26 +156,28 @@ const addAdShifts = () => {
 }
 </script>
 <template>
-  <el-form :model="shiftsData" ref="shiftsRef" label-width="100px">
-    <el-form-item label="班次名称" required>
-      <el-input
-        style="width: 240px"
-        v-model="shiftsData.shiftsName"
-        placeholder="请输入班次名称"
-      >
-      </el-input>
-    </el-form-item>
-    <el-form-item label="班次负责人" required
-      ><CustomTransfer :type="true" :successData="successData" />
-    </el-form-item>
+  <page-container title="班次管理">
+    <el-form :model="shiftsData" ref="shiftsRef" label-width="100px">
+      <el-form-item label="班次名称" required>
+        <el-input
+          style="width: 240px"
+          v-model="shiftsData.shiftsName"
+          placeholder="请输入班次名称"
+        >
+        </el-input>
+      </el-form-item>
+      <el-form-item label="班次负责人" required
+        ><CustomTransfer :type="true" :successData="successData" />
+      </el-form-item>
 
-    <el-form-item label="上下班时间" required>
-      <el-button @click="addFrameTimeList" icon="Plus">添加</el-button>
-    </el-form-item>
-    <el-form-item style="margin-bottom: 5%">
-      <shifts-time></shifts-time>
-    </el-form-item>
-  </el-form>
+      <el-form-item label="上下班时间" required>
+        <el-button @click="addFrameTimeList" icon="Plus">添加</el-button>
+      </el-form-item>
+      <el-form-item style="margin-bottom: 5%">
+        <shifts-time></shifts-time>
+      </el-form-item>
+    </el-form>
+  </page-container>
   <page-container title="弹性设置">
     <el-checkbox
       v-model="shiftsData.shiftsElasticAllowable"

@@ -1,18 +1,14 @@
-## 构建基于 node-alpine 基础镜像的Docker容器
-FROM node:21.2.0-alpine
+## 构建基于 nginx 基础镜像的Docker容器
+FROM nginx
+
 ## 设置作者
-LABEL authors="HRET"
-## 设置工作目录
-WORKDIR /app
+MAINTAINER HRET
 
-## 添加项目文件
-ADD . /app
+## 删除默认配置
+RUN rm /etc/nginx/conf.d/default.conf
 
-## 安装pnpm
-RUN npm install -g pnpm
-## 安装项目依赖
-COPY package.json .
-RUN pnpm install
+## 添加自定义配置文件
+ADD default.conf /etc/nginx/conf.d/
 
-## 运行
-CMD [ "pnpm", "dev" ]
+## 拷贝静态资源
+COPY dist/ /usr/share/nginx/html/
