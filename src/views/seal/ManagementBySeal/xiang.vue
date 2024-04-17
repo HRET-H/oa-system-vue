@@ -650,10 +650,10 @@ export default {
   width: 100%;
   height: 100%;
 }
->>> .el-dialog {
+.el-dialog::v-deep {
   width: 600px;
 }
->>> .el-form-item__label {
+.el-form-item__label::v-deep {
   width: 100px;
   font-weight: 700;
 }
@@ -666,7 +666,7 @@ export default {
   width: 50%; /* 设置弹框容器的宽度为屏幕的一半 */
   right: 0; /* 将弹框容器定位到屏幕右侧 */
 }
->>> .el-dialog.right-side-dialog {
+.el-dialog.right-side-dialog::v-deep {
   width: 100%; /* 设置弹框内部内容宽度为100% */
 }
 .el-dialog__wrapper {

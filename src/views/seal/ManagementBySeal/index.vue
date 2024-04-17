@@ -218,11 +218,11 @@ export default {
         })
     },
     add() {
-      window.location.href = 'ManagementBySealadd'
+      window.location.href = 'sealAdd'
     },
     handleEdit(index, row) {
       console.log(index, row)
-      this.$router.push({ path: '/ManagementBySealxiang?id=' + row.sid })
+      this.$router.push({ path: '/sealXiang?id=' + row.sid })
     }
   }
 }

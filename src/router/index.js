@@ -163,7 +163,7 @@ const routes = [
             component: () => import('@/views/seal/sealVault/index.vue')
           },
           {
-            path: 'sealLibraryAdd',
+            path: '/home/seal/sealLibraryAdd',
             name: 'sealLibraryAdd',
             component: () => import('@/views/seal/sealVault/add.vue')
           },

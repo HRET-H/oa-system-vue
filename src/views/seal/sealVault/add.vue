@@ -19,10 +19,14 @@
           ></el-input>
         </el-form-item>
         <br />
-        <el-from-item label="印章封存">
-          <el-radio v-model="library.state" value="2" label="1">正常</el-radio>
-          <el-radio v-model="library.state" value="3" label="2">封存</el-radio>
-        </el-from-item>
+        <el-form-item label="状态">
+          <el-radio-group v-model="library.state">
+            <!-- 添加单个 Radio -->
+            <el-radio value="1" :label="1">正常</el-radio>
+            <el-radio value="2" :label="2">未封装</el-radio>
+            <!-- 根据实际需求添加更多 Radio -->
+          </el-radio-group>
+        </el-form-item>
         <br />
         <el-form-item label="备注">
           <el-input type="textarea" v-model="library.sIllustrate"></el-input>

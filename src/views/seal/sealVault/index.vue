@@ -180,10 +180,10 @@ export default {
       console.log(index, row)
       //  window.location.href = "sealVaultup?id="+row.id;
 
-      this.$router.push({ path: '/sealVaultup?id=' + row.id })
+      this.$router.push({ path: '/sealLibraryUpdate?id=' + row.id })
     },
     add() {
-      window.location.href = 'sealVaultadd'
+      window.location.href = '/home/seal/sealLibraryAdd'
     }
   }
 }

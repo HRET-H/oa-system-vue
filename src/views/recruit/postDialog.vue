@@ -300,13 +300,13 @@ export default {
                 :limit="3"
                 :on-exceed="handleExceed"
               >
-                上传文件：
                 <el-button type="primary">图片上传</el-button>
-                &nbsp;&nbsp;&nbsp;
-                <div class="el-upload__tip">
-                  支持扩展名：.png .gif .pdf .jpg,单个文件不超过500kb。
-                </div>
-              </el-upload></el-form-item
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              </el-upload>
+              <br />
+              <div class="el-upload__tip">
+                支持扩展名：.png .gif .pdf .jpg,单个文件不超过500kb。
+              </div></el-form-item
             >
           </el-row>
         </el-row>
