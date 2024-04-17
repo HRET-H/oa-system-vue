@@ -115,13 +115,13 @@
                   <el-button
                     size="mini"
                     type="danger"
-                    @click="handleupdater(scope.$index, scope.row)"
+                    @click="handleupdater(scope.$index, scope.row, 3)"
                     >拒绝</el-button
                   >
                   <el-button
                     size="mini"
                     type="danger"
-                    @click="handleupdatea(scope.$index, scope.row)"
+                    @click="handleupdatea(scope.$index, scope.row, 2)"
                     >同意</el-button
                   >
                 </template>
@@ -196,22 +196,26 @@ export default {
       console.log(this.pageNum)
     },
     // 同意
-    handleupdatea(index, row) {
+    handleupdatea(index, row, sta) {
       console.log(index, row)
-      axios.post('/seal/updatebyida?id=' + row.sid).then((res) => {
-        if (res.status == 200) {
-          this.searchList()
-        }
-      })
+      axios
+        .post('/seal/updatebyida?id=' + row.sid + '&state=' + sta)
+        .then((res) => {
+          if (res.status == 200) {
+            this.searchList()
+          }
+        })
     },
     // 拒绝
-    handleupdater(index, row) {
+    handleupdater(index, row, sta) {
       console.log(index, row)
-      axios.post('/seal/updatebyidr?id=' + row.sid).then((res) => {
-        if (res.status == 200) {
-          this.searchList()
-        }
-      })
+      axios
+        .post('/seal/updatebyidr?id=' + row.sid + '&state=' + sta)
+        .then((res) => {
+          if (res.status == 200) {
+            this.searchList()
+          }
+        })
     },
     add() {
       window.location.href = 'ManagementBySealadd'
