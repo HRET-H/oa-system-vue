@@ -1,5 +1,7 @@
 <template>
+  <PageContainer>
   <div style="width: 1220px; margin: 0 auto">
+    
     <h1>
       <div>
         <span style="color: #1890ff; font-size: 36px">|</span>
@@ -28,6 +30,7 @@
         <el-option label="行政部" value="4"> </el-option>
       </el-select>
     </span>
+
     <br />
     <br />
     <span style="margin-left: 70px">
@@ -45,6 +48,7 @@
         <el-option label="人才库" value="6"> </el-option>
       </el-select>
     </span>
+
     <br />
     <br />
     <br />
@@ -107,10 +111,11 @@
       <el-date-picker
         v-model="addCanDidate.candidateDateBirth"
         type="datetime"
+        style="width: 350px"
         placeholder="请选择日期"
       />
     </span>
-    <span style="margin-left: 430px">
+    <span style="margin-left: 300px">
       邮箱&nbsp;
       <el-input
         placeholder="请输入内容"
@@ -155,6 +160,7 @@
       <el-date-picker
         v-model="addCanDidate.candidateWorkDate"
         type="datetime"
+        style="width: 350px"
         placeholder="请选择日期"
       />
     </span>
@@ -367,11 +373,11 @@
       >
     </div>
   </div>
+</PageContainer>
 </template>
 
 <script>
 import axios from 'axios'
-
 export default {
   data() {
     return {
@@ -434,7 +440,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .el-timeline {
   width: 1100px;
   height: 150px;
@@ -448,5 +454,10 @@ export default {
 .el-timeline-item__tail {
   text-align: center;
   line-height: 150px;
+}
+.el-row {
+  background-color: white;
+  padding: 15px;
+  margin-bottom: 20px;
 }
 </style>
