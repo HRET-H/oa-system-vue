@@ -203,4 +203,9 @@ export default {
   width: 100%;
   background-color: white;
 }
+.el-row {
+  background-color: white;
+  padding: 15px;
+  margin-bottom: 20px;
+}
 </style>

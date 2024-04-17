@@ -1,6 +1,6 @@
 <template>
   <div>
-    <page-container>
+    <el-row>
       <!-- 新建考核模板按钮 -->
       <div class="btn">
         <el-button
@@ -16,8 +16,10 @@
           @click="findAssessTemplateListAndPage"
         />
       </div>
-      <!-- 表单 -->
-      <el-form :model="assessTemplateForm"> </el-form>
+    </el-row>
+    <!-- 表单 -->
+    <el-form :model="assessTemplateForm"> </el-form>
+    <el-row>
       <!-- 表格 -->
       <el-table :data="assessTemplateList" style="width: 100%">
         <el-table-column prop="templateId" label="模板ID"> </el-table-column>
@@ -80,7 +82,7 @@
         layout="prev, pager, next"
       >
       </el-pagination>
-    </page-container>
+    </el-row>
   </div>
 </template>
 
@@ -176,5 +178,10 @@ export default {
 .btn {
   width: 100%;
   height: 75px;
+}
+.el-row {
+  background-color: white;
+  padding: 15px;
+  margin-bottom: 20px;
 }
 </style>

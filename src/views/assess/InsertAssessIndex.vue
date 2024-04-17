@@ -109,4 +109,9 @@ export default {
 .title h1 {
   text-indent: 0.3em;
 }
+.el-row {
+  background-color: white;
+  padding: 15px;
+  margin-bottom: 20px;
+}
 </style>

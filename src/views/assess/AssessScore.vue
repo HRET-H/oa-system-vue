@@ -1,145 +1,152 @@
 <template>
   <div>
     <!-- 发起评分设置按钮 -->
-    <div class="btn">
-      <el-popover
-        placement="bottom"
-        width="200"
-        trigger="manual"
-        :visible="visible"
-      >
-        <el-button @click="scoreForm = true">评分制</el-button>
-        <el-button @click="leaveForm = true">等级制</el-button>
-        <template #reference>
-          <el-button class="m-2" @Click="visible = !visible"
-            >新建评分机制</el-button
-          >
-        </template>
-      </el-popover>
-      <!-- 隐藏弹框 -->
-      <!-- Form -->
-      <el-dialog title="新增评分方式" v-model="scoreForm">
-        <el-form :model="Assessform" lable-position="left">
-          <el-form-item label="名称" :label-width="formLabelWidth">
-            <el-input
-              v-model="Assessform.scoreName"
-              type="text"
-              autocomplete="off"
-              style="width: 200px"
-            ></el-input>
-          </el-form-item>
-          <el-form-item label="评分区间" :label-width="formLabelWidth">
-            <el-input
-              v-model="Assessform.scoreBands"
-              type="text"
-              autocomplete="off"
-              style="width: 200px"
-            ></el-input
-            >分
-          </el-form-item>
-          <el-form-item label="保留小数" :label-width="formLabelWidth">
-            <el-input
-              v-model="Assessform.keepDecimals"
-              type="text"
-              autocomplete="off"
-              style="width: 200px"
-            ></el-input
-            >位
-          </el-form-item>
-        </el-form>
-        <template v-slot:footer>
-          <div class="dialog-footer">
-            <el-button @click="scoreForm = false">取 消</el-button>
-            <el-button type="primary" @click="addAssessScore()"
-              >确 定</el-button
+    <el-row>
+      <div class="btn">
+        <el-popover
+          placement="bottom"
+          width="200"
+          trigger="manual"
+          :visible="visible"
+        >
+          <el-button @click="scoreForm = true">评分制</el-button>
+          <el-button @click="leaveForm = true">等级制</el-button>
+          <template #reference>
+            <el-button class="m-2" @Click="visible = !visible"
+              >新建评分机制</el-button
             >
-          </div>
-        </template>
-      </el-dialog>
-      <!--  -->
-      <el-dialog title="新增评分方式" v-model="leaveForm">
-        <el-form :model="Assessform">
-          <el-form-item label="等级制名称" :label-width="formLabelWidth">
-            <el-input
-              v-model="Assessform.hierarchyName"
-              type="text"
-              autocomplete="off"
-              style="width: 200px"
-            ></el-input>
-          </el-form-item>
-          <el-form-item label="等级名称" :label-width="formLabelWidth">
-            <el-input
-              v-model="Assessform.leaveName"
-              type="text"
-              autocomplete="off"
-              style="width: 200px"
-            ></el-input
-            >分
-          </el-form-item>
-          <el-form-item label="等级说明" :label-width="formLabelWidth">
-            <el-input
-              v-model="Assessform.leaveIllustrate"
-              type="text"
-              autocomplete="off"
-              style="width: 200px"
-            ></el-input
-            >位
-          </el-form-item>
-        </el-form>
-        <template v-slot:footer>
-          <div class="dialog-footer">
-            <el-button @click="leaveForm = false">取 消</el-button>
-            <el-button type="primary" @click="addAssessScore()"
-              >确 定</el-button
+          </template>
+        </el-popover>
+        <!-- 隐藏弹框 -->
+        <!-- Form -->
+        <el-dialog title="新增评分方式" v-model="scoreForm">
+          <el-form :model="Assessform" lable-position="left">
+            <el-form-item label="名称" :label-width="formLabelWidth">
+              <el-input
+                v-model="Assessform.scoreName"
+                type="text"
+                autocomplete="off"
+                style="width: 200px"
+              ></el-input>
+            </el-form-item>
+            <el-form-item label="评分区间" :label-width="formLabelWidth">
+              <el-input
+                v-model="Assessform.scoreBands"
+                type="text"
+                autocomplete="off"
+                style="width: 200px"
+              ></el-input
+              >分
+            </el-form-item>
+            <el-form-item label="保留小数" :label-width="formLabelWidth">
+              <el-input
+                v-model="Assessform.keepDecimals"
+                type="text"
+                autocomplete="off"
+                style="width: 200px"
+              ></el-input
+              >位
+            </el-form-item>
+          </el-form>
+          <template v-slot:footer>
+            <div class="dialog-footer">
+              <el-button @click="scoreForm = false">取 消</el-button>
+              <el-button type="primary" @click="addAssessScore()"
+                >确 定</el-button
+              >
+            </div>
+          </template>
+        </el-dialog>
+        <!--  -->
+        <el-dialog title="新增评分方式" v-model="leaveForm">
+          <el-form :model="Assessform">
+            <el-form-item label="等级制名称" :label-width="formLabelWidth">
+              <el-input
+                v-model="Assessform.hierarchyName"
+                type="text"
+                autocomplete="off"
+                style="width: 200px"
+              ></el-input>
+            </el-form-item>
+            <el-form-item label="等级名称" :label-width="formLabelWidth">
+              <el-input
+                v-model="Assessform.leaveName"
+                type="text"
+                autocomplete="off"
+                style="width: 200px"
+              ></el-input
+              >分
+            </el-form-item>
+            <el-form-item label="等级说明" :label-width="formLabelWidth">
+              <el-input
+                v-model="Assessform.leaveIllustrate"
+                type="text"
+                autocomplete="off"
+                style="width: 200px"
+              ></el-input
+              >位
+            </el-form-item>
+          </el-form>
+          <template v-slot:footer>
+            <div class="dialog-footer">
+              <el-button @click="leaveForm = false">取 消</el-button>
+              <el-button type="primary" @click="addAssessScore()"
+                >确 定</el-button
+              >
+            </div>
+          </template>
+        </el-dialog>
+      </div>
+    </el-row>
+    <el-row>
+      <!-- 表格 -->
+      <el-table :data="assessScoreList" style="width: 100%">
+        <el-table-column prop="scoreName" label="评分名称" width="180">
+        </el-table-column>
+        <el-table-column prop="scoreBands" width="180" label="评分区间">
+        </el-table-column>
+        <el-table-column prop="keepDecimals" label="保留小数">
+        </el-table-column>
+        <el-table-column prop="createBy" label="创建人"> </el-table-column>
+        <el-table-column prop="status" label="状态">
+          <template v-slot:default="scope">
+            <el-tag v-if="scope.row.status == 0" type="danger">启用</el-tag>
+            <el-tag v-else-if="scope.row.status == 1" type="warning"
+              >停用</el-tag
             >
-          </div>
-        </template>
-      </el-dialog>
-    </div>
-    <!-- 表格 -->
-    <el-table :data="assessScoreList" style="width: 100%">
-      <el-table-column prop="scoreName" label="评分名称" width="180">
-      </el-table-column>
-      <el-table-column prop="scoreBands" width="180" label="评分区间">
-      </el-table-column>
-      <el-table-column prop="keepDecimals" label="保留小数"> </el-table-column>
-      <el-table-column prop="createBy" label="创建人"> </el-table-column>
-      <el-table-column prop="status" label="状态">
-        <template v-slot:default="scope">
-          <el-tag v-if="scope.row.status == 0" type="danger">启用</el-tag>
-          <el-tag v-else-if="scope.row.status == 1" type="warning">停用</el-tag>
-        </template>
-      </el-table-column>
-      <el-table-column label="操作">
-        <template v-slot:default="scope">
-          <el-link
-            type="primary"
-            :underline="false"
-            @click="detailAssessScore(scope.row)"
-            >停用</el-link
-          >
-          <el-link
-            type="primary"
-            :underline="false"
-            @click="editAssessScore(scope.row)"
-            >修改</el-link
-          >
-          <el-link
-            type="primary"
-            :underline="false"
-            @click="deleteAssessScore(scope.row)"
-            >删除</el-link
-          >
-        </template>
-      </el-table-column>
-    </el-table>
-    <GetPagination
-      :page-num="Assessform.pageNum"
-      :page-size="Assessform.pageSize"
-      :total="total"
-      :handle-current-change="handleCurrentChange"
-      :handle-size-change="handleSizeChange"
-    />
+          </template>
+        </el-table-column>
+        <el-table-column label="操作">
+          <template v-slot:default="scope">
+            <el-link
+              type="primary"
+              :underline="false"
+              @click="detailAssessScore(scope.row)"
+              >停用</el-link
+            >
+            <el-link
+              type="primary"
+              :underline="false"
+              @click="editAssessScore(scope.row)"
+              >修改</el-link
+            >
+            <el-link
+              type="primary"
+              :underline="false"
+              @click="deleteAssessScore(scope.row)"
+              >删除</el-link
+            >
+          </template>
+        </el-table-column>
+      </el-table>
+      <GetPagination
+        :page-num="Assessform.pageNum"
+        :page-size="Assessform.pageSize"
+        :total="total"
+        :handle-current-change="handleCurrentChange"
+        :handle-size-change="handleSizeChange"
+      />
+    </el-row>
   </div>
 </template>
 
@@ -272,5 +279,10 @@ export default {
 .btn {
   width: 100%;
   height: 75px;
+}
+.el-row {
+  background-color: white;
+  padding: 15px;
+  margin-bottom: 20px;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <page-container>
+    <el-row>
       <!-- form表单条查 -->
       <el-form
         ref="form"
@@ -16,7 +16,9 @@
           @click="findAssessAndUserListAndPage()"
         />
       </el-form>
-      <!-- 表格 -->
+    </el-row>
+    <!-- 表格 -->
+    <el-row>
       <el-table :data="userAndAssessList" style="width: 100%">
         <el-table-column prop="users[0].userId" label="员工ID" width="180">
         </el-table-column>
@@ -49,7 +51,7 @@
         :handle-current-change="handleCurrentChange"
         :handle-size-change="handleSizeChange"
       />
-    </page-container>
+    </el-row>
   </div>
 </template>
 
@@ -122,5 +124,10 @@ export default {
 .btn {
   width: 100%;
   height: 75px;
+}
+.el-row {
+  background-color: white;
+  padding: 15px;
+  margin-bottom: 20px;
 }
 </style>

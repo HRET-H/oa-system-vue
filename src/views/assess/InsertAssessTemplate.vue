@@ -340,4 +340,9 @@ export default {
   font-size: 14px;
   margin-bottom: 20px;
 }
+.el-row {
+  background-color: white;
+  padding: 15px;
+  margin-bottom: 20px;
+}
 </style>
